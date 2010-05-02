@@ -1,7 +1,7 @@
 import httplib, urllib
 
-GOOGLE_URL = "google.com"
-ALERTS_URL = "/alerts/create?gl=us&hl=en"
+GOOGLE_URL = "www.google.com"
+ALERTS_URL = "/alerts/create?hl=en&gl=us"
 TYPES_NAME = "t"
 EMAIL_NAME = "e"
 FREQUENCY_NAME = "f"
@@ -24,34 +24,38 @@ FREQUENCY = {
 }
 
 
-
-
 def create_alert(term, email, type='comprehensive', frequency='instant', length=50):
 
     """
+    Creates a google alert for the given term and
+    email.
     """
 
     assert frequency in FREQUENCY.keys(), "Must be one of %s" % FREQUENCY.keys()
-    assert type in TYPES.keys(), "Must be one of %s" % TYPTES.keys()
+    assert type in TYPES.keys(), "Must be one of %s" % TYPES.keys()
     assert length == 50 or length == 20, "Length must be 50 or 20."
 
     params = create_params(term, email, type, frequency, length)
-    headers = {"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8,application/json"}
+    headers = {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'}
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("POST", ALERTS_URL, params, headers)
     response = conn.getresponse()
-    print response.status
     conn.close()
 
 
 def create_params(term, email, type, frequency, length):
 
-    return {
+    """
+    Creates a url encoded POST string to send to
+    google alerts service.
+    """
+
+    return urllib.urlencode({
         TERM_NAME : term, 
         EMAIL_NAME : email,
         TYPES_NAME : type, 
         FREQUENCY_NAME : frequency,
-        LENGTH : length}
+        LENGTH_NAME : length})
 
 
 
