@@ -1,0 +1,12 @@
+
+/*could be a script*/
+git clone git@github.com:sfioritto/lookout.git
+cd lookout
+mkdir env
+cp scripts/activate env/activate
+cd env
+virtualenv LOOKOUT
+. activate LOOKOUT
+cd LOOKOUT
+easy_install lamson
+easy_install nose

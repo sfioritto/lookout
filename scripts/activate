@@ -1,0 +1,6 @@
+#!/bin/sh
+export DEPLOY=$PWD
+export PATH=$DEPLOY/bin:$PATH
+cd $1
+source bin/activate
+cd $DEPLOY

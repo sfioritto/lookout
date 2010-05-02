@@ -59,3 +59,12 @@ def create_params(term, email, type, frequency, length):
 
 
 
+def confirm_alert(msg):
+
+    """
+    Takes a lamson message object, finds the confirmation
+    url and confirms the creation of the alert.
+    """
+
+    body = msg.base.body
+    
