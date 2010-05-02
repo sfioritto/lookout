@@ -1,4 +1,5 @@
 import httplib, urllib
+import re
 
 GOOGLE_URL = "www.google.com"
 ALERTS_URL = "/alerts/create?hl=en&gl=us"
@@ -23,6 +24,7 @@ FREQUENCY = {
     'week' : 6
 }
 
+verify = re.compile("/alerts/verify.*\w")
 
 def create_alert(term, email, type='comprehensive', frequency='instant', length=50):
 
@@ -58,13 +60,25 @@ def create_params(term, email, type, frequency, length):
         LENGTH_NAME : length})
 
 
-
 def confirm_alert(msg):
 
     """
     Takes a lamson message object, finds the confirmation
     url and confirms the creation of the alert.
     """
-
-    body = msg.base.body
     
+    url = get_conf_url(msg.base.body)
+    send_confirmation(url)
+
+
+def send_confirmation(url):
+
+    conn = httplib.HTTPConnection(GOOGLE_URL)
+    conn.request("GET", url)
+    conn.close()
+
+
+def get_conf_url(body):
+
+    url = verify.findall(body)[0]
+    return url
