@@ -10,3 +10,4 @@ virtualenv LOOKOUT
 cd LOOKOUT
 easy_install lamson
 easy_install nose
+easy_install django
