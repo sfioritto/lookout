@@ -14,3 +14,5 @@ env/
 .ropeproject/*
 *~
 webapp/settings.py
+logs/
+run/
