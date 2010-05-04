@@ -11,3 +11,8 @@ cd LOOKOUT
 easy_install lamson
 easy_install nose
 easy_install django
+easy_install psycopg2
+
+In your env/LOOKOUT/lib/python.6/site-packages directory create lookout.pth with two lines:
+/absolute/path/to/lookout
+/absolute/path/to/lookout/email
