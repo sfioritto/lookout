@@ -10,6 +10,11 @@ receiver_config = {'host': 'localhost', 'port': 8823}
 
 handlers = ['app.handlers.sample']
 
+router_defaults = {
+    'host': 'lookoutthere\\.com',
+    'alert_id': '[0-9]+',
+}
+
 router_defaults = {'host': '.+'}
 
 template_config = {'dir': 'app', 'module': 'templates'}
