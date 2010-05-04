@@ -4,18 +4,9 @@ import os
 from lamson import server
 
 relay = relay(port=8823)
-client = RouterConversation("somedude@localhost", "requests_tests")
+client = RouterConversation("somedude@lookoutthere.com", "requests_tests")
 confirm_format = "testing-confirm-[0-9]+@"
 noreply_format = "testing-noreply@"
-
-
-def test_forwards_relay_host():
-    """
-    Makes sure that your config/settings.py is configured to forward mail from
-    localhost (or your direct host) to your relay.
-    """
-    client.begin()
-    client.say("tester@localhost", "Test that forward works.", "tester@localhost")
 
 
 def test_drops_open_relay_messages():
