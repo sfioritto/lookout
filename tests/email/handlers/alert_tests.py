@@ -3,13 +3,17 @@ from lamson.testing import *
 from lamson.routing import Router
 from lamson.mail import MailRequest
 from lamson import queue
+import clients.alerts as alerts
 
 relay = relay(port=8823)
 client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
-receiver = "alerts-1@lookoutthere.com"
+receiver = "alerts-2@lookoutthere.com"
 confmsg = MailRequest('fakepeer', sender, receiver, open("tests/data/emails/alert-confirmation.msg").read())
-confmsg['To'] = receiver
+confmsg['to'] = receiver
+
+#send the alerts urls to localhost
+alerts.GOOGLE_URL = "http://localhost"
 
 
 def setup_func():

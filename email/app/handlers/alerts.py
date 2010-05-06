@@ -1,4 +1,4 @@
-import alerts
+import clients.alerts as alerts
 from lamson.routing import route, route_like
 # from config.settings import relay, CONFIRM
 # from lamson import view, queue
@@ -16,8 +16,14 @@ def START(message, alert_id=None, host=None):
 def CONFIRMING(message, alert_id=None, host=None):
 
     """
+    Waiting for an email with a confirmation link.
     """
 
+    try:
+        alerts.confirm_alert(message)
+    except:
+        q = queue.Queue("run/error")
+        q.push(message)
     return ALERTING
 
 

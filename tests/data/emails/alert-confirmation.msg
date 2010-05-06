@@ -34,10 +34,10 @@ Google received a request to start sending Alerts for the search
 [ test ] to sean.fioritto@gmail.com.
 
 Verify this Google Alert request:
-http://www.google.com/alerts/verify/me?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o
+http://www.google.com/alerts/verify?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o
 
 Cancel this Google Alert request:
-http://www.google.com/alerts/remove/me?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o
+http://www.google.com/alerts/remove?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o
 
 Thanks,
 The Google Alerts Team

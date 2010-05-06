@@ -16,3 +16,5 @@ env/
 webapp/settings.py
 logs/
 run/
+email/run/
+email/logs/
