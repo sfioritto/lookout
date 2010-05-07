@@ -17,7 +17,7 @@ confmsg['to'] = receiver
 print Router.REGISTERED
 
 #send the alerts urls to localhost
-alerts.GOOGLE_URL = "http://localhost"
+alerts.GOOGLE_URL = "http://localhost/testing"
 
 
 def setup_func():

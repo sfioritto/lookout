@@ -14,6 +14,7 @@ easy_install lamson
 easy_install nose
 easy_install django
 easy_install psycopg2
+easy_install beautifulsoup
 
 
 cd *your lookout dir*
