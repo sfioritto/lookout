@@ -1,5 +1,6 @@
 import clients.alerts as alerts
 from lamson.routing import route, route_like
+from settings import *
 # from config.settings import relay, CONFIRM
 # from lamson import view, queue
 # from app.model import mailinglist
@@ -22,7 +23,7 @@ def CONFIRMING(message, alert_id=None, host=None):
     try:
         alerts.confirm_alert(message)
     except:
-        q = queue.Queue("run/error")
+        q = queue.Queue(LOOKOUT_EMAIL)
         q.push(message)
     return ALERTING
 

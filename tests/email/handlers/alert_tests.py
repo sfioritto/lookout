@@ -3,13 +3,15 @@ from lamson.testing import *
 from lamson.routing import Router
 from lamson.mail import MailRequest
 from lamson import queue
+from settings import *
+import os
 import clients.alerts as alerts
 
 relay = relay(port=8823)
 client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
 receiver = "alerts-2@lookoutthere.com"
-confmsg = MailRequest('fakepeer', sender, receiver, open("tests/data/emails/alert-confirmation.msg").read())
+confmsg = MailRequest('fakepeer', sender, receiver, open(os.path.join(LOOKOUT_HOME, "tests/data/emails/alert-confirmation.msg")).read())
 confmsg['to'] = receiver
 
 #send the alerts urls to localhost
@@ -17,7 +19,7 @@ alerts.GOOGLE_URL = "http://localhost"
 
 
 def setup_func():
-    q = queue.Queue("run/error")
+    q = queue.Queue(LOOKOUT_ERROR)
     q.clear()
 
 
@@ -36,7 +38,7 @@ def test_incoming_confirmation():
     """
 
     Router.deliver(confmsg)
-    q = queue.Queue("run/error")
+    q = queue.Queue(LOOKOUT_ERROR)
     assert q.count() == 1
 
 

@@ -7,6 +7,9 @@ relay = relay(port=8823)
 client = RouterConversation("somedude@lookoutthere.com", "requests_tests")
 confirm_format = "testing-confirm-[0-9]+@"
 noreply_format = "testing-noreply@"
+#maybe in the init file of the lamson tests, cd to the lamson directory?
+#put absolute path to the run queue in settings module? use that everywhere
+#in your app?
 
 
 def test_drops_open_relay_messages():
