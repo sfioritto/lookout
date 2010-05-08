@@ -1,5 +1,7 @@
 # This file contains python variables that configure Lamson for email processing.
 import logging
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'webapp.settings'
 
 # You may add additional parameters such as `username' and `password' if your
 # relay server requires authentication, `starttls' (boolean) or `ssl' (boolean)

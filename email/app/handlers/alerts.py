@@ -25,10 +25,11 @@ def CONFIRMING(message, alert_id=None, host=None):
 
     try:
         alerts.confirm_alert(message)
+        return ALERTING
     except:
         q = queue.Queue('run/error')
         q.push(message)
-    return ALERTING
+        return CONFIRMING
 
 
 @route_like(START)

@@ -1,5 +1,6 @@
 import httplib, urllib
 import re
+from BeautifulSoup import BeautifulSoup
 
 GOOGLE_URL = "www.google.com"
 ALERTS_URL = "/alerts/create?hl=en&gl=us"
@@ -70,6 +71,7 @@ def confirm_alert(msg):
     url = get_conf_url(msg.base.body)
     response = send_confirmation(url)
     assert response.status == 200
+    assert confirmed(response)
 
 
 def send_confirmation(url):
@@ -85,3 +87,15 @@ def get_conf_url(body):
 
     url = verify.findall(body)[0]
     return url
+
+
+def confirmed(response):
+    
+    html = response.read()
+    soup = BeautifulSoup(html)
+    message = soup.findAll(re.compile("error"))[0].replace("\n", "")
+    if message == "An error has occurred.":
+        return False
+    else:
+        return True
+    

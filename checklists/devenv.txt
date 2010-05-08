@@ -10,11 +10,11 @@ cd env
 virtualenv LOOKOUT
 . activate LOOKOUT
 cd LOOKOUT
-easy_install lamson
-easy_install nose
-easy_install django
-easy_install psycopg2
-easy_install beautifulsoup
+pip install lamson
+pip install nose
+pip install django
+pip install psycopg2
+pip install beautifulsoup
 
 
 cd *your lookout dir*

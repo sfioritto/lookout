@@ -46,7 +46,10 @@ def test_good_confirmation():
 
 @with_setup(setup_func, teardown_func)
 def test_bad_confirmation():
-    assert True
+    Router.deliver(badmsg)
+    q = queue.Queue(email('run/error'))
+    assert q.count() == 1
+    assert_in_state('app.handlers.alerts', goodmsg['to'], sender, 'CONFIRMING') 
 
 
 @with_setup(setup_func, teardown_func)
