@@ -1,7 +1,14 @@
 import clients.alerts as alerts
 from lamson import queue
-from lamson.routing import route, route_like
-from settings import *
+from lamson.routing import route, route_like, state_key_generator
+from email.utils import parseaddr
+
+
+@state_key_generator
+def module_and_listname(modulename, message):
+
+    name, address = parseaddr(message['to'])
+    return modulename + ':' + address.split("@")[0]
 
 
 @route('alerts-(alert_id)@(host)')
@@ -19,7 +26,7 @@ def CONFIRMING(message, alert_id=None, host=None):
     try:
         alerts.confirm_alert(message)
     except:
-        q = queue.Queue(LOOKOUT_ERROR)
+        q = queue.Queue('run/error')
         q.push(message)
     return ALERTING
 

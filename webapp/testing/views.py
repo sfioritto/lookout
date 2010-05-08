@@ -1,4 +1,4 @@
-from lookout.settings import home
+from conf import home
 from django.views.generic import simple
 from django.http import HttpResponse
 

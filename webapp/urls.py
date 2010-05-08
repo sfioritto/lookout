@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        (r'^admin/', include(admin.site.urls)),
-                       (r'^testing/', include('webapp.testing.urls')),
+                       (r'^alerts/', include('webapp.testing.urls')),
                        )
 
 #load static files when in dev.

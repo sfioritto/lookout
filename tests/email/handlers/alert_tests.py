@@ -4,24 +4,26 @@ from lamson.routing import Router
 from lamson.mail import MailRequest
 from lamson import queue
 from config import testing
-from settings import *
+from conf import email, home
 import os
 import clients.alerts as alerts
 
 relay = relay(port=8823)
 client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
-receiver = "alerts-2@lookoutthere.com"
-confmsg = MailRequest('fakepeer', sender, receiver, open(os.path.join(LOOKOUT_HOME, "tests/data/emails/alert-confirmation.msg")).read())
-confmsg['to'] = receiver
-print Router.REGISTERED
+
+goodmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alert-confirmation.msg")).read())
+goodmsg['to'] = "alerts-1@lookoutthere.com"
+
+badmsg = MailRequest('fakepeer', sender, "alerts-2@lookoutthere.com", open(home("tests/data/emails/bad-confirmation.msg")).read())
+badmsg['to'] = "alerts-2@lookoutthere.com"
 
 #send the alerts urls to localhost
-alerts.GOOGLE_URL = "http://localhost/testing"
+alerts.GOOGLE_URL = "localhost:8000"
 
 
 def setup_func():
-    q = queue.Queue(LOOKOUT_ERROR)
+    q = queue.Queue(email('run/error'))
     q.clear()
 
 
@@ -29,21 +31,25 @@ def teardown_func():
     pass
 
 @with_setup(setup_func, teardown_func)
-def test_incoming_confirmation():
+def test_good_confirmation():
 
     """
-    The confirmation link in the email is invalid,
-    so it should fail. The handler shouuld handle
-    this by logging a reason and dumping the message
-    into the error queue. This test should also fail
-    when running without an internet connection.
+    This message should move the state into
+    ALERTING.
     """
 
-    Router.deliver(confmsg)
-    q = queue.Queue(LOOKOUT_ERROR)
-    assert q.count() == 1
+    Router.deliver(goodmsg)
+    q = queue.Queue(email('run/error'))
+    assert q.count() == 0
+    assert_in_state('app.handlers.alerts', goodmsg['to'], sender, 'ALERTING') 
 
 
+@with_setup(setup_func, teardown_func)
+def test_bad_confirmation():
+    assert True
+
+
+@with_setup(setup_func, teardown_func)
 def test_incoming_alert():
 
     """

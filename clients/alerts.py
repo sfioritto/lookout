@@ -68,14 +68,17 @@ def confirm_alert(msg):
     """
     
     url = get_conf_url(msg.base.body)
-    send_confirmation(url)
+    response = send_confirmation(url)
+    assert response.status == 200
 
 
 def send_confirmation(url):
 
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("GET", url)
+    response = conn.getresponse()
     conn.close()
+    return response
 
 
 def get_conf_url(body):

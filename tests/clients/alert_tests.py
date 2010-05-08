@@ -1,13 +1,14 @@
 from clients import alerts
 from lamson.mail import MailRequest
-from settings import *
+from conf import home
 import os
 import re
 
 sender = "test@localhost"
 receiver = "google@localhost"
 
-msg = MailRequest('fakepeer', sender, receiver, open(os.path.join(LOOKOUT_HOME, "tests/data/emails/alert-confirmation.msg")).read())
+msg = MailRequest('fakepeer', sender, receiver, open(home("tests/data/emails/alert-confirmation.msg")).read())
+
 
 def test_get_confirmation_url():
 
