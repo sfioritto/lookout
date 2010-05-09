@@ -22,7 +22,6 @@ def CONFIRMING(message, alert_id=None, host=None):
     """
     Waiting for an email with a confirmation link.
     """
-
     try:
         alerts.confirm_alert(message)
         return ALERTING
