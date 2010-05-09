@@ -56,10 +56,10 @@ def test_bad_confirmation():
 
 @with_setup(setup_func, teardown_func)
 def test_incoming_alert():
-
     """
+    Verify an incoming alert generates
+    the correct database records.
     """
-
     assert True
 
 

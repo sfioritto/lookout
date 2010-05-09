@@ -118,4 +118,35 @@ def confirmed(html):
         return True
     else:
         return False
+
+
+def parse_alerts(msg, alert):
+    """
+    Takes an alert and parses it into
+    lists of alert stub instances and
+    persists them to the database.
+    """
+    return []
+
+
+def get_raw_alerts(html):
+    """
+    Given some html returns very basic
+    parsing of the alerts.
+    """
+    soup = BeautifulSoup(html)
+    return []
+
+def get_html_stubs(html):
+    return []
+
+def get_raw_alert(stub):
+    """
+    Given a stub of html, return
+    a dictionary representing the alert.
+    """
+    return {}
     
+
+
+
