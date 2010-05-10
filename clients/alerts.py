@@ -26,6 +26,7 @@ FREQUENCY = {
 }
 
 verify = re.compile("/alerts/verify.*\w")
+byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
 
 def create_alert(term, email, type='comprehensive', frequency='instant', length=50):
 
@@ -154,10 +155,27 @@ def get_html_stubs(html):
 
 def get_raw_alert(stub):
     """
-    Given a stub of html, return
+    Given a stub of html beautiful soup, return
     a dictionary representing the alert.
     """
-    return {}
+    
+    #the first font tag contains the text nodes we want.
+    blurb = ''.join(stub.find('font', recursive=False).findAll(text=True, recursive=False)).replace("\n", "")
+    title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
+    source = stub.find('font', recursive=False).font.find(text=True)
+    url = stub.find('a', recursive=False)['href']
+
+    #get the byline
+    by = ""
+    mtch = byline.match(blurb)
+    if mtch:
+        by = mtch.groups()[0]
+        
+    return {'blurb' : blurb,
+            'title' : title,
+            'source' : source,
+            'byline' : by,
+            'url' : url}
     
 
 

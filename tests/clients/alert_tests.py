@@ -57,9 +57,24 @@ def test_get_html_stubs():
     assert len(stubs) == 15
 
 
-# should be used for get raw alerts
-#     assert stubs[0]['title'] == "Breaking News : Beth Phoenix Is Injured, But ''THANK GOD,'' Its Not Serious"
-#     assert stubs[1]['byline'] == "Dallas Morning News"
-#     assert stubs[5]['url'] == "http://www.google.com/url?sa=X&q=http://www.newsday.com/lifestyle/books/mom-must-face-her-fears-in-quindlen-s-every-last-one-1.1898768&ct=ga&cad=:s7:f2:v0:i0:lt:e5:p5:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNH2DrVXtQVKUfJzXG7HPzOZ-4ycTg"
+def test_get_raw_alert():
+    """
+    Given a chunk of html, turn it into
+    a python dictionary we can use to 
+    populate a database record.
+    """
+    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+    stub = alerts.get_html_stubs(alertsmsg.body())[1]
+    alert = alerts.get_raw_alert(stub)
+    assert alert.has_key('blurb')
+    assert alert['title'].startswith("Q&amp;A with outgoing Irving council member")
+    assert alert['source'] == "Dallas Morning News"
+    assert alert['byline'] == "BRANDON FORMBY"
+    alert['url'] == "http://www.google.com/url?sa=X&q=http://www.dallasnews.com/sharedcontent/dws/news/city/coppell_vr/stories/DN-vanduyneqa_06met.ART.Central.Edition1.f47fa.html&ct=ga&cad=:s7:f2:v0:i0:lt:e1:p1:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNE75voDhXQsZGMtnvaHilTE-hpMIw"
+
+    stub = alerts.get_html_stubs(alertsmsg.body())[0]
+    alert = alerts.get_raw_alert(stub)
+    assert alert['byline'] == ""
+    assert alert['url'] == "http://www.google.com/url?sa=X&q=http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious&ct=ga&cad=:s7:f2:v0:i0:lt:e0:p0:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNEUStlFdaeVUnL_bvslOnTPGzFM2A"    
 
     
