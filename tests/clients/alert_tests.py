@@ -1,6 +1,10 @@
 from clients import alerts
 from lamson.mail import MailRequest
 from conf import home
+from webapp.alerts.models import Alert, AlertBlurb
+from webapp.account.models import Account
+from webapp.folders.models import Folder
+from django.contrib.auth.models import User
 import os
 import re
 
@@ -9,6 +13,25 @@ receiver = "google@localhost"
 
 msg = MailRequest('fakepeer', sender, receiver, open(home("tests/data/emails/alert-confirmation.msg")).read())
 
+
+def setup():
+    user = User.objects.all()[0]
+    account = Account(email="test@test.com",
+                   user=user)
+    account.save()
+    folder = Folder(name="Beth",
+                    user=account)
+    folder.save()
+    alert = Alert(user=account,
+                  folder=folder)
+    alert.save()
+
+def teardown():
+    Alert.objects.all().delete()
+    AlertBlurb.objects.all().delete()
+    Account.objects.all().delete()
+    Folder.objects.all().delete()
+    
 
 def test_get_confirmation_url():
 
@@ -35,17 +58,6 @@ def test_not_confirmed():
     assert alerts.confirmed(open(home('tests/data/html/bad-verify.html')).read()) == False
     
 
-def test_get_raw_alert():
-    """
-    Given some markup that represents an alert, test
-    that we get back a dictionary of key values representing
-    that alert's basic data.
-    """
-
-#     raw = alerts.get_raw_alert(
-    assert False
-
-
 def test_get_html_stubs():
     """
     Given some html, return a list
@@ -70,11 +82,17 @@ def test_get_raw_alert():
     assert alert['title'].startswith("Q&amp;A with outgoing Irving council member")
     assert alert['source'] == "Dallas Morning News"
     assert alert['byline'] == "BRANDON FORMBY"
-    alert['url'] == "http://www.google.com/url?sa=X&q=http://www.dallasnews.com/sharedcontent/dws/news/city/coppell_vr/stories/DN-vanduyneqa_06met.ART.Central.Edition1.f47fa.html&ct=ga&cad=:s7:f2:v0:i0:lt:e1:p1:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNE75voDhXQsZGMtnvaHilTE-hpMIw"
+    alert['url'] == "http://www.dallasnews.com/sharedcontent/dws/news/city/coppell_vr/stories/DN-vanduyneqa_06met.ART.Central.Edition1.f47fa.html"
 
     stub = alerts.get_html_stubs(alertsmsg.body())[0]
     alert = alerts.get_raw_alert(stub)
     assert alert['byline'] == ""
-    assert alert['url'] == "http://www.google.com/url?sa=X&q=http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious&ct=ga&cad=:s7:f2:v0:i0:lt:e0:p0:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNEUStlFdaeVUnL_bvslOnTPGzFM2A"    
+    assert alert['url'] == "http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious"    
+
+def test_create_alert_blurb():
+     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+     alert = Alert.objects.all()[0]
+     blurb = alerts.create_alert(alertsmsg, alert)
+     assert True
 
     

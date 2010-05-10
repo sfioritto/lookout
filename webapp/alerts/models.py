@@ -27,7 +27,7 @@ class AlertBlurb(models.Model):
     title = models.CharField(max_length=1024)
     blurb = models.CharField(max_length=1024)
     url = models.CharField(max_length=1024)
-    related = models.CharField(max_length=1024)
+
 
 
 

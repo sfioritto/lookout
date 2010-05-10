@@ -1,4 +1,4 @@
-import httplib, urllib
+import httplib, urllib, urllib2
 import re
 from BeautifulSoup import BeautifulSoup
 
@@ -163,7 +163,12 @@ def get_raw_alert(stub):
     blurb = ''.join(stub.find('font', recursive=False).findAll(text=True, recursive=False)).replace("\n", "")
     title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
     source = stub.find('font', recursive=False).font.find(text=True)
-    url = stub.find('a', recursive=False)['href']
+
+    #Google wraps up the direct link in a query string, which goes
+    #to them first then redirects. This gets the big link then pulls
+    # the actual link out of the query string.
+    bigUrl = stub.find('a', recursive=False)['href']
+    url = urllib2.unquote(urllib2.urlparse.parse_qs(bigUrl)['q'][0])
 
     #get the byline
     by = ""

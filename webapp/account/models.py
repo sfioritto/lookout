@@ -9,7 +9,7 @@ class Account(models.Model):
     user = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
-        return "%s" % email
+        return "%s" % self.email
 
 
 class LamsonState(models.Model):
