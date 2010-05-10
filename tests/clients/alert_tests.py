@@ -23,7 +23,11 @@ def setup():
                     user=account)
     folder.save()
     alert = Alert(user=account,
-                  folder=folder)
+                  folder=folder,
+                  term="l",
+                  type="l",
+                  frequency="50",
+                  length=50)
     alert.save()
 
 def teardown():
@@ -92,7 +96,7 @@ def test_get_raw_alert():
 def test_create_alert_blurb():
      alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
      alert = Alert.objects.all()[0]
-     blurb = alerts.create_alert(alertsmsg, alert)
+     blurb = alerts.create_alert_blurb(alertsmsg, alert)
      assert True
 
     
