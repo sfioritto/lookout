@@ -55,8 +55,11 @@ def test_get_html_stubs():
     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
     stubs = alerts.get_html_stubs(alertsmsg.body())
     assert len(stubs) == 15
-    assert stubs[0]['title'] == "Breaking News : Beth Phoenix Is Injured, But ''THANK GOD,'' Its Not Serious"
-    assert stubs[1]['byline'] == "Dallas Morning News"
-    assert stubs[5]['url'] == "http://www.google.com/url?sa=X&q=http://www.newsday.com/lifestyle/books/mom-must-face-her-fears-in-quindlen-s-every-last-one-1.1898768&ct=ga&cad=:s7:f2:v0:i0:lt:e5:p5:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNH2DrVXtQVKUfJzXG7HPzOZ-4ycTg"
+
+
+# should be used for get raw alerts
+#     assert stubs[0]['title'] == "Breaking News : Beth Phoenix Is Injured, But ''THANK GOD,'' Its Not Serious"
+#     assert stubs[1]['byline'] == "Dallas Morning News"
+#     assert stubs[5]['url'] == "http://www.google.com/url?sa=X&q=http://www.newsday.com/lifestyle/books/mom-must-face-her-fears-in-quindlen-s-every-last-one-1.1898768&ct=ga&cad=:s7:f2:v0:i0:lt:e5:p5:t1273200633:&cd=TdfUlYqIXl4&usg=AFQjCNH2DrVXtQVKUfJzXG7HPzOZ-4ycTg"
 
     

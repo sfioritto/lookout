@@ -137,8 +137,20 @@ def get_raw_alerts(html):
     soup = BeautifulSoup(html)
     return []
 
+
 def get_html_stubs(html):
-    return []
+    """
+    Takes in the html from an alerts email
+    and returns a list.
+    """
+    soup = BeautifulSoup(html)
+    tables = soup.p.findNextSiblings('table')
+    trs = []
+    for table in tables:
+        trs.extend(table.findAll('tr', recursive=False))
+        
+    return [tr.find('td', recursive=False) for tr in trs]
+
 
 def get_raw_alert(stub):
     """
