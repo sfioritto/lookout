@@ -1,4 +1,4 @@
-from clients import alerts
+from app.model import alerts
 from lamson.mail import MailRequest
 from conf import home
 from webapp.alerts.models import Alert, AlertBlurb

@@ -1,7 +1,7 @@
 import os
 
 HOME = "/Users/seanfioritto/lookout"
-EMAIL = os.path.join(HOME, "email")
+EMAIL = os.path.join(HOME, "emails")
 
 
 def home(path="/"):

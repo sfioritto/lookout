@@ -1,4 +1,4 @@
-import clients.alerts as alerts
+import app.model.alerts as alerts
 from lamson import queue
 from lamson.routing import route, route_like, state_key_generator
 from email.utils import parseaddr

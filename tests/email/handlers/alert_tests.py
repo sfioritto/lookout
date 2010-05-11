@@ -7,7 +7,7 @@ from config import testing
 from conf import email, home
 from webapp.account.models import LamsonState
 import os
-import clients.alerts as alerts
+import app.model.alerts as alerts
 
 relay = relay(port=8823)
 client = RouterConversation("somedude@localhost", "alerts_tests")
