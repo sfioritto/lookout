@@ -1,6 +1,7 @@
 import httplib, urllib, urllib2
 import re
 from BeautifulSoup import BeautifulSoup
+from webapp.alerts.models import Blurb
 
 GOOGLE_URL = "www.google.com"
 ALERTS_URL = "/alerts/create?hl=en&gl=us"
@@ -160,9 +161,33 @@ def get_raw_alert(stub):
         
     return {'blurb' : blurb,
             'title' : title,
-            'source' : source,
+            'source' : str(source),
             'byline' : by,
             'url' : url}
-    
+
+
+def create_blurbs(msg, alert):
+    """
+    Given a lamson message and an alert, create
+    the blurb objects and persist to the database.
+    """
+    stubs = get_html_stubs(msg.body())
+    rawAlerts = [get_raw_alert(stub) for stub in stubs]
+
+    blurbs = []
+    for raw in rawAlerts:
+
+        blurb = Blurb(alert=alert,
+                      folder=alert.folder,
+                      byline=raw['byline'],
+                      source=raw['source'],
+                      title=raw['title'],
+                      blurb=raw['blurb'],
+                      url=raw['url'])
+        blurb.save()
+        blurbs.append(blurb)
+
+    return blurbs
+
 
 

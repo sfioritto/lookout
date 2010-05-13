@@ -17,7 +17,7 @@ class Alert(models.Model):
         return "alerts-%s@lookoutthere.com" % self.id
 
 
-class AlertBlurb(models.Model):
+class Blurb(models.Model):
     
     created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
     alert = models.ForeignKey(Alert)
@@ -25,7 +25,7 @@ class AlertBlurb(models.Model):
     byline = models.CharField(max_length=1024)
     source = models.CharField(max_length=1024)
     title = models.CharField(max_length=1024)
-    blurb = models.CharField(max_length=1024)
+    blurb = models.CharField(max_length=2048)
     url = models.CharField(max_length=1024)
 
 

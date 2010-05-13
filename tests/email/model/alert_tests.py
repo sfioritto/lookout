@@ -1,7 +1,7 @@
 from app.model import alerts
 from lamson.mail import MailRequest
 from conf import home
-from webapp.alerts.models import Alert, AlertBlurb
+from webapp.alerts.models import Alert, Blurb
 from webapp.account.models import Account
 from webapp.folders.models import Folder
 from django.contrib.auth.models import User
@@ -32,7 +32,7 @@ def setup():
 
 def teardown():
     Alert.objects.all().delete()
-    AlertBlurb.objects.all().delete()
+    Blurb.objects.all().delete()
     Account.objects.all().delete()
     Folder.objects.all().delete()
     
@@ -93,10 +93,15 @@ def test_get_raw_alert():
     assert alert['byline'] == ""
     assert alert['url'] == "http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious"    
 
-def test_create_alert_blurb():
+def test_create_blurbs():
      alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
      alert = Alert.objects.all()[0]
-     blurb = alerts.create_alert_blurb(alertsmsg, alert)
-     assert True
+     blurbs = alerts.create_blurbs(alertsmsg, alert)
+     assert len(blurbs) == 15
+     blurb = blurbs[1]
+     assert blurb.title.startswith("Q&amp;A with outgoing Irving council member")
+     assert blurb.source == "Dallas Morning News"
+     assert blurb.byline == "BRANDON FORMBY"
+     assert len(Blurb.objects.all()) == 15
 
     
