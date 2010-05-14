@@ -93,6 +93,7 @@ def test_get_raw_alert():
     assert alert['byline'] == ""
     assert alert['url'] == "http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious"    
 
+
 def test_create_blurbs():
      alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
      alert = Alert.objects.all()[0]

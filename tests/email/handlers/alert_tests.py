@@ -8,7 +8,7 @@ from conf import email, home
 from webapp.folders.models import Folder
 from django.contrib.auth.models import User
 from webapp.account.models import LamsonState, Account
-from webapp.alerts.models import Alert
+from webapp.alerts.models import Alert, Blurb
 import os
 import app.model.alerts as alerts
 
@@ -44,6 +44,7 @@ def setup_func():
 
 
 def teardown_func():
+    Blurb.objects.all().delete()
     Alert.objects.all().delete()
     Account.objects.all().delete()
     Folder.objects.all().delete()
@@ -83,9 +84,15 @@ def test_incoming_alert():
                   frequency="50",
                   length=50)
     alert.save()
-    msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/alert-confirmation.msg")).read())
+    
+    msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/beth-alerts.msg")).read())
     msg['to'] = "alerts-%s@lookoutthere.com" % alert.id
     Router.deliver(msg)
+    
+    assert len(Blurb.objects.all()) == 15
+    
+    #Should error out in the alerts.py handlers module in CONFIRMING
     q = queue.Queue(email('run/error'))
-    assert q.count() == 0
+    assert q.count() == 1
+
 

@@ -171,6 +171,7 @@ def create_blurbs(msg, alert):
     Given a lamson message and an alert, create
     the blurb objects and persist to the database.
     """
+
     stubs = get_html_stubs(msg.body())
     rawAlerts = [get_raw_alert(stub) for stub in stubs]
 
