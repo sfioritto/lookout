@@ -33,8 +33,11 @@ def CONFIRMING(message, alert_id=None, host=None):
 
 @route_like(START)
 def ALERTING(message, alert_id=None, host=None):
-
     """
+    Just dump the alert message into a queue
+    for later processing.
     """
-
+    q = queue.Queue("run/alerts")
+    q.push(message)
+    
     return ALERTING
