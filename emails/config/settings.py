@@ -10,7 +10,11 @@ relay_config = {'host': 'localhost', 'port': 8825}
 
 receiver_config = {'host': 'localhost', 'port': 8823}
 
+alertsq_config = {'queue' : 'run/alerts', 'sleep' : 10}
+
 handlers = ['app.handlers.alerts']
+
+alertsq_handlers = ['app.handlers.alertsq']
 
 router_defaults = {
     'host': 'lookoutthere\\.com',
