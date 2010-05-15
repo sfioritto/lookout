@@ -6,6 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        (r'^admin/', include(admin.site.urls)),
                        (r'^alerts/', include('webapp.testing.urls')),
+                       (r'^folders/(?P<folderid>[0-9]+)/feed/', include('webapp.feed.urls')),
                        )
 
 #load static files when in dev.

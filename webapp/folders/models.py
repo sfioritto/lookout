@@ -7,3 +7,5 @@ class Folder(models.Model):
     user = models.ForeignKey(Account)
     name = models.CharField(max_length=256, null=False)
 
+    def __unicode__(self):
+        return "%s" % self.id

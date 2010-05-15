@@ -1,5 +1,4 @@
 from conf import home
-from django.views.generic import simple
 from django.http import HttpResponse
 
 def good_verify(request):
