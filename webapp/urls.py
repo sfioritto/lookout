@@ -10,6 +10,7 @@ urlpatterns = patterns(
     (r'^alerts/', include('testing.urls')),
     (r'^account/', include('account.urls')),
     (r'^folders/(?P<folderid>[0-9]+)/feed/', include('feed.urls')),
+    (r'^folders/', include('folders.urls')),
     )
 
 #django contrib
