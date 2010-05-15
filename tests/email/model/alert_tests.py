@@ -2,7 +2,7 @@ from app.model import alerts
 from lamson.mail import MailRequest
 from conf import home
 from webapp.alerts.models import Alert
-from webapp.feed.models import Blurb
+from webapp.blurb.models import Blurb
 from webapp.account.models import Account
 from webapp.folders.models import Folder
 from django.contrib.auth.models import User

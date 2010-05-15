@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from webapp.folders.models import Folder
-from webapp.feed.models import Blurb
+from webapp.blurb.models import Blurb
 from django.http import HttpResponse
 
 def show(request, folderid):

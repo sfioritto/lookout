@@ -1,7 +1,7 @@
 import httplib, urllib, urllib2
 import re
 from BeautifulSoup import BeautifulSoup
-from webapp.feed.models import Blurb
+from webapp.blurb.models import Blurb
 
 GOOGLE_URL = "www.google.com"
 ALERTS_URL = "/alerts/create?hl=en&gl=us"
