@@ -1,6 +1,6 @@
 from nose.tools import *
 from app.model.state import UserStateStorage
-from webapp.account.models import LamsonState
+from webapp.alerts.models import LamsonState
 from lamson.routing import ROUTE_FIRST_STATE
 
 

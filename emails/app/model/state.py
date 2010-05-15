@@ -1,5 +1,5 @@
 from lamson.routing import StateStorage, ROUTE_FIRST_STATE
-from webapp.account.models import LamsonState
+from webapp.alerts.models import LamsonState
 
 
 class UserStateStorage(StateStorage):

@@ -7,8 +7,8 @@ from config import testing
 from conf import email, home
 from webapp.folders.models import Folder
 from django.contrib.auth.models import User
-from webapp.account.models import LamsonState, Account
-from webapp.alerts.models import Alert
+from webapp.account.models import Account
+from webapp.alerts.models import Alert, LamsonState
 from webapp.blurb.models import Blurb
 import os
 import app.model.alerts as alerts

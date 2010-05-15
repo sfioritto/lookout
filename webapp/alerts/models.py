@@ -15,3 +15,14 @@ class Alert(models.Model):
     @property
     def email(self):
         return "alerts-%s@lookoutthere.com" % self.id
+
+
+class LamsonState(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)
+    key = models.CharField(max_length=512)
+    address = models.EmailField()
+    state = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return "%s:%s (%s)" % (self.key, self.address, self.state)
+
