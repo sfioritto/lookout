@@ -1,8 +1,10 @@
-
+from webapp.account.forms import CreateAccountForm
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
 def create(request):
     
-    form = AccountCreationForm()
+    form = CreateAccountForm()
     if request.method == "POST":
         form = CreateAccountForm(request.POST)
         

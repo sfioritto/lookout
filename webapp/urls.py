@@ -3,14 +3,22 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+#webapp
 urlpatterns = patterns(
-    '',
+    'webapp',
     (r'^admin/', include(admin.site.urls)),
-    (r'^alerts/', include('webapp.testing.urls')),
-    (r'^folders/(?P<folderid>[0-9]+)/feed/', include('webapp.feed.urls')),
-    (r'^login/$', 'django.contrib.auth.views.login', {
-            'template_name': 'account/login.html'}),
-    (r'logout/$', 'django.contrib.auth.views.logout_then_login'),
+    (r'^alerts/', include('testing.urls')),
+    (r'^account/', include('account.urls')),
+    (r'^folders/(?P<folderid>[0-9]+)/feed/', include('feed.urls')),
+    )
+
+#django contrib
+urlpatterns += patterns(
+    'django.contrib.auth.views',
+    (r'^login/$', 'login', {
+        'template_name': 'account/login.html'}
+     ),
+    (r'logout/$', 'logout_then_login'),
     )
 
 #load static files when in dev.

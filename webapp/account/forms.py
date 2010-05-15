@@ -11,7 +11,6 @@ class CreateAccountForm(forms.Form):
                                widget=forms.PasswordInput(render_value=False)) 
     repassword = forms.CharField(label=(u'Password'),
                                widget=forms.PasswordInput(render_value=False)) 
-    next = forms.CharField()
 
 
     def clean_password(self):
@@ -44,7 +43,7 @@ class CreateAccountForm(forms.Form):
         try:
             account = Account.objects.get(pk=email)
         except Account.DoesNotExist:
-            Account = None
+            account = None
 
         if account or user:
             raise forms.ValidationError("An account for this email address has already been created.")
