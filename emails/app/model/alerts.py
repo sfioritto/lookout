@@ -179,7 +179,7 @@ def create_blurbs(msg, alert):
     for raw in rawAlerts:
 
         blurb = Blurb(alert=alert,
-                      folder=alert.folder,
+                      client=alert.client,
                       byline=raw['byline'],
                       source=raw['source'],
                       title=raw['title'],

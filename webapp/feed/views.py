@@ -5,10 +5,10 @@ from django.http import HttpResponse
 
 def show(request, clientid):
     """
-    Shows all the blurbs for the folder.
+    Shows all the blurbs for the client.
     """
-    folder = get_object_or_404(Client, pk=clientid)
-    blurbs = Blurb.objects.filter(folder=folder).all()
+    client = get_object_or_404(Client, pk=clientid)
+    blurbs = Blurb.objects.filter(client=client).all()
     return render_to_response('feed/show.html', {'blurbs' : blurbs,
-                                                 'folder' : folder})
+                                                 'client' : client})
 

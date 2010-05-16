@@ -20,11 +20,11 @@ def setup():
     account = Account(email="test@test.com",
                    user=user)
     account.save()
-    folder = Client(name="Beth",
+    client = Client(name="Beth",
                     user=account)
-    folder.save()
+    client.save()
     alert = Alert(user=account,
-                  folder=folder,
+                  client=client,
                   term="l",
                   type="l",
                   frequency="50",

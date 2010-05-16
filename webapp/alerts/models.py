@@ -6,7 +6,7 @@ class Alert(models.Model):
 
     created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
     user = models.ForeignKey(Account)
-    folder = models.ForeignKey(Client)
+    client = models.ForeignKey(Client)
     term = models.CharField(max_length=256)
     type = models.CharField(max_length=256)
     frequency = models.CharField(max_length=256)

@@ -32,9 +32,9 @@ def setup_func():
     account = Account(email="test@test.com",
                    user=user)
     account.save()
-    folder = Client(name="Beth",
+    client = Client(name="Beth",
                     user=account)
-    folder.save()
+    client.save()
 
     LamsonState.objects.all().delete()
     q = queue.Queue(email('run/error'))
@@ -79,7 +79,7 @@ def test_incoming_alert():
     the correct database records.
     """
     alert = Alert(user=Account.objects.all()[0],
-                  folder=Client.objects.all()[0],
+                  client=Client.objects.all()[0],
                   term="l",
                   type="l",
                   frequency="50",
@@ -89,11 +89,12 @@ def test_incoming_alert():
     msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/beth-alerts.msg")).read())
     msg['to'] = "alerts-%s@lookoutthere.com" % alert.id
     Router.deliver(msg)
-    
-    assert len(Blurb.objects.all()) == 15
-    
+
     #Should error out in the alerts.py handlers module in CONFIRMING
     q = queue.Queue(email('run/error'))
     assert q.count() == 1
+    
+    assert len(Blurb.objects.all()) == 15, "There are %s blurbs." % len(Blurb.objects.all())
+    
 
 
