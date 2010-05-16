@@ -21,11 +21,11 @@ def create_alert(request, clientid):
     """
     Create a new alert for the given client.
     """
-
+    client = get_object_or_404(Client, pk=clientid)
     if request.method == "POST":
         form = RequestForm(request.POST)
         email = form.data['email']
         return HttpResponseRedirect(reverse("webapp.alerts.show_all"))
     else:
-        return render_to_response('marketing/create-alert.html',
+        return render_to_response('alerts/create.html',
                                   context_instance=RequestContext(request))
