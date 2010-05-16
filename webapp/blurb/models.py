@@ -1,12 +1,12 @@
 from django.db import models
-from webapp.folders.models import Folder
+from webapp.clients.models import Client
 from webapp.alerts.models import Alert
 
 class Blurb(models.Model):
     
     created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
     alert = models.ForeignKey(Alert)
-    folder = models.ForeignKey(Folder)
+    folder = models.ForeignKey(Client)
     byline = models.CharField(max_length=1024)
     source = models.CharField(max_length=1024)
     title = models.CharField(max_length=1024)

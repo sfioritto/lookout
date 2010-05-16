@@ -1,14 +1,14 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from webapp.folders.models import Folder
+from webapp.clients.models import Client
 
 @login_required
-def show(request, folderid):
+def show(request, clientid):
     """
     Show all of the alerts for a folder.
     """
-    folder = get_object_or_404(Folder, pk=folderid)
+    folder = get_object_or_404(Client, pk=clientid)
     alerts = folder.alert_set.all()
     return render_to_response('alerts/show.html', {
             'alerts' : alerts,

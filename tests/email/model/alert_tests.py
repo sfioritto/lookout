@@ -4,7 +4,7 @@ from conf import home
 from webapp.alerts.models import Alert
 from webapp.blurb.models import Blurb
 from webapp.account.models import Account
-from webapp.folders.models import Folder
+from webapp.clients.models import Client
 from django.contrib.auth.models import User
 import os
 import re
@@ -20,7 +20,7 @@ def setup():
     account = Account(email="test@test.com",
                    user=user)
     account.save()
-    folder = Folder(name="Beth",
+    folder = Client(name="Beth",
                     user=account)
     folder.save()
     alert = Alert(user=account,
@@ -35,7 +35,7 @@ def teardown():
     Alert.objects.all().delete()
     Blurb.objects.all().delete()
     Account.objects.all().delete()
-    Folder.objects.all().delete()
+    Client.objects.all().delete()
     
 
 def test_get_confirmation_url():

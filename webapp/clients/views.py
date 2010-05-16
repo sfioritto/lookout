@@ -6,10 +6,10 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def show(request):
     """
-    Show all of the folders for a user.
+    Show all of the clients for a user.
     """
     account = request.user.get_profile()
-    folders = account.folder_set.all()
-    return render_to_response('folders/show.html', {
-            'folders' : folders
+    clients = account.client_set.all()
+    return render_to_response('clients/show.html', {
+            'clients' : clients
             }, context_instance = RequestContext(request))

@@ -5,7 +5,7 @@ from lamson.mail import MailRequest
 from lamson import queue
 from config import testing
 from conf import email, home
-from webapp.folders.models import Folder
+from webapp.clients.models import Client
 from django.contrib.auth.models import User
 from webapp.account.models import Account
 from webapp.alerts.models import Alert, LamsonState
@@ -32,7 +32,7 @@ def setup_func():
     account = Account(email="test@test.com",
                    user=user)
     account.save()
-    folder = Folder(name="Beth",
+    folder = Client(name="Beth",
                     user=account)
     folder.save()
 
@@ -48,7 +48,7 @@ def teardown_func():
     Blurb.objects.all().delete()
     Alert.objects.all().delete()
     Account.objects.all().delete()
-    Folder.objects.all().delete()
+    Client.objects.all().delete()
 
 @with_setup(setup_func, teardown_func)
 def test_good_confirmation():
@@ -79,7 +79,7 @@ def test_incoming_alert():
     the correct database records.
     """
     alert = Alert(user=Account.objects.all()[0],
-                  folder=Folder.objects.all()[0],
+                  folder=Client.objects.all()[0],
                   term="l",
                   type="l",
                   frequency="50",
