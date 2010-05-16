@@ -3,4 +3,5 @@ from webapp import settings
 
 urlpatterns = patterns('webapp.clients.views',
                        (r'^$', 'show'),
+                       (r'create/$', 'create'),
                        )
