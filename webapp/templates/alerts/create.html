@@ -1,10 +1,14 @@
-<head>
-<title>
-Alerts
-</title>
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" />
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/create-alert.css" />
-</head>
+{% if error %}
+<p>Oops, looks like something went wrong. Try creating your alert again.</p>
+{% endif %}
 
-<body>
-</body>
+{{ form.errors }}
+<form method="post" action="{% url webapp.alerts.views.create clientid=client.id %}">
+  <table>
+    <tr>
+      <td>{{ form.term.label_tag }}</td>
+      <td>{{ form.term }}</td>
+    </tr>
+ </table>
+  <input type="submit" value="login" />
+</form>

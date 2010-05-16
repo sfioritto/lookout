@@ -45,6 +45,7 @@ def create_alert(term, email, type='comprehensive', frequency='instant', length=
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("POST", ALERTS_URL, params, headers)
     response = conn.getresponse()
+    assert response.status == 200, "Something went wrong, your alert was not created."
     conn.close()
 
 

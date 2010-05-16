@@ -16,3 +16,9 @@ def bad_verify(request):
     markup.
     """
     return HttpResponse(open(home("tests/data/html/bad-verify.html")).read())
+
+def create(request):
+    """
+    Returns a 200OK. Should probably test a bad response...
+    """
+    return HttpResponse("Alert created. Sending email now.")
