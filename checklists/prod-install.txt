@@ -1,0 +1,76 @@
+#assuming you have a slice and are logged in
+# as root.
+
+-- Change the DNS settings to point to the new IP
+-- Create a user, change depending on the username you want
+
+> adduser --home /home/sean --shell /bin/bash sean
+
+-- add nano as default editor, add this line to ~/.bashrc
+export EDITOR="nano"
+
+-- start visudo
+> visudo
+
+-- add the 'sean' line after the root line
+root    ALL=(ALL) ALL
+sean    ALL=(ALL) ALL
+
+-- logout as root, login as new user
+> exit
+> ssh sean@ip.address.com
+
+-- disable root
+sudo usermod -p '!' root
+
+-- copy public ssh key, from local machine:
+>scp id_rsa.pub sean@the.ip.address:/tmp/id_rsa.pub
+>ssh sean@the.ip.address
+>cd ~
+>mkdir .ssh
+>cd .ssh
+>touch authorized_keys
+>cat /tmp/id_rsa.pub >> authorized_keys 
+>exit
+>ssh sean@the.ip.address
+# should be logged in without entering password.
+
+-- install some software
+> sudo apt-get install emacs
+> sudo apt-get install postgresql
+> sudo apt-get install gcc
+> sudo apt-get install python-dev
+> sudo apt-get install libpq-dev
+> sudo apt-get install libncurses-dev
+> sudo apt-get install apache2-mpm-prefork
+> sudo apt-get install libapache2-mod-python
+> cd /tmp
+> wget http://peak.telecommunity.com/dist/ez_setup.py
+> sudo pyton ez_setup.py
+> sudo easy_install virtualenv
+> sudo easy_install pip
+> wget http://pylockfile.googlecode.com/files/lockfile-0.9.tar.gz
+> tar -xvf lockfile-0.9.tar.gz 
+> cd lockfile-0.9
+> sudo python setup.py install
+> cd ~
+> sudo pip install lamson
+> sudo pip install django
+> sudo pip install psycopg2
+> sudo pip install beautifulsoup
+> sudo pip install ipython
+> sudo pip install readline
+> sudo -u postgres createdb lookout
+
+-- create system user for lookout app
+sudo adduser --system --home /home/lookout lookout
+
+-- copy production python path file
+#from local machine
+scp path/to/prod/lookout.pth sean@lookoutthere.com:/tmp
+#on prod machine
+sudo cp /tmp/lookout.pth /usr/local/lib/python2.6/dist-packages/
+
+
+
+

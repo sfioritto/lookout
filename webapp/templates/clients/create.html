@@ -1,0 +1,10 @@
+{{ form.errors }}
+<form method="post" action="{% url webapp.clients.views.create %}">
+  <table>
+    <tr>
+      <td>{{ form.name.label_tag }}</td>
+      <td>{{ form.name }}</td>
+    </tr>
+ </table>
+  <input type="submit" value="create" />
+</form>
