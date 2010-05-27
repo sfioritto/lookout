@@ -48,11 +48,11 @@ def upload_untar(archive, hash):
 
 def switch(hash):
     with cd(env.prodhome):
-        sudo("ln -s %s/snapshots/%s /tmp/live_tmp && sudo mv -Tf /tmp/live_tmp /var/local/lookout" % (env.prodhome, hash))
+        sudo("ln -s %s/snapshots/%s /tmp/live_tmp && sudo mv -Tf /tmp/live_tmp /var/local/www" % (env.prodhome, hash))
 
-#     with cd(env.approot):
-#         run("cp webappsettings.py webapp/settings.py")
-#         run("cp config/prod-settings.py config/settings.py")
+    with cd(env.approot):
+        run("cp prod/webapp/settings.py settings.py")
+        run("cp prod/emails/settings.py emails/settings.py")
 
 
 def reboot():
@@ -72,7 +72,7 @@ def deploy(hash):
     archive = pack(hash)
     upload(archive)
     untar(archive, hash)
-#    switch(hash)
+    switch(hash)
 #    reboot()
 
     
