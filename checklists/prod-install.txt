@@ -68,6 +68,19 @@ scp path/to/prod/lookout.pth sean@lookoutthere.com:/tmp
 #on prod machine
 sudo cp /tmp/lookout.pth /usr/local/lib/python2.6/dist-packages/
 
+-- update postgres hba conf file
+>sudo emacs /etc/postgresql/8.4/main/pg_hba.conf
+
+#comment out this line
+local   all         postgres                          ident  
+
+>sudo /etc/init.d/postgresql-8.4 restart
+
+-- update database schema
+> cd /var/lookout/www/webapp
+> python manage.py syncdb
+
+
 
 
 
