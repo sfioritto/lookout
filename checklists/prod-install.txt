@@ -62,9 +62,6 @@ sudo usermod -p '!' root
 > sudo pip install readline
 > sudo -u postgres createdb lookout
 
--- create system user for lookout app
-sudo adduser --system --home /home/lookout lookout
-
 -- copy production python path file
 #from local machine
 scp path/to/prod/lookout.pth sean@lookoutthere.com:/tmp

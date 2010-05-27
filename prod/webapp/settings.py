@@ -1,10 +1,10 @@
 # Django settings for webapp project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    # ('Sean Fioritto', 'sean@twosix.es'),
 )
 
 MANAGERS = ADMINS
@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 DATABASE_ENGINE = 'postgresql_psycopg2'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'lookout'             # Or path to database file if using sqlite3.
 DATABASE_USER = 'postgres'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'Bethers8064'         # Not used with sqlite3.
+DATABASE_PASSWORD = 'C3rb3russ'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'webapp.urls'
 
 TEMPLATE_DIRS = (
-    '/Users/seanfioritto/lookout/webapp/templates',
+    '/var/lookout/www/webapp/templates',
 )
 
 INSTALLED_APPS = (
@@ -79,6 +79,16 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'webapp.alerts',
     'webapp.account',
-    'webapp.folders',
+    'webapp.clients',
     'webapp.feed',
+    'webapp.testing',
+    'webapp.blurb',
 )
+
+
+AUTHENTICATION_BACKENDS = ('webapp.backends.EmailBackend',
+                           'django.contrib.auth.backends.ModelBackend',)
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+AUTH_PROFILE_MODULE = 'account.Account'
+
