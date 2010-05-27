@@ -13,7 +13,6 @@ env/
 .ropeproject/*.*
 .ropeproject/*
 *~
-webapp/settings.py
 logs/
 run/
 email/run/

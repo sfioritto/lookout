@@ -17,8 +17,18 @@ pip install psycopg2
 pip install beautifulsoup
 pip install ipython
 pip install readline
+pip install fabric
 
 
 cd *your lookout dir*
 cp settings/lookout.pth env/LOOKOUT/lib/python2.6/site-packages/lookout.pth
+
+-- Add username and password to .fabrc
+emacs ~/.fabrc
+
+#add these lines
+user=<your username on production>
+password=<your password on production>
+devpath=/full/path/to/local/source/code
+
 
