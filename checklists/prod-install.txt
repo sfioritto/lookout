@@ -65,7 +65,7 @@ sudo usermod -p '!' root
 
 -- copy production python path file
 #from local machine
-scp path/to/prod/lookout.pth sean@lookoutthere.com:/tmp
+scp ~/lookout/prod/python/lookout.pth sean@lookoutthere.com:/tmp
 #on prod machine
 sudo cp /tmp/lookout.pth /usr/local/lib/python2.6/dist-packages/
 
@@ -81,7 +81,26 @@ local   all         postgres                          ident
 > cd /var/lookout/www/webapp
 > python manage.py syncdb
 
+-- Create directories for apache
+> sudo mkdir /var/lookout
+> sudo mkdir /var/lookout/snapshots
+> sudo rm /var/www/index.html
+> cd /var/www
+> sudo ln -s /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/ media
+> sudo ln -s /var/lookout/www/media/ static
+> sudo emacs /etc/apache2/apache2.conf
 
-
-
+-- copy apache config files
+#from local machine
+> cd ~/lookout/prod/apache
+> scp apache2.conf sean@lookoutthere.com:/tmp
+> scp lookout sean@lookoutthere.com:/tmp
+> ssh sean@lookoutthere.com
+> cd /etc/apache2
+> sudo cp /tmp/apache2.conf .
+> cd sites-available
+> sudo cp /tmp/lookout .
+> sudo a2dissite default
+> sudo a2ensite lookout
+> sudo apache2ctl restart
 
