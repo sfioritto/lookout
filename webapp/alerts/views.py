@@ -41,8 +41,8 @@ def create(request, clientid):
                       frequency='instant',
                       length=50)
         try:
-            alerts.create_alert(alert.term, alert.email)
             alert.save()
+            alerts.create_alert(alert.term, alert.email)
             return HttpResponseRedirect(reverse("webapp.alerts.views.show", kwargs={'clientid':client.id}))
         except:
             #TODO: dump something in the error logs
