@@ -1,5 +1,7 @@
-#assuming you have a slice and are logged in
-# as root.
+# Assumptions:
+# -- you have a slice and are logged in as root.
+# -- you have checked out the most recent version of code into ~/lookout
+# on your local machine
 
 -- Change the DNS settings to point to the new IP
 -- Create a user, change depending on the username you want
@@ -61,6 +63,10 @@ sudo usermod -p '!' root
 > sudo pip install beautifulsoup
 > sudo pip install ipython
 > sudo pip install readline
+# get lockfile and python-daemon module versions synced up.
+> sudo pip install http://pypi.python.org/packages/source/p/python-daemon/python-daemon-1.5.5.tar.gz#md5=1f6cd41473c2e201021a0aeef395b2b1
+> sudo pip uninstall lockfile
+> sudo pip install http://pylockfile.googlecode.com/files/lockfile-0.8.tar.gz
 > sudo -u postgres createdb lookout
 
 -- copy production python path file
@@ -77,9 +83,6 @@ local   all         postgres                          ident
 
 >sudo /etc/init.d/postgresql-8.4 restart
 
--- update database schema
-> cd /var/lookout/www/webapp
-> python manage.py syncdb
 
 -- Create directories for apache
 > sudo mkdir /var/lookout
@@ -89,6 +92,18 @@ local   all         postgres                          ident
 > sudo ln -s /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/ media
 > sudo ln -s /var/lookout/www/media/ static
 > sudo emacs /etc/apache2/apache2.conf
+
+-- deploy code
+# from local machine
+> cd ~/lookout
+> git log
+# grab the latest-hash
+> fab deploy:hash=latest-hash
+
+-- update database schema
+> cd /var/lookout/www/webapp
+> python manage.py syncdb
+
 
 -- copy apache config files
 #from local machine
@@ -103,4 +118,18 @@ local   all         postgres                          ident
 > sudo a2dissite default
 > sudo a2ensite lookout
 > sudo apache2ctl restart
+
+-- email setup
+> cd /var/lookout
+> sudo mkdir run
+> sudo mkdir logs
+> sudo chown -R sean:sean run
+> sudo chown -R sean:sean logs
+
+
+-- start everything up
+# from local machine
+> cd ~/lookout
+> fab reboot
+
 

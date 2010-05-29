@@ -54,9 +54,15 @@ def switch(hash):
     with cd(env.approot):
         sudo("cp prod/webapp/settings.py webapp/settings.py")
         sudo("cp prod/emails/settings.py emails/settings.py")
+        sudo("ln -s /var/lookout/run emails/run")
+        sudo("ln -s /var/lookout/logs emails/logs")
 
 
 def reboot():
+    #TODO: this will break when there are multiple hosts, need to dynamically lookup uid and gid
+    #This assert makes sure I know when it breaks
+    assert len(env.hosts) == 1
+
     with settings(warn_only=True):
         with cd(env.emailroot):
             sudo("apache2ctl graceful")
@@ -74,7 +80,7 @@ def deploy(hash):
     upload(archive)
     untar(archive, hash)
     switch(hash)
-#    reboot()
+
 
     
     
