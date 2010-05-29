@@ -3,8 +3,13 @@ from webapp.account.models import Account
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, forms
 from django.contrib.auth.models import User
+
+
+#Django hack to let us put emails in the username field in the login form
+forms.AuthenticationForm.base_fields['username'].max_length = 75 
+
 
 def create(request):
     """

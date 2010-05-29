@@ -36,6 +36,7 @@ sudo usermod -p '!' root
 # should be logged in without entering password.
 
 -- install some software
+> sudo apt-get update
 > sudo apt-get install emacs
 > sudo apt-get install postgresql
 > sudo apt-get install gcc
