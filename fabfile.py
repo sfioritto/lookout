@@ -53,7 +53,7 @@ def switch(hash):
 
     with cd(env.approot):
         sudo("cp prod/webapp/settings.py webapp/settings.py")
-        sudo("cp prod/emails/settings.py emails/settings.py")
+        sudo("cp prod/emails/settings.py emails/config/settings.py")
         sudo("ln -s /var/lookout/run emails/run")
         sudo("ln -s /var/lookout/logs emails/logs")
 
