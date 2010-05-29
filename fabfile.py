@@ -68,9 +68,11 @@ def reboot():
             sudo("apache2ctl graceful")
             sudo("lamson stop -ALL run/")
             sudo("rm run/*")
-            sudo("lamson start -gid 65534 -uid 103")
-            sudo("lamson start -gid 65534 -uid 103 -boot config.queue -pid run/queue.pid")
-            sudo("chown -R sean:sean ../www")
+            sudo("lamson start -gid 1000 -uid 1000")
+            #TODO: why can't I start it up and switch to a different user?
+#            sudo("lamson start -gid 1000 -uid 1000 -boot config.queue -pid run/queue.pid")
+            sudo("lamson start -boot config.queue -pid run/queue.pid")
+            sudo("chown -R sean:sean %s" % env.approot)
 
     
 def deploy(hash):
