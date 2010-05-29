@@ -8,7 +8,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'webapp.settings'
 # for secure connections.
 relay_config = {'host': 'localhost', 'port': 8825}
 
-receiver_config = {'host': 'localhost', 'port': 23}
+receiver_config = {'host': 'localhost', 'port': 25}
 
 alertsq_config = {'queue' : 'run/alerts', 'sleep' : 10}
 
