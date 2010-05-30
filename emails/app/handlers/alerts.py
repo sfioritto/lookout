@@ -39,7 +39,7 @@ def CONFIRMING(message, alert_id=None, host=None):
     except Exception as e:
         q = queue.Queue('run/error')
         q.push(message)
-        LOG.debug(str(e))
+        LOG.debug("Something bad happened in the alerts handler: %s" % str(e))
         return CONFIRMING
 
 
