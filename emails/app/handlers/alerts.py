@@ -28,7 +28,7 @@ def CONFIRMING(message, alert_id=None, host=None):
         # google alerts sends alerts from a different address than the confirmation email. Lamson
         # state key includes the sender, so I have to add this extra piece.
         if alert.confirmed:
-            return ALERTING(message, alert_id=None, host=None)
+            return ALERTING(message, alert_id=alert_id, host=host)
         alerts.confirm_alert(message)
         alert.confirmed = True
         alert.save()
