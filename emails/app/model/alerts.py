@@ -1,3 +1,4 @@
+import logging
 import httplib, urllib, urllib2
 import re
 from BeautifulSoup import BeautifulSoup
@@ -25,6 +26,8 @@ FREQUENCY = {
     'day' : 1,
     'week' : 6
 }
+
+LOG = logging.getLogger("Parse Alerts")
 
 verify = re.compile("/alerts/verify.*\w")
 byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
@@ -145,11 +148,16 @@ def get_raw_alert(stub):
     Given a stub of html beautiful soup, return
     a dictionary representing the alert.
     """
-    
+
     #the first font tag contains the text nodes we want.
     blurb = ''.join(stub.find('font', recursive=False).findAll(text=True, recursive=False)).replace("\n", "")
     title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
-    source = stub.find('font', recursive=False).font.find(text=True)
+    source = ""
+
+    #sometimes there is not a source
+    font = stub.find('font', recursive=False).font
+    if font:
+        source = font.find(text=True)
 
     #Google wraps up the direct link in a query string, which goes
     #to them first then redirects. This gets the big link then pulls
@@ -177,6 +185,15 @@ def create_blurbs(msg, alert):
     """
 
     stubs = get_html_stubs(msg.body())
+
+    rawAlerts = []
+    for stub in stubs:
+        try:
+            raw = get_raw_alert(stub)
+            rawAlerts.append(raw)
+        except Exception as e:
+            LOG.debug("Failed to parse this stub:\n%s" % str(stub))
+
     rawAlerts = [get_raw_alert(stub) for stub in stubs]
 
     blurbs = []
