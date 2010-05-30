@@ -2,6 +2,7 @@ import app.model.alerts as alerts
 from lamson import queue
 from lamson.routing import route, route_like, state_key_generator
 from email.utils import parseaddr
+from webapp.alerts.models import Alert
 
 
 @state_key_generator
@@ -23,7 +24,14 @@ def CONFIRMING(message, alert_id=None, host=None):
     Waiting for an email with a confirmation link.
     """
     try:
+        alert = Alert.objects.get(pk=alert_id)
+        # google alerts sends alerts from a different address than the confirmation email. Lamson
+        # state key includes the sender, so I have to add this extra piece.
+        if alert.confirmed:
+            return ALERTING(message, alert_id=None, host=None)
         alerts.confirm_alert(message)
+        alert.confirmed = True
+        alert.save()
         return ALERTING
     except:
         q = queue.Queue('run/error')

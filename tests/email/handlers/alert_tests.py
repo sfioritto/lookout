@@ -17,8 +17,6 @@ relay = relay(port=8823)
 client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
 
-goodmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alert-confirmation.msg")).read())
-goodmsg['to'] = "alerts-1@lookoutthere.com"
 
 badmsg = MailRequest('fakepeer', sender, "alerts-2@lookoutthere.com", open(home("tests/data/emails/bad-confirmation.msg")).read())
 badmsg['to'] = "alerts-2@lookoutthere.com"
@@ -51,17 +49,27 @@ def teardown_func():
     Client.objects.all().delete()
 
 @with_setup(setup_func, teardown_func)
-def test_good_confirmation():
+def test_good_confirmation(msg=None):
 
     """
     This message should move the state into
     ALERTING.
     """
-
-    Router.deliver(goodmsg)
+    alert = Alert(user=Account.objects.all()[0],
+                  client=Client.objects.all()[0],
+                  term="tim",
+                  type="l",
+                  frequency="50",
+                  length=50)
+    alert.save()
+    addr = "alerts-%s@lookoutthere.com" % alert.id
+    if not msg:
+        msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alert-confirmation.msg")).read())
+    msg['to'] = addr
+    Router.deliver(msg)
     q = queue.Queue(email('run/alerts'))
     assert q.count() == 0
-    assert_in_state('app.handlers.alerts', goodmsg['to'], sender, 'ALERTING') 
+    assert_in_state('app.handlers.alerts', msg['to'], sender, 'ALERTING') 
 
 
 @with_setup(setup_func, teardown_func)
@@ -69,7 +77,43 @@ def test_bad_confirmation():
     Router.deliver(badmsg)
     q = queue.Queue(email('run/error'))
     assert q.count() == 2 #one for the alertsq module and one for alerts
-    assert_in_state('app.handlers.alerts', badmsg['to'], sender, 'CONFIRMING') 
+    assert_in_state('app.handlers.alerts', badmsg['to'], sender, 'CONFIRMING')
+
+
+@with_setup(setup_func, teardown_func)
+def test_confirm_then_alert():
+    """
+    An alert sent after an account is confirmed should go right into
+    ALERTING and alert objects should be created in the database.
+    """
+    alert = Alert(user=Account.objects.all()[0],
+                  client=Client.objects.all()[0],
+                  term="tim",
+                  type="l",
+                  frequency="50",
+                  length=50)
+    alert.save()
+
+    addr = "alerts-%s@lookoutthere.com" % alert.id
+
+    confirm = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/tim-confirmation.msg")).read())
+    confirm['to'] = addr
+    test_good_confirmation(msg=confirm)
+
+
+    alertsmsg = MailRequest('fakepeer', "different@sender", addr, open(home("tests/data/emails/tim-alerts.msg")).read())
+    alertsmsg['to'] = addr
+    Router.deliver(alertsmsg)
+
+    # there are 10 alerts in this alert email. since this is the test environment it will be dumped
+    # into the alerts queue automatically, which will create the 10 alerts. Then it should be processed
+    # by the alerts handler module, dumped into the queue again, thereby upping the alerts queue by one.
+    assert len(Blurb.objects.all()) == 10, "There are %s blurbs." % len(Blurb.objects.all())
+    q = queue.Queue(email('run/alerts'))
+    assert q.count() == 1
+
+    
+    
 
 
 @with_setup(setup_func, teardown_func)
