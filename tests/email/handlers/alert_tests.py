@@ -1,3 +1,4 @@
+from tests.email import create_alert
 from nose.tools import *
 from lamson.testing import *
 from lamson.routing import Router
@@ -23,7 +24,6 @@ badmsg['to'] = "alerts-2@lookoutthere.com"
 
 #send the alerts urls to localhost
 alerts.GOOGLE_URL = "localhost:8000"
-
 
 def setup_func():
     user = User.objects.all()[0]
@@ -55,13 +55,8 @@ def test_good_confirmation(msg=None):
     This message should move the state into
     ALERTING.
     """
-    alert = Alert(user=Account.objects.all()[0],
-                  client=Client.objects.all()[0],
-                  term="tim",
-                  type="l",
-                  frequency="50",
-                  length=50)
-    alert.save()
+    alert = create_alert()
+
     addr = "alerts-%s@lookoutthere.com" % alert.id
     if not msg:
         msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alert-confirmation.msg")).read())
@@ -86,13 +81,7 @@ def test_confirm_then_alert():
     An alert sent after an account is confirmed should go right into
     ALERTING and alert objects should be created in the database.
     """
-    alert = Alert(user=Account.objects.all()[0],
-                  client=Client.objects.all()[0],
-                  term="tim",
-                  type="l",
-                  frequency="50",
-                  length=50)
-    alert.save()
+    alert = create_alert()
 
     addr = "alerts-%s@lookoutthere.com" % alert.id
 
@@ -122,13 +111,8 @@ def test_incoming_alert():
     Verify an incoming alert generates
     the correct database records.
     """
-    alert = Alert(user=Account.objects.all()[0],
-                  client=Client.objects.all()[0],
-                  term="l",
-                  type="l",
-                  frequency="50",
-                  length=50)
-    alert.save()
+    alert = create_alert()
+
     
     msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/beth-alerts.msg")).read())
     msg['to'] = "alerts-%s@lookoutthere.com" % alert.id
@@ -141,6 +125,8 @@ def test_incoming_alert():
     assert q.count() == 1
     
     assert len(Blurb.objects.all()) == 15, "There are %s blurbs." % len(Blurb.objects.all())
+
+    
     
 
 
