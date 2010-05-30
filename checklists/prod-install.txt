@@ -69,6 +69,10 @@ sudo usermod -p '!' root
 > sudo pip install http://pylockfile.googlecode.com/files/lockfile-0.8.tar.gz
 > sudo -u postgres createdb lookout
 
+-- install and configure postfix
+> sudo apt-get install mutt
+# accept defaults
+
 -- copy production python path file
 #from local machine
 scp ~/lookout/prod/python/lookout.pth sean@lookoutthere.com:/tmp

@@ -72,21 +72,24 @@ def confirm_alert(msg):
     """
     
     url = get_conf_url(msg.base.body)
-    response = send_confirmation(url)
-    assert response.status == 200
-    assert confirmed(response.read())
+    status, body = send_confirmation(url)
+    assert status == 200
+    assert confirmed(body)
 
 
 def send_confirmation(url):
     """
-    Geneartes a request to the given
+    Generates a request to the given
     confirmation url.
     """
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("GET", url)
     response = conn.getresponse()
+    body = response.read()
+    status = response.status
     conn.close()
-    return response
+    return status, body
+
 
 
 def get_conf_url(body):

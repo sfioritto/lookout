@@ -91,6 +91,8 @@ def test_incoming_alert():
     Router.deliver(msg)
 
     #Should error out in the alerts.py handlers module in CONFIRMING
+    #because these messages are dumped in the alertsq to be handled asyncronously,
+    #but the testing environment just sends it to both modules at the same time.
     q = queue.Queue(email('run/error'))
     assert q.count() == 1
     
