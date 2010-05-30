@@ -72,7 +72,7 @@ def reboot():
             #TODO: why can't I start it up and switch to a different user?
 #            sudo("lamson start -gid 1000 -uid 1000 -boot config.queue -pid run/queue.pid")
             sudo("lamson start -boot config.queue -pid run/queue.pid")
-            sudo("chown -R sean:sean %s" % env.approot)
+            sudo("chown -R sean:sean %s" % env.prodhome)
 
     
 def deploy(hash):
