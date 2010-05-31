@@ -1,6 +1,7 @@
 ul#tabs{
     position: absolute;
     top: 20px;
+    left: 80px;
 }
 
 img#tabimage{
@@ -11,8 +12,9 @@ img#tabimage{
 
 ul#tabs li{
     float: left;
-    margin-right: 30px;
     text-align: center;
+    width: 265px;
+    height: 30px;
 }
 
 ul#tabs li a, div#content h3{
@@ -29,6 +31,15 @@ div#content h2{
 
 li#clientname a{
     color: #AB1F27;
+    white-space: nowrap;
+}
+
+li#clientname{
+    overflow: hidden;
+}
+
+li#manage{
+    margin-left: 30px;
 }
 
 li#manage a{
