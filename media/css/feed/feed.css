@@ -33,13 +33,13 @@ div#content{
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
-div#content, div.blurb, li.blurb, div.links{
+div#content, div.blurb, li.blurb, ul#blurbs, div.links{
     float: left;
 }
 
 li.blurb{
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     width: 100%;
 }
 
@@ -48,16 +48,15 @@ li.blurb:hover{
 }
 
 div.blurb{
-    width: 80%;
+    width: 90%;
 }
 
 div.links{
-    width: 20%;
+    width: 10%;
+    margin-top: 15px; 
 }
 
 div.links a{
-    position: relative;
-    top: 25%;
 }
 p.source, p.blurb{
     font-family: georgia;
