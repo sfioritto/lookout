@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
 from django.http import HttpResponse
+from django.template import RequestContext
 
 def show(request, clientid):
     """
@@ -10,5 +11,6 @@ def show(request, clientid):
     client = get_object_or_404(Client, pk=clientid)
     blurbs = Blurb.objects.filter(client=client).all()
     return render_to_response('feed/show.html', {'blurbs' : blurbs,
-                                                 'client' : client})
+                                                 'client' : client, 
+                                                 }, context_instance = RequestContext(request))
 

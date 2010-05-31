@@ -1,5 +1,12 @@
+{% extends "base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
 <ul>
   {% for blurb in blurbs %}
   <li>{{ blurb.blurb }}</li>
   {% endfor %}
 </ul>
+{% endblock %}
