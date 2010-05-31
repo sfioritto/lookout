@@ -44,7 +44,6 @@ li.blurb{
     margin-bottom: 0px;
     padding: 5px 0px 5px 10px;
     margin-right: -10px;
-    -moz-border-radius: 5px;
 }
 
 li.blurb:hover{
@@ -65,4 +64,34 @@ p.source, p.blurb{
     font-size: 12px;
     color: #636363;
     margin-top: 3px;
+}
+
+a.textbtn{
+    font-family: georgia;
+    font-size: 12px;
+    color: #979495;
+    padding: 5px 13px;
+    /*same color as the content border*/
+    border: 1px solid;
+    border-color: #FAC9B5;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+a.textbtn:hover{
+    background-color: #F8FFC2;
+    text-decoration: none;
+}
+
+li.blurb div.links a{ 
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+/*rounded corners*/
+li.blurb, a.textbtn{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

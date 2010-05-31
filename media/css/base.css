@@ -5,7 +5,7 @@ body{
 div#nav{
     float: right;
     background-color: white;
-    margin: 10px;
+    margin: 10px 20px 10px 10px;
 }
 
 div#nav ul{
@@ -35,10 +35,12 @@ div#content{
     background-color: white;
     border: 1px solid;
     border-color: #D8B4BE;
+    min-height: 400px;
 }
 
 /*rounded corners*/
 div#content, div#nav{
     -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
