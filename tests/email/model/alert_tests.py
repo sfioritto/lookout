@@ -6,6 +6,7 @@ from webapp.alerts.models import Alert
 from webapp.blurb.models import Blurb
 from webapp.account.models import Account
 from webapp.clients.models import Client
+from webapp.testing.models import Confirmation
 from django.contrib.auth.models import User
 from nose.tools import *
 import os
@@ -32,7 +33,7 @@ def teardown_func():
     Runs after every test.
     """
     Alert.objects.all().delete()
-
+    Confirmation.objects.all().delete()
 
 def setup():
     user = User.objects.all()[0]
@@ -158,3 +159,35 @@ def test_computer_monitor_raw():
     stubs = alerts.get_html_stubs(compmsg.body())
     rawAlerts = [alerts.get_raw_alert(stub) for stub in stubs]
     assert len(rawAlerts) == 11
+
+
+@with_setup(setup_func, teardown_func)
+def test_create_alert():
+    """
+    Tests creating the alert against a test server.
+    """
+
+    alerts.create_alert("test", "test@localhost")
+    assert len(Confirmation.objects.all()) == 1
+
+
+@with_setup(setup_func, teardown_func)
+def test_create_params():
+    """
+    Pass in some default values to create_params and ensure
+    they are mapped to the right POST values
+    """
+    term = "test"
+    email = "test@localhost"
+    type = "comprehensive"
+    frequency = "instant"
+    length = 50
+    params = alerts.create_params(term, email, type, frequency, length)
+    print params
+    assert params[alerts.TERM_NAME] == term
+    assert params[alerts.EMAIL_NAME] == email
+    assert params[alerts.TYPES_NAME] == alerts.TYPES[type]
+    assert params[alerts.FREQUENCY_NAME] == alerts.FREQUENCY[frequency]
+    assert params[alerts.LENGTH_NAME] == length
+
+    

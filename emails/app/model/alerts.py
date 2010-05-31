@@ -13,18 +13,18 @@ LENGTH_NAME = "l"
 TERM_NAME = "q"
 
 TYPES = {
-    'comprehensive' : 7,
-    'news' : 1,
-    'web' : 2,
-    'blogs' : 4,
-    'groups' : 8,
-    'video' : 9
+    'comprehensive' : '7',
+    'news' : '1',
+    'web' : '2',
+    'blogs' : '4',
+    'groups' : '8',
+    'video' : '9'
 }
 
 FREQUENCY = {
-    'instant' : 0,
-    'day' : 1,
-    'week' : 6
+    'instant' : '0',
+    'day' : '1',
+    'week' : '6'
 }
 
 LOG = logging.getLogger("Parse Alerts")
@@ -39,11 +39,8 @@ def create_alert(term, email, type='comprehensive', frequency='instant', length=
     email.
     """
 
-    assert frequency in FREQUENCY.keys(), "Must be one of %s" % FREQUENCY.keys()
-    assert type in TYPES.keys(), "Must be one of %s" % TYPES.keys()
-    assert length == 50 or length == 20, "Length must be 50 or 20."
-
-    params = create_params(term, email, type, frequency, length)
+    pdict = create_params(term, email, type, frequency, length)
+    params =  urllib.urlencode(pdict)
     headers = {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'}
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("POST", ALERTS_URL, params, headers)
@@ -52,19 +49,25 @@ def create_alert(term, email, type='comprehensive', frequency='instant', length=
     conn.close()
 
 
-def create_params(term, email, type, frequency, length):
+def create_params(term, email, typekey, freqkey, length):
 
     """
     Creates a url encoded POST string to send to
     google alerts service.
     """
 
-    return urllib.urlencode({
+    assert freqkey in FREQUENCY.keys(), "Must be one of %s" % FREQUENCY.keys()
+    assert typekey in TYPES.keys(), "Must be one of %s" % TYPES.keys()
+    assert length == 50 or length == 20, "Length must be 50 or 20."
+
+    type = TYPES[typekey]
+    frequency = FREQUENCY[freqkey]
+    return {
         TERM_NAME : term, 
         EMAIL_NAME : email,
         TYPES_NAME : type, 
         FREQUENCY_NAME : frequency,
-        LENGTH_NAME : length})
+        LENGTH_NAME : length}
 
 
 def confirm_alert(msg):

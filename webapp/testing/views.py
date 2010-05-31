@@ -1,5 +1,8 @@
+import app.model.alerts as alerts
 from conf import home
 from django.http import HttpResponse
+from webapp.testing.models import Confirmation
+
 
 def good_verify(request):
     """
@@ -19,6 +22,12 @@ def bad_verify(request):
 
 def create(request):
     """
-    Returns a 200OK. Should probably test a bad response...
+    Returns a 200OK. Assumes the alert is created with the defaults.
     """
+    post = request.POST
+    assert post[alerts.TYPES_NAME] == alerts.TYPES['comprehensive']
+    assert post[alerts.FREQUENCY_NAME] == alerts.FREQUENCY['instant']
+    assert post[alerts.LENGTH_NAME] == '50'
+    c = Confirmation()
+    c.save()
     return HttpResponse("Alert created. Sending email now.")
