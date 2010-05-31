@@ -2,6 +2,10 @@ body{
     background-color: #C5DEEB;
 }
 
+div#body{
+    max-width: 1024px;
+}
+
 div#nav{
     float: right;
     background-color: white;

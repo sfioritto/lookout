@@ -68,11 +68,11 @@ li.blurb:hover{
 }
 
 div.blurb{
-    width: 85%;
+    width: 80%;
 }
 
 div.links{
-    width: 15%;
+    width: 20%;
     margin-top: 15px; 
 }
 
@@ -99,6 +99,16 @@ a.textbtn{
 a.textbtn:hover{
     background-color: #F8FFC2;
     text-decoration: none;
+}
+
+a.irrelevant{
+    background-image: url("/static/images/thumb.png");
+    height: 25px;
+    width: 25px;
+}
+
+a.irrelevant:hover{
+    background-image: url("/static/images/thumb-hover.png");
 }
 
 li.blurb div.links a{ 
