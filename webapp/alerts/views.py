@@ -14,7 +14,7 @@ def show(request, clientid):
     Show all of the alerts for a client.
     """
     client = get_object_or_404(Client, pk=clientid)
-    alerts = client.alert_set.all()
+    alerts = client.alert_set.filter(disabled=False).all()
     return render_to_response('alerts/show.html', {
             'alerts' : alerts,
             'client' : client,

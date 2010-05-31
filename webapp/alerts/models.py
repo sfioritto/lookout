@@ -12,6 +12,7 @@ class Alert(models.Model):
     frequency = models.CharField(max_length=256)
     length = models.IntegerField()
     confirmed = models.BooleanField(default=False)
+    disabled = models.BooleanField(default=False)
 
     @property
     def email(self):
