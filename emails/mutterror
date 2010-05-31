@@ -1,8 +1,8 @@
 set mbox_type=Maildir
-set folder="run/alerts"
+set folder="run/error"
 set mask="!^\\.[^.]"
-set mbox="run/alerts"
+set mbox="run/error"
 set record="+.Sent"
 set postponed="+.Drafts"
-set spoolfile="run/alerts"
+set spoolfile="run/error"
 set sendmail="/usr/bin/env lamson sendmail -port 8823 -host 127.0.0.1"
