@@ -1,6 +1,6 @@
 ul#tabs{
     position: absolute;
-    top: 40px;
+    top: 20px;
 }
 
 ul#tabs li{
@@ -18,6 +18,7 @@ div#content h2{
     color: #F4A3A6;
     font-family: verdana;
     font-size: 48px;
+    padding-left: 10px; /*should match li.blurb padding left*/
 }
 
 li#clientname a{
@@ -29,7 +30,7 @@ li#manage a{
 }
 
 div#content{
-    padding: 20px;
+    padding: 30px;
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
@@ -38,9 +39,12 @@ div#content, div.blurb, li.blurb, ul#blurbs, div.links{
 }
 
 li.blurb{
-    margin-top: 5px;
-    margin-bottom: 10px;
     width: 100%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    padding: 5px 0px 5px 10px;
+    margin-right: -10px;
+    -moz-border-radius: 5px;
 }
 
 li.blurb:hover{
@@ -48,16 +52,14 @@ li.blurb:hover{
 }
 
 div.blurb{
-    width: 90%;
+    width: 85%;
 }
 
 div.links{
-    width: 10%;
+    width: 15%;
     margin-top: 15px; 
 }
 
-div.links a{
-}
 p.source, p.blurb{
     font-family: georgia;
     font-size: 12px;
