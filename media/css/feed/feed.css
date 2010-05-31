@@ -1,0 +1,67 @@
+ul#tabs{
+    position: absolute;
+    top: 40px;
+}
+
+ul#tabs li{
+    float: left;
+    margin-right: 30px;
+    text-align: center;
+}
+
+ul#tabs li a, div#content h3{
+    font-family: georgia;
+    font-size: 18px;
+}
+
+div#content h2{
+    color: #F4A3A6;
+    font-family: verdana;
+    font-size: 48px;
+}
+
+li#clientname a{
+    color: #AB1F27;
+}
+
+li#manage a{
+    color: #979495;
+}
+
+div#content{
+    padding: 20px;
+}
+
+/*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
+div#content, div.blurb, li.blurb, div.links{
+    float: left;
+}
+
+li.blurb{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+li.blurb:hover{
+    background-color: #F0F0F1;
+}
+
+div.blurb{
+    width: 80%;
+}
+
+div.links{
+    width: 20%;
+}
+
+div.links a{
+    position: relative;
+    top: 25%;
+}
+p.source, p.blurb{
+    font-family: georgia;
+    font-size: 12px;
+    color: #636363;
+    margin-top: 3px;
+}

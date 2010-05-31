@@ -1,0 +1,44 @@
+body{
+    background-color: #C5DEEB;
+}
+
+div#nav{
+    float: right;
+    background-color: white;
+    margin: 20px;
+}
+
+div#nav ul{
+    /*only 10px on right to make up for right margin on LI*/
+    padding: 5px 10px 5px 20px; 
+}
+
+div#nav li{
+    display: inline;
+    font-family: verdana;
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+div#content{
+    clear: right;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: white;
+    border: 1px solid;
+    border-color: #D8B4BE;
+}
+
+/*rounded corners*/
+div#content, div#nav{
+    -moz-border-radius: 5px;
+}
+

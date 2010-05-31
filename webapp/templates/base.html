@@ -1,0 +1,28 @@
+<head>
+
+<title>
+{% block title %}
+Lookout
+{% endblock %}
+</title>
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" />
+{% block css %}
+{% endblock %}
+</head>
+
+<body>
+<div id="nav">
+  <ul>
+    <li><a href="/">My Clients</a></li>
+    <li><a href="/">Preferences</a></li>
+    <li><a href="/">Profile</a></li>
+    <li><a href="/">Help</a></li>
+    <li><a href="/">Logout</a></li>
+  </ul>
+</div>
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+</body>

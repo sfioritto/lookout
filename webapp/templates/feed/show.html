@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 
 {% block css %}
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/feed/feed.css" />
 {% endblock %}
 
 {% block content %}
-<ul>
+<ul id="tabs">
+  <li id="clientname">
+  <h1><a href="/">{{ client.name }}</a></h1>
+  </li>
+  <li id="manage">
+  <h1><a href="/">Manage</a></h2>
+  </li>
+</ul>
+<ul id="blurbs">
+  <h2>Today</h2>
   {% for blurb in blurbs %}
-  <li>{{ blurb.blurb }}</li>
+  <li class="blurb">
+  <div class="blurb">
+    <h3><a href="{{ blurb.url }}">{{ blurb.title }}</a></h3>
+    {% if blurb.source %}
+    <p class="source">{{ blurb.source }}</p>
+    {% endif %}
+    <p class="blurb">
+    {{ blurb.blurb }}
+    </p>
+    </div>
+    <div class="links">
+      <a class="textbtn" href="/">Text</a>
+      <a class="irrelevant" href="/">Irrelevant</a>
+    </div>
+  </li>
   {% endfor %}
 </ul>
 {% endblock %}
