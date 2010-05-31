@@ -3,6 +3,12 @@ ul#tabs{
     top: 20px;
 }
 
+img#tabimage{
+    position: absolute;
+    top: 9px;
+    left: 50px;
+}
+
 ul#tabs li{
     float: left;
     margin-right: 30px;

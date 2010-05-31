@@ -5,7 +5,7 @@ body{
 div#nav{
     float: right;
     background-color: white;
-    margin: 10px 20px 10px 10px;
+    margin: 15px 20px 10px 10px;
 }
 
 div#nav ul{
@@ -34,7 +34,7 @@ div#content{
     margin-right: 20px;
     background-color: white;
     border: 1px solid;
-    border-color: #D8B4BE;
+    border-color: #FBD5D6;
     min-height: 400px;
 }
 
