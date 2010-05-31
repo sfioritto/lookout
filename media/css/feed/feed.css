@@ -104,7 +104,7 @@ a.textbtn:hover{
 a.irrelevant{
     background-image: url("/static/images/thumb.png");
     height: 25px;
-    width: 25px;
+    width: 24px;
 }
 
 a.irrelevant:hover{
