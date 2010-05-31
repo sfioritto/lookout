@@ -1,13 +1,13 @@
 ul#tabs{
     position: absolute;
     top: 20px;
-    left: 80px;
+    left: 70px;
 }
 
 img#tabimage{
     position: absolute;
     top: 9px;
-    left: 50px;
+    left: 40px;
 }
 
 ul#tabs li{

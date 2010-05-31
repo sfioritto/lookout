@@ -5,19 +5,19 @@ body{
 div#nav{
     float: right;
     background-color: white;
-    margin: 15px 20px 10px 10px;
+    margin: 15px 10px 10px 10px;
 }
 
 div#nav ul{
     /*only 10px on right to make up for right margin on LI*/
-    padding: 5px 10px 5px 20px; 
+    padding: 5px; 
 }
 
 div#nav li{
     display: inline;
     font-family: verdana;
     font-size: 10px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 a{
@@ -30,8 +30,7 @@ a:hover{
 
 div#content{
     clear: right;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 0px 10px 10px 10px;
     background-color: white;
     border: 1px solid;
     border-color: #FBD5D6;
