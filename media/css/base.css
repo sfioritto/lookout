@@ -2,9 +2,6 @@ body{
     background-color: #C5DEEB;
 }
 
-div#content{
-    width: 825px;
-}
 
 div#nav{
     float: right;
@@ -33,12 +30,13 @@ a:hover{
 }
 
 div#content{
-    clear: right;
+    width: 825px;
     margin: 0px 10px 10px 10px;
     background-color: white;
     border: 1px solid;
     border-color: #FBD5D6;
     min-height: 375px;
+    clear: both;
 }
 
 /*rounded corners*/
