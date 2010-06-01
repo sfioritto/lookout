@@ -2,8 +2,9 @@ body{
     background-color: #C5DEEB;
 }
 
-div#body, div#content{
-    width: 1024px;
+div#content{
+    max-width: 825px;
+    width: 825px;
 }
 
 div#nav{

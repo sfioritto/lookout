@@ -51,7 +51,7 @@ div#content{
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
-div#content, div.blurb, li.blurb, ul#blurbs, div.links{
+div#body, div#content, div.blurb, li.blurb, ul#blurbs, div.links{
     float: left;
 }
 
