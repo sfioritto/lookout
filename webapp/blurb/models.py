@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 from webapp.clients.models import Client
 from webapp.alerts.models import Alert
 
@@ -13,6 +14,11 @@ class Blurb(models.Model):
     blurb = models.CharField(max_length=2048)
     url = models.CharField(max_length=1024)
     visited = models.BooleanField(default=False)
+
+    @property
+    def visit(self):
+        return reverse("webapp.blurb.views.visit", kwargs={'clientid':self.client.id,
+                                                           'blurbid':self.id})
     
     def __unicode__(self):
         return "%s" % self.id

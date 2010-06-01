@@ -130,3 +130,7 @@ li.blurb, a.textbtn{
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
+a.visit{
+    display: none;
+}
