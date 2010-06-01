@@ -15,18 +15,18 @@
   </li>
 </ul>
 <ul id="blurbs">
-  {% if today %}
+  {% if todays %}
   <h2>Today</h2>
-  {% for blurb in today %}
+  {% for blurb in todays %}
   <li class="blurb{% if blurb.visited %} visited{% endif %}">
   {% include 'blurb/blurb.html' %}
   </li>
   {% endfor %}
   {% endif %}
 
-  {% if yesterday %}
+  {% if yesterdays %}
   <h2>Yesterday</h2>
-  {% for blurb in yesterday %}
+  {% for blurb in yesterdays %}
   <li class="blurb">
   {% include 'blurb/blurb.html' %}
   </li>

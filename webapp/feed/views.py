@@ -1,4 +1,4 @@
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta as td
 from django.shortcuts import render_to_response, get_object_or_404
 from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
@@ -11,21 +11,22 @@ def show(request, clientid):
     """
     client = get_object_or_404(Client, pk=clientid)
 
-    year = dt.today().year
-    month = dt.today().month
-    day = dt.today().day
+    today = dt.today()
+    yesterday = dt.today() - td(1)
 
-    today = Blurb.objects.filter(client=client).filter(created_on__year=year,
-                                                       created_on__month=month,
-                                                       created_on__day=day).all()
-    yesterday = Blurb.objects.filter(client=client).filter(created_on__year=year,
-                                                       created_on__month=month,
-                                                       created_on__day=day - 1).all()
+    todays = Blurb.objects.filter(client=client).filter(created_on__year=today.year,
+                                                       created_on__month=today.month,
+                                                       created_on__day=today.day).all()
+    yesterdays = Blurb.objects.filter(client=client).filter(created_on__year=yesterday.year,
+                                                       created_on__month=yesterday.month,
+                                                       created_on__day=yesterday.day).all()
 
-    older = Blurb.objects.filter(client=client).filter(created_on__lt=dt(year, month, day-1)).all()
+    older = Blurb.objects.filter(client=client).filter(created_on__lt=dt(yesterday.year,
+                                                                         yesterday.month,
+                                                                         yesterday.day)).all()
 
-    return render_to_response('feed/show.html', {'today' : today,
-                                                 'yesterday' : yesterday,
+    return render_to_response('feed/show.html', {'todays' : todays,
+                                                 'yesterdays' : yesterdays,
                                                  'older' : older,
                                                  'client' : client, 
                                                  }, context_instance = RequestContext(request))
