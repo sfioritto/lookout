@@ -15,23 +15,35 @@
   </li>
 </ul>
 <ul id="blurbs">
+  {% if today %}
   <h2>Today</h2>
-  {% for blurb in blurbs %}
+  {% for blurb in today %}
   <li class="blurb">
-  <div class="blurb">
-    <h3><a href="{{ blurb.url }}">{{ blurb.title }}</a></h3>
-    {% if blurb.source %}
-    <p class="source">{{ blurb.source }}</p>
-    {% endif %}
-    <p class="blurb">
-    {{ blurb.blurb }}
-    </p>
-    </div>
-    <div class="links">
-      <a class="textbtn" href="/">Text</a>
-      <a class="irrelevant" href="/"></a>
-    </div>
+  {% include 'blurb/blurb.html' %}
   </li>
   {% endfor %}
+  {% endif %}
+
+  {% if yesterday %}
+  <h2>Yesterday</h2>
+  {% for blurb in yesterday %}
+  <li class="blurb">
+  {% include 'blurb/blurb.html' %}
+  </li>
+  {% endfor %}
+  {% endif %}
+
+  
+  {% if older %}
+  <h2>Older</h2>
+  {% for blurb in older %}
+  <li class="blurb">
+  {% include 'blurb/blurb.html' %}
+  </li>
+  {% endfor %}
+  {% endif %}
+
+  
+
 </ul>
 {% endblock %}
