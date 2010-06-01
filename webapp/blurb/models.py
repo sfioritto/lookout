@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from webapp.clients.models import Client
 from webapp.alerts.models import Alert
 
+    
 class Blurb(models.Model):
     
     created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
@@ -20,7 +21,25 @@ class Blurb(models.Model):
     def visit(self):
         return reverse("webapp.blurb.views.visit", kwargs={'clientid':self.client.id,
                                                            'blurbid':self.id})
+
+    @property
+    def relevance(self):
+        return reverse("webapp.blurb.views.relevance", kwargs={'clientid':self.client.id,
+                                                           'blurbid':self.id})
+
     
     def __unicode__(self):
         return "%s" % self.id
 
+
+class IrrelevantBlurb(models.Model):
+    """
+    Basically a quick and dirty queue of blurbs which
+    some async process will use to train the bayesian
+    network.
+    """
+
+    created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
+    blurb = models.ForeignKey(Blurb)
+    client = models.ForeignKey(Client)
+    processed = models.BooleanField(default=False)
