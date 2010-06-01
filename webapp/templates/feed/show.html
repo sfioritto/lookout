@@ -18,7 +18,7 @@
   {% if today %}
   <h2>Today</h2>
   {% for blurb in today %}
-  <li class="blurb">
+  <li class="blurb{% if blurb.visited %} visited{% endif %}">
   {% include 'blurb/blurb.html' %}
   </li>
   {% endfor %}

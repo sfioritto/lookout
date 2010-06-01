@@ -12,6 +12,7 @@ class Blurb(models.Model):
     title = models.CharField(max_length=1024)
     blurb = models.CharField(max_length=2048)
     url = models.CharField(max_length=1024)
+    visited = models.BooleanField(default=False)
     
     def __unicode__(self):
         return "%s" % self.id

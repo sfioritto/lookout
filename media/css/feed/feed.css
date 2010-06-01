@@ -22,6 +22,14 @@ ul#tabs li a, div#content h3{
     font-size: 18px;
 }
 
+div#content li.visited h3 a{
+    color: #879BCD;
+}
+
+div#content li.visited p{
+    color: #BCBCBC;
+}
+
 div#content h2{
     color: #F4A3A6;
     font-family: verdana;

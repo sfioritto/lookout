@@ -11,6 +11,7 @@ urlpatterns = patterns(
     (r'^account/', include('account.urls')),
     (r'^clients/(?P<clientid>[0-9]+)/alerts/', include('alerts.urls')),
     (r'^clients/(?P<clientid>[0-9]+)/feed/', include('feed.urls')),
+    (r'^clients/(?P<clientid>[0-9]+)/blurb/', include('blurb.urls')),
     (r'^clients/', include('clients.urls')),
     )
 
