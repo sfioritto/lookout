@@ -9,13 +9,13 @@ from webapp.alerts.forms import CreateAlertForm
 from app.model import alerts
 
 @login_required
-def show(request, clientid):
+def manage(request, clientid):
     """
     Show all of the alerts for a client.
     """
     client = get_object_or_404(Client, pk=clientid)
     alerts = client.alert_set.filter(disabled=False).all()
-    return render_to_response('alerts/show.html', {
+    return render_to_response('alerts/manage.html', {
             'alerts' : alerts,
             'client' : client,
             }, context_instance = RequestContext(request))

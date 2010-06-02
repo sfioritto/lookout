@@ -6,9 +6,20 @@
 
 {% block content %}
 <img id="tabimage" src="{{ MEDIA_URL }}images/manage-tabs.png" />
-<ul>
+<h2>Search Terms</h2>
+<h3>What should we be looking for?</h3>
+
+<ul id="alerts">
   {%for alert in alerts %}
-  <li>{{ alert.term }}</li>
+  <li>
+  <div class="term">
+  {{ alert.term }}
+  </div>
+  <div class="links">
+    <a class="edit" href="/">Edit</a>
+    <a class="delete" href="/">Delete</a>
+  </div>
+  </li>
   {% endfor %}
 </ul>
 {% endblock %}

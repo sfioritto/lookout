@@ -27,10 +27,10 @@ Lookout
 <div id="content">
   <ul id="tabs">
   <li id="clientname">
-  <h1><a href="/">{{ client.name }}</a></h1>
+  <h1><a href="{{ client.feed }}">{{ client.name }}</a></h1>
   </li>
   <li id="manage">
-  <h1><a href="/">Manage</a></h2>
+  <h1><a href="{{ client.manage }}">Manage</a></h2>
   </li>
 </ul>
   {% block content %}

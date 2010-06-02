@@ -5,6 +5,12 @@ img#tabimage{
     left: 40px;
 }
 
+div#content h3{
+    color: #A09C9C;
+    font-family: verdana;
+    font-size: 14px;
+}
+
 li#clientname a{
     color: #979495;
     white-space: nowrap;
@@ -13,4 +19,63 @@ li#clientname a{
 li#manage a{
     color: #AB1F27;
 }
+
+ul#alerts{
+    margin-top: 30px;
+    width: 60%;
+}
+
+ul#alerts, ul#alerts li, div.term, div.links{
+    float: left;
+}
+
+div.term{
+    width: 60%;
+}
+
+div.links a{
+    border: 1px solid #FAC9B5;
+    padding: 5px 10px;
+    width: 50px;
+    display: block;
+    text-align: center;
+    float: left;
+    font-family: georgia;
+    font-size: 14px;
+    color: #A09C9C;
+    background-color: white;
+}
+
+div.links a:hover{
+    background-color: #F8FFC2;
+    text-decoration: none;
+}
+
+a.edit{
+    margin-right: 10px;
+}
+
+ul#alerts li{
+    font-family: georgia;
+    font-size: 21px;
+    color: #474646;
+    width: 100%;
+    padding: 15px 10px;
+}
+
+ul#alerts li:hover{
+    background-color: #F0F0F1;
+}
+
+
+div#content h3{
+    padding-left: 10px;
+}
+
+/*rounded corners*/
+ul#alerts li, div.links a{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 
