@@ -1,0 +1,18 @@
+<div class="term">
+<p>{{ alert.term }}</p>
+</div>
+<div class="links">
+  <a class="edit" href="/">Edit</a>
+  <a class="delete" href="/">Delete</a>
+</div>
+<div class="editing">
+<div class="form">
+  <form method="post" action="{{ alert.update }}" class="form">
+  <input type="text" name="term" value="{{ alert.term }}"/>
+  </form>
+</div>
+<div class="save">
+  <a href="/">Cancel</a>
+  <a href="/">Save</a>
+</div>
+</div>
