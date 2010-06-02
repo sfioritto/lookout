@@ -18,6 +18,10 @@ class Alert(models.Model):
     def email(self):
         return "alerts-%s@lookoutthere.com" % self.id
 
+    @property
+    def update(self):
+        return "/"
+
 
 class LamsonState(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)

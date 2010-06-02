@@ -55,16 +55,53 @@ a.edit{
     margin-right: 10px;
 }
 
-ul#alerts li{
+div.term p, div.form input{
     font-family: georgia;
     font-size: 21px;
     color: #474646;
+}
+
+ul#alerts li{
     width: 100%;
     padding: 15px 10px;
 }
 
 ul#alerts li:hover{
     background-color: #F0F0F1;
+}
+
+/*** editing styles ***/
+
+ul#alerts li.editing{
+    padding-left: 0;
+}
+
+div.form input{
+    width: 100%;
+    padding: 5px 10px;
+    border: 2px solid #FAC9B5
+}
+
+div.save a{
+    float: right;
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+ul#alerts li.editing:hover{
+    background-color: white;
+}
+
+div.editing{
+    display: none;
+}
+
+li.editing div.editing{
+    display: block;
+}
+
+li.editing div.term, li.editing div.links{
+    display: none;
 }
 
 

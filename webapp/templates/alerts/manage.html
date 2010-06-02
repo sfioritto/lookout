@@ -11,15 +11,9 @@
 
 <ul id="alerts">
   {%for alert in alerts %}
-  <li>
-  <div class="term">
-  {{ alert.term }}
-  </div>
-  <div class="links">
-    <a class="edit" href="/">Edit</a>
-    <a class="delete" href="/">Delete</a>
-  </div>
-  </li>
+  <li class="editing">
+  {% include "alerts/alert.html" %}
+ </li>
   {% endfor %}
 </ul>
 {% endblock %}
