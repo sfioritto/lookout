@@ -1,0 +1,16 @@
+
+img#tabimage{
+    position: absolute;
+    top: 0px;
+    left: 40px;
+}
+
+li#clientname a{
+    color: #979495;
+    white-space: nowrap;
+}
+
+li#manage a{
+    color: #AB1F27;
+}
+

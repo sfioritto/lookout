@@ -52,3 +52,45 @@ img#feedback{
     right: 0;
 }
 
+ul#tabs{
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    z-index: 1;
+}
+
+ul#tabs li{
+    float: left;
+    text-align: center;
+    width: 265px;
+    height: 30px;
+}
+
+ul#tabs li a, div#content h3{
+    font-family: georgia;
+    font-size: 18px;
+}
+
+div#content h2{
+    color: #F4A3A6;
+    font-family: verdana;
+    font-size: 48px;
+    padding-left: 10px; /*should match li.blurb padding left*/
+}
+
+li#clientname{
+    overflow: hidden;
+}
+
+li#manage{
+    margin-left: 30px;
+}
+
+div#content{
+    padding: 30px;
+}
+
+/*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
+div#body, div#content{
+    float: left;
+}

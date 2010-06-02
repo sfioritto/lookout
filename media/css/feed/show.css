@@ -1,25 +1,7 @@
-ul#tabs{
-    position: absolute;
-    top: 20px;
-    left: 70px;
-}
-
 img#tabimage{
     position: absolute;
     top: 9px;
     left: 40px;
-}
-
-ul#tabs li{
-    float: left;
-    text-align: center;
-    width: 265px;
-    height: 30px;
-}
-
-ul#tabs li a, div#content h3{
-    font-family: georgia;
-    font-size: 18px;
 }
 
 li.irrelevant p, li.irrelevant a, div#content li.irrelevant h3 a.blurb{
@@ -54,13 +36,6 @@ li#clientname a{
     white-space: nowrap;
 }
 
-li#clientname{
-    overflow: hidden;
-}
-
-li#manage{
-    margin-left: 30px;
-}
 
 li#manage a{
     color: #979495;
@@ -71,7 +46,7 @@ div#content{
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
-div#body, div#content, div.blurb, li.blurb, ul#blurbs, div.links{
+div.blurb, li.blurb, ul#blurbs, div.links{
     float: left;
 }
 

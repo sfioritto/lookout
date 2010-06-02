@@ -25,6 +25,14 @@ Lookout
 </div>
 
 <div id="content">
+  <ul id="tabs">
+  <li id="clientname">
+  <h1><a href="/">{{ client.name }}</a></h1>
+  </li>
+  <li id="manage">
+  <h1><a href="/">Manage</a></h2>
+  </li>
+</ul>
   {% block content %}
   {% endblock %}
   <a href="/"><img id="feedback" src="{{ MEDIA_URL }}images/feedback.png" /></a>
