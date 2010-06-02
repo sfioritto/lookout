@@ -6,7 +6,7 @@ from webapp.alerts.models import Alert
     
 class Blurb(models.Model):
     
-    created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     alert = models.ForeignKey(Alert)
     client = models.ForeignKey(Client)
     byline = models.CharField(max_length=1024, blank=True)
@@ -39,7 +39,7 @@ class IrrelevantBlurb(models.Model):
     network.
     """
 
-    created_on = models.DateTimeField(auto_now_add=True, auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     blurb = models.ForeignKey(Blurb)
     client = models.ForeignKey(Client)
     processed = models.BooleanField(default=False)
