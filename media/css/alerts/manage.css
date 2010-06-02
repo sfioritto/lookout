@@ -25,15 +25,19 @@ ul#alerts{
     width: 60%;
 }
 
-ul#alerts, ul#alerts li, div.term, div.links{
+ul#alerts, ul#alerts li, div.term, div#add, div#canceladd{
     float: left;
+}
+
+div.links{
+    float: right;
 }
 
 div.term{
     width: 60%;
 }
 
-div.links a{
+div.links a, a#addterm{
     border: 1px solid #FAC9B5;
     padding: 5px 10px;
     width: 50px;
@@ -55,10 +59,16 @@ a.edit{
     margin-right: 10px;
 }
 
-div.term p, div.form input{
+div.term p, div.form input, div#add input{
     font-family: georgia;
     font-size: 21px;
     color: #474646;
+}
+
+
+div.term p, div.links{
+    /*seven pixels so it lines up perfectly with the edit box*/
+    padding: 7px 0px;
 }
 
 ul#alerts li{
@@ -70,6 +80,38 @@ ul#alerts li:hover{
     background-color: #F0F0F1;
 }
 
+div#add{
+    clear: left;
+    width: 60%;
+    margin-top: 30px;
+}
+
+div#add form, div#formlinks{
+    display: none;
+}
+
+div#add form input{
+    border: 2px solid #FAC9B5;
+    width: 100%;
+    /*left, right padding should be same as alerts li*/
+    padding: 5px 0px 5px 10px;
+}
+
+div#formlinks{
+    margin-top: 20px;
+}
+
+a#addterm{
+    background-color: #DBDBDB;
+    color: #474646;
+    border-color: #9A9A9A;
+    width: 100px;
+}
+
+div#canceladd{
+    padding: 5px 10px;
+}
+
 /*** editing styles ***/
 
 ul#alerts li.editing{
@@ -78,7 +120,8 @@ ul#alerts li.editing{
 
 div.form input{
     width: 100%;
-    padding: 5px 10px;
+    /*three pixels because of 2 pixel border -- should add to 10*/
+    padding: 5px 7px;
     border: 2px solid #FAC9B5
 }
 
@@ -105,12 +148,12 @@ li.editing div.term, li.editing div.links{
 }
 
 
-div#content h3{
+div#content h3, a#addlink{
     padding-left: 10px;
 }
 
 /*rounded corners*/
-ul#alerts li, div.links a{
+ul#alerts li, div.links a, div#formlinks a{
     -moz-border-radius: 5px;
     border-radius: 5px;
 }

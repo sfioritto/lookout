@@ -21,8 +21,9 @@ div#nav li{
     margin-right: 5px;
 }
 
-a{
+a, a:visited{
     text-decoration: none;
+    color: blue;
 }
 
 a:hover{

@@ -11,9 +11,21 @@
 
 <ul id="alerts">
   {%for alert in alerts %}
-  <li class="editing">
+  <li>
   {% include "alerts/alert.html" %}
  </li>
   {% endfor %}
 </ul>
+<div id="add">
+  <a id="addlink" href="/">Add a new term.</a>
+  <form id="addform" method="post" action="">
+  <input type="text" name="term" value="Type a new search term here."/>
+  </form>
+<div id="formlinks">
+  <a id="addterm" href="/">+ Add this term</a>
+<div id="canceladd">
+  <a href="/">Close</a>
+</div>
+</div>
+</div>
 {% endblock %}
