@@ -11,18 +11,14 @@
   {% if todays %}
   <h2>Today</h2>
   {% for blurb in todays %}
-  <li class="blurb{% if blurb.visited %} visited{% endif %}">
-  {% include 'blurb/blurb.html' %}
-  </li>
+  {% include 'feed/blurb.html' %}
   {% endfor %}
   {% endif %}
 
   {% if yesterdays %}
   <h2>Yesterday</h2>
   {% for blurb in yesterdays %}
-  <li class="blurb">
-  {% include 'blurb/blurb.html' %}
-  </li>
+  {% include 'feed/blurb.html' %}
   {% endfor %}
   {% endif %}
 
@@ -30,9 +26,7 @@
   {% if older %}
   <h2>Older</h2>
   {% for blurb in older %}
-  <li class="blurb">
-  {% include 'blurb/blurb.html' %}
-  </li>
+  {% include 'feed/blurb.html' %}
   {% endfor %}
   {% endif %}
 

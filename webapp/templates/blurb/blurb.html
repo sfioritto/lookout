@@ -1,3 +1,4 @@
+{% block content %}
 <div class="blurb">
   <h3><a class="blurb" href="{{ blurb.url }}">{{ blurb.title }}</a></h3>
   {% if blurb.source %}
@@ -12,4 +13,4 @@
   <a class="textbtn" href="{{ blurb.url }}">Text</a>
   <a class="relevance" href="{{ blurb.relevance }}">Undo</a>
 </div>
-
+{% endblock %}
