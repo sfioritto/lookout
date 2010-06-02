@@ -18,18 +18,21 @@ def show(request, clientid):
                                                         created_on__month=today.month,
                                                         created_on__day=today.day)\
                                                         .filter(relevant=True)\
+                                                        .order_by('-created_on')\
                                                         .all()
 
     yesterdays = Blurb.objects.filter(client=client).filter(created_on__year=yesterday.year,
                                                        created_on__month=yesterday.month,
                                                        created_on__day=yesterday.day)\
                                                        .filter(relevant=True)\
+                                                       .order_by('-created_on')\
                                                        .all()
 
     older = Blurb.objects.filter(client=client).filter(created_on__lt=dt(yesterday.year,
                                                                          yesterday.month,
                                                                          yesterday.day))\
                                                                          .filter(relevant=True)\
+                                                                         .order_by('-created_on')\
                                                                          .all()
 
     return render_to_response('feed/show.html', {'todays' : todays,
