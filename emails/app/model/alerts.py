@@ -146,6 +146,16 @@ def get_html_stubs(html):
     return [tr.find('td', recursive=False) for tr in trs]
 
 
+def get_remove_url(html):
+    """
+    Return the url used for removing this alert.
+    """
+    soup = BeautifulSoup(html)
+    #The href of the last p tag in the first div that has 'Remove' as text
+    href = soup.div.findAll("p")[-1].find(lambda tag: tag.contents and tag.contents[0] == 'Remove')['href']
+    return href
+
+
 def get_raw_alert(stub):
     """
     Given a stub of html beautiful soup, return
@@ -156,6 +166,7 @@ def get_raw_alert(stub):
     blurb = ''.join(stub.find('font', recursive=False).findAll(text=True, recursive=False)).replace("\n", "")
     title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
     source = ""
+
 
     #sometimes there is not a source
     font = stub.find('font', recursive=False).font
@@ -197,7 +208,6 @@ def create_blurbs(msg, alert):
         except Exception as e:
             LOG.debug("Failed to parse this stub:\n%s" % str(stub))
 
-    rawAlerts = [get_raw_alert(stub) for stub in stubs]
 
     blurbs = []
     for raw in rawAlerts:

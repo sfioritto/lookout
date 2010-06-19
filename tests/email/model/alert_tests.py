@@ -94,6 +94,12 @@ def test_get_html_stubs():
     assert len(stubs) == 15
 
 
+def test_get_remove_url():
+    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+    url = alerts.get_remove_url(alertsmsg.body())
+    assert url == u"http://www.google.com/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&hl=en&gl=us&source=alertsmail&cd=TdfUlYqIXl4&cad=:s7:f2:v0:"
+
+
 def test_get_raw_alert():
     """
     Given a chunk of html, turn it into
@@ -107,6 +113,7 @@ def test_get_raw_alert():
     assert alert['title'].startswith("Q&amp;A with outgoing Irving council member")
     assert alert['source'] == "Dallas Morning News"
     assert alert['byline'] == "BRANDON FORMBY"
+
     alert['url'] == "http://www.dallasnews.com/sharedcontent/dws/news/city/coppell_vr/stories/DN-vanduyneqa_06met.ART.Central.Edition1.f47fa.html"
 
     stub = alerts.get_html_stubs(alertsmsg.body())[0]
