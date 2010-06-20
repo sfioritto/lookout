@@ -29,7 +29,7 @@ FREQUENCY = {
 
 LOG = logging.getLogger("Parse Alerts")
 
-remove = re.compile("/alerts/remove.*")
+remove = re.compile('(?:(/alerts/remove.*)">)|(/alerts/remove.*\w)')
 verify = re.compile("/alerts/verify.*\w")
 byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
 
@@ -151,11 +151,10 @@ def get_remove_url(html):
     """
     Return the url used for removing this alert.
     """
-    soup = BeautifulSoup(html)
-    #The href of the last p tag in the first div that has 'Remove' as text
-    full = soup.div.findAll("p")[-1].find(lambda tag: tag.contents and tag.contents[0] == 'Remove')['href']
-    href = remove.findall(full)[0]
-    return href
+    left, right = remove.findall(html)[0]
+    answer = left or right
+    print answer
+    return left or right
 
 
 def get_raw_alert(stub):

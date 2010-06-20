@@ -97,7 +97,11 @@ def test_get_html_stubs():
 def test_get_remove_url():
     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
     url = alerts.get_remove_url(alertsmsg.body())
-    assert url == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&hl=en&gl=us&source=alertsmail&cd=TdfUlYqIXl4&cad=:s7:f2:v0:"
+    assert url == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&amp;hl=en&amp;gl=us&amp;source=alertsmail&amp;cd=TdfUlYqIXl4&amp;cad=:s7:f2:v0:"
+
+    msg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alert-confirmation.msg")).read())
+    url = alerts.get_remove_url(msg.body())
+    assert url == "/alerts/remove?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o"
 
 
 def test_get_raw_alert():

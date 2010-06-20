@@ -69,6 +69,6 @@ def test_remove_url():
     Router.deliver(msg)
     assert len(Blurb.objects.all()) == 15, "There are %s blurbs, expected 15." % len(Blurb.objects.all())
     alert = Alert.objects.all()[0]
-    assert alert.removeurl == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&hl=en&gl=us&source=alertsmail&cd=TdfUlYqIXl4&cad=:s7:f2:v0:"
+    assert alert.removeurl == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&amp;hl=en&amp;gl=us&amp;source=alertsmail&amp;cd=TdfUlYqIXl4&amp;cad=:s7:f2:v0:"
 
 
