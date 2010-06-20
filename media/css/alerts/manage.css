@@ -158,4 +158,7 @@ ul#alerts li, div.links a, div#formlinks a{
     border-radius: 5px;
 }
 
+li.disabled{
+    display: none;
+}
 

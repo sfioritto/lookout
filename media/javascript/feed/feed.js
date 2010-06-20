@@ -7,7 +7,7 @@ $(document).ready(function(){
 							event.preventDefault();
 					 });
 
-		      /*markt the div as irrelevant and post to the relevance view*/
+		      /*mark the div as irrelevant and post to the relevance view*/
 		      $("a.relevance").click(function(event){
 
 						 var relevance = "false",

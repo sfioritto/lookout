@@ -23,7 +23,6 @@ class Alert(models.Model):
     def update(self):
         return "/"
 
-
 class LamsonState(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     key = models.CharField(max_length=512)

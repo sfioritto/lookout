@@ -34,6 +34,7 @@ def CONFIRMING(message, alert_id=None, host=None):
             return ALERTING(message, alert_id=alert_id, host=host)
         alerts.confirm_alert(message)
         alert.confirmed = True
+        alert.removeurl = alerts.get_remove_url(message.body())
         alert.save()
         return ALERTING
     except Exception as e:

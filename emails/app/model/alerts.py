@@ -157,6 +157,17 @@ def get_remove_url(html):
     return left or right
 
 
+def disable_alert(url):
+    """
+    Takes a url to call in order to disable an
+    alert.
+    """
+    conn = httplib.HTTPConnection(GOOGLE_URL)
+    conn.request("GET", url)
+    response = conn.getresponse()
+    conn.close()
+
+
 def get_raw_alert(stub):
     """
     Given a stub of html beautiful soup, return

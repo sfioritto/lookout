@@ -19,10 +19,15 @@ def START(message, alert_id=None, host=None):
     
     try:
         alert = Alert.objects.get(pk=int(alert_id))
-        alert.removeurl = alerts.get_remove_url(message.body())
-        alert.save()
-        alerts.create_blurbs(message, alert)
-        transaction.commit()
+        if not alert.disabled:
+            url = alerts.get_remove_url(message.body())
+            if url:
+                alert.removeurl = url
+            alert.save()
+            alerts.create_blurbs(message, alert)
+            transaction.commit()
+        else:
+            LOG.debug("Received alerts for a disabled alert with id %s and remove url %s" % (alert.id, alert.removeurl))
 
     except Exception as e:
         #queue up any messages that failed so we can diagnose

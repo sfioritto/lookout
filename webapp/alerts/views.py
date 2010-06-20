@@ -1,11 +1,11 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from webapp.clients.models import Client
 from webapp.alerts.models import Alert
-from webapp.alerts.forms import CreateAlertForm
+from webapp.alerts.forms import CreateAlertForm, DisableAlertForm
 from app.model import alerts
 
 @login_required
@@ -14,11 +14,29 @@ def manage(request, clientid):
     Show all of the alerts for a client.
     """
     client = get_object_or_404(Client, pk=clientid)
-    alerts = client.alert_set.filter(disabled=False).all()
+    allalerts = client.alert_set.filter(disabled=False).all()
     return render_to_response('alerts/manage.html', {
-            'alerts' : alerts,
+            'alerts' : allalerts,
             'client' : client,
             }, context_instance = RequestContext(request))
+
+
+
+@login_required
+def disable(request, clientid):
+    """
+    Disable the given alert. A disabled alert can never be
+    enabled.
+    """
+    if request.method == "POST":
+        form = DisableAlertForm(request.POST)
+        alert = get_object_or_404(Alert, pk=form.data['id'])
+        alerts.disable_alert(alert.removeurl)
+        alert.disabled = True
+        alert.save()
+        return HttpResponse()
+    else:
+        raise Http404
 
 
 @login_required
