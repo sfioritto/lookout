@@ -8,15 +8,27 @@ from webapp.alerts.models import Alert
 from webapp.alerts.forms import CreateAlertForm, DisableAlertForm
 from app.model import alerts
 
+
+@login_required
+def alert_list(request, clientid):
+    """
+    Return html for the list of alerts for ajax requests.
+    """
+    client = get_object_or_404(Client, pk=clientid)
+    return render_to_response('alerts/list.html', {
+            'alerts' : client.all_alerts(),
+            'client' : client,
+            })
+
+
 @login_required
 def manage(request, clientid):
     """
     Show all of the alerts for a client.
     """
     client = get_object_or_404(Client, pk=clientid)
-    allalerts = client.alert_set.filter(disabled=False).all()
     return render_to_response('alerts/manage.html', {
-            'alerts' : allalerts,
+            'alerts' : client.all_alerts(),
             'client' : client,
             }, context_instance = RequestContext(request))
 

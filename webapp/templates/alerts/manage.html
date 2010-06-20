@@ -10,11 +10,7 @@
 <h3>What should we be looking for?</h3>
 
 <ul id="alerts">
-  {%for alert in alerts %}
-  <li>
-  {% include "alerts/alert.html" %}
- </li>
-  {% endfor %}
+ {% include "alerts/list.html" %}
 </ul>
 <div id="add">
   <a id="addlink" href="/">Add a new term.</a>
@@ -22,7 +18,7 @@
   <input type="text" name="term" value="Type a new search term here."/>
   </form>
 <div id="formlinks">
-  <a id="addterm" href="/">+ Add this term</a>
+  <a id="addterm" href="{%url webapp.alerts.views.create client.id%}">+ Add this term</a>
 <div id="canceladd">
   <a href="/">Close</a>
 </div>

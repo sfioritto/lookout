@@ -1,5 +1,28 @@
 $(document).ready(function(){
-    /*disable the alert*/
+
+var DEFAULT_VALUE = "Type a new search term here.";
+
+
+var add_term = function(url){
+    var input = $("#addform input")[0];
+
+    /*don't do anything if the input is blank or the default value*/
+    if (input.value == DEFAULT_VALUE){
+	input.value = "";
+    } else if (input.value){
+	$.post(url, {
+		   'term' : input.value
+	       });
+	input.value = "";
+	$.get('list', function(data) {
+		  $("#alerts").html(data);
+		  /* inserting the html blows away jqueries event handlers */
+		  bind_delete_links();
+	      });
+    }
+}
+
+var bind_delete_links = function(){
     $("a.delete").click(function(event){
 			    var container = $(event.target).parent().parent();
 			    $.post(event.target.href, {
@@ -10,4 +33,35 @@ $(document).ready(function(){
 			    event.preventDefault();
 			});
 
+};
+/*disable the alert*/
+bind_delete_links();
+
+$("#addlink").click(function(event){
+			$("#addform, #formlinks").show();
+			$(event.target).hide();
+			event.preventDefault();
+		    });
+
+$("#canceladd").click(function(event){
+			  $("#addlink").show();
+			  $("#addform, #formlinks").hide();
+			  $("#addform input")[0].value = DEFAULT_VALUE;
+			  event.preventDefault();
+		      });
+
+$("#addterm").click(function(event){
+			add_term(event.target.href);
+			event.preventDefault();
+		    });
+$("#addform").submit(function(event){
+			 add_term($("#addterm")[0].href);
+			 event.preventDefault();
+		     });
+
+
+$("#addform input").click(function(event){
+			      event.target.value = "";
+
+});
 });
