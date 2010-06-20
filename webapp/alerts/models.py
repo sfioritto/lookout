@@ -13,6 +13,7 @@ class Alert(models.Model):
     length = models.IntegerField()
     confirmed = models.BooleanField(default=False)
     disabled = models.BooleanField(default=False)
+    removeurl = models.CharField(max_length=2083, null=True)
 
     @property
     def email(self):

@@ -29,6 +29,7 @@ FREQUENCY = {
 
 LOG = logging.getLogger("Parse Alerts")
 
+remove = re.compile("/alerts/remove.*")
 verify = re.compile("/alerts/verify.*\w")
 byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
 
@@ -152,7 +153,8 @@ def get_remove_url(html):
     """
     soup = BeautifulSoup(html)
     #The href of the last p tag in the first div that has 'Remove' as text
-    href = soup.div.findAll("p")[-1].find(lambda tag: tag.contents and tag.contents[0] == 'Remove')['href']
+    full = soup.div.findAll("p")[-1].find(lambda tag: tag.contents and tag.contents[0] == 'Remove')['href']
+    href = remove.findall(full)[0]
     return href
 
 

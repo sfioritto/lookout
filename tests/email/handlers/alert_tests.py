@@ -56,7 +56,7 @@ def test_good_confirmation(msg=None):
     ALERTING.
     """
     alert = create_alert()
-
+    
     addr = "alerts-%s@lookoutthere.com" % alert.id
     if not msg:
         msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alert-confirmation.msg")).read())

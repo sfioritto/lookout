@@ -16,9 +16,11 @@ def START(message, alert_id=None, host=None):
     This reads in the alert emails, parses them and
     sticks them in the database as blurbs.
     """
-
+    
     try:
         alert = Alert.objects.get(pk=int(alert_id))
+        alert.removeurl = alerts.get_remove_url(message.body())
+        alert.save()
         alerts.create_blurbs(message, alert)
         transaction.commit()
 
