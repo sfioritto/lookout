@@ -58,9 +58,7 @@ def create(request, clientid):
     """
     client = get_object_or_404(Client, pk=clientid)
     account = request.user.get_profile()
-    error = False
 
-    form = CreateAlertForm()
     if request.method == "POST":
         form = CreateAlertForm(request.POST)
         term = form.data['term']
@@ -73,10 +71,12 @@ def create(request, clientid):
         try:
             alert.save()
             alerts.create_alert(alert.term, alert.email)
-            return HttpResponseRedirect(reverse("webapp.alerts.views.show", kwargs={'clientid':client.id}))
+            return HttpResponse()
         except:
             #TODO: dump something in the error logs
-            error = True
+            raise Http404
+    else:
+        raise Http404
 
 
     return render_to_response('alerts/create.html', {
