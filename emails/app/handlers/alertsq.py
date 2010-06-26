@@ -21,6 +21,7 @@ def START(message, alert_id=None, host=None):
         alert = Alert.objects.get(pk=int(alert_id))
         if not alert.disabled:
             url = alerts.get_remove_url(message.body())
+            LOG.debug("The removeurl for alert %s is %s" % (alert.id, url))
             if url:
                 alert.removeurl = url
             alert.save()

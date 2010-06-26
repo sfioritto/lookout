@@ -36,6 +36,7 @@ def CONFIRMING(message, alert_id=None, host=None):
         alert.confirmed = True
         alert.removeurl = alerts.get_remove_url(message.body())
         alert.save()
+        LOG.debug("The removeurl for alert %s is %s" % (alert.id, alert.removeurl))
         return ALERTING
     except Exception as e:
         q = queue.Queue('run/error')

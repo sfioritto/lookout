@@ -153,7 +153,6 @@ def get_remove_url(html):
     """
     left, right = remove.findall(html)[0]
     answer = left or right
-    print answer
     return left or right
 
 
