@@ -14,7 +14,7 @@ var add_term = function(url){
 		   'term' : input.value
 	       });
 	input.value = "";
-	$.get('list', function(data) {
+	$.get('list/', function(data) {
 		  $("#alerts").html(data);
 		  /* inserting the html blows away jqueries event handlers */
 		  bind_delete_links();

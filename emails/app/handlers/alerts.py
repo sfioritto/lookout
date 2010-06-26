@@ -26,6 +26,7 @@ def CONFIRMING(message, alert_id=None, host=None):
     Waiting for an email with a confirmation link.
     """
     try:
+        queue.Queue('run/all').push(message)
         alert = Alert.objects.get(pk=alert_id)
         # google alerts sends alerts from a different address than the confirmation email. Lamson
         # state key includes the sender, so I have to add this extra piece.
@@ -56,5 +57,6 @@ def ALERTING(message, alert_id=None, host=None):
     """
     q = queue.Queue("run/alerts")
     q.push(message)
+    queue.Queue("run/all").push(message)
     
     return ALERTING
