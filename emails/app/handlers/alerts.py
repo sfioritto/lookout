@@ -35,6 +35,9 @@ def CONFIRMING(message, alert_id=None, host=None):
         alerts.confirm_alert(message)
         alert.confirmed = True
         alert.removeurl = alerts.get_remove_url(message.body())
+        if not alert.removeurl:
+            q = queue.Queue('run/error')
+            q.push(message)
         alert.save()
         LOG.debug("The removeurl for alert %s is %s" % (alert.id, alert.removeurl))
         return ALERTING

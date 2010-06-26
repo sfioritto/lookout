@@ -24,6 +24,10 @@ def START(message, alert_id=None, host=None):
             LOG.debug("The removeurl for alert %s is %s" % (alert.id, url))
             if url:
                 alert.removeurl = url
+            else:
+                q = queue.Queue("run/error")
+                q.push(message)
+
             alert.save()
             alerts.create_blurbs(message, alert)
             transaction.commit()
