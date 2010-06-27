@@ -33,7 +33,7 @@ def show(request, clientid):
                                                                          yesterday.day))\
                                                                          .filter(relevant=True)\
                                                                          .order_by('-created_on')\
-                                                                         .all()
+                                                                         .all()[:10]
 
     return render_to_response('feed/show.html', {'todays' : todays,
                                                  'yesterdays' : yesterdays,
