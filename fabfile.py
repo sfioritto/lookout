@@ -65,7 +65,7 @@ def reboot():
 
     with settings(warn_only=True):
         with cd(env.emailroot):
-            sudo("apache2ctl reboot")
+            sudo("apache2ctl restart")
             sudo("lamson stop -ALL run/")
             sudo("rm run/*")
             sudo("lamson start -gid 1000 -uid 1000")
