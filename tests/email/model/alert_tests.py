@@ -9,6 +9,7 @@ from webapp.clients.models import Client
 from webapp.testing.models import Confirmation
 from django.contrib.auth.models import User
 from nose.tools import *
+from exceptions import AssertionError
 import os
 import re
 
@@ -93,6 +94,12 @@ def test_get_html_stubs():
     stubs = alerts.get_html_stubs(alertsmsg.body())
     assert len(stubs) == 15
 
+@raises(AssertionError)
+def test_disable_alert():
+    """
+    Should raise errors if the url doesn't start with "/alerts".
+    """
+    alerts.disable_alert("")
 
 def test_get_remove_url():
     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())

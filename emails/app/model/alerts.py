@@ -161,6 +161,7 @@ def disable_alert(url):
     Takes a url to call in order to disable an
     alert.
     """
+    assert url.startswith("/alerts"), "Url of the alert to disable is empty."
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("GET", url)
     response = conn.getresponse()
