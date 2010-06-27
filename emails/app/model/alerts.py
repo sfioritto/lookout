@@ -165,6 +165,7 @@ def disable_alert(url):
     conn = httplib.HTTPConnection(GOOGLE_URL)
     conn.request("GET", url)
     response = conn.getresponse()
+    assert response.status == 200, "Disable alert failed. Google alerts status code was %s" % response.status
     conn.close()
 
 

@@ -95,11 +95,19 @@ def test_get_html_stubs():
     assert len(stubs) == 15
 
 @raises(AssertionError)
-def test_disable_alert():
+def test_disable_alert_bad_url():
     """
     Should raise errors if the url doesn't start with "/alerts".
     """
     alerts.disable_alert("")
+
+
+@raises(AssertionError)
+def test_disable_alert_google_down():
+    """
+    The url provided returns a 404 which should raise a 404.
+    """
+    alerts.disable_alert("/alerts/disable/bad")
 
 def test_get_remove_url():
     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())

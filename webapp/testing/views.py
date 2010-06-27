@@ -1,8 +1,14 @@
 import app.model.alerts as alerts
 from conf import home
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from webapp.testing.models import Confirmation
 
+
+def good_disable(request):
+    return HttpResponse()
+
+def bad_disable(request):
+    raise Http404
 
 def good_verify(request):
     """
