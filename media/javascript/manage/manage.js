@@ -12,13 +12,14 @@ var add_term = function(url){
     } else if (input.value){
 	$.post(url, {
 		   'term' : input.value
+	       }, function(){
+		   $.get('list/', function(data) {
+			     $("#alerts").html(data);
+			     /* inserting the html blows away jqueries event handlers */
+			     bind_delete_links();
+			 });
 	       });
 	input.value = "";
-	$.get('list/', function(data) {
-		  $("#alerts").html(data);
-		  /* inserting the html blows away jqueries event handlers */
-		  bind_delete_links();
-	      });
     }
 }
 
@@ -54,6 +55,7 @@ $("#addterm").click(function(event){
 			add_term(event.target.href);
 			event.preventDefault();
 		    });
+
 $("#addform").submit(function(event){
 			 add_term($("#addterm")[0].href);
 			 event.preventDefault();
