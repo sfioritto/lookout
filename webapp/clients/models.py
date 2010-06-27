@@ -17,7 +17,7 @@ class Client(models.Model):
         return reverse('webapp.alerts.views.manage', kwargs={'clientid':self.id})
 
     def all_alerts(self):
-        return self.alert_set.filter(disabled=False).all()
+        return self.alert_set.filter(disabled=False).order_by('created_on').all()
 
     def __unicode__(self):
         return "%s" % self.id
