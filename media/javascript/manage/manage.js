@@ -60,8 +60,16 @@ $("#addform").submit(function(event){
 		     });
 
 
-$("#addform input").click(function(event){
-			      event.target.value = "";
-
+$("#addform input").focus(function(event){
+			      if (event.target.value === DEFAULT_VALUE){
+				  event.target.value = "";
+			      }
 });
+
+$("#addform input").blur(function(event){
+			      if (event.target.value == ""){
+				  event.target.value = DEFAULT_VALUE;
+			      }
+});
+
 });
