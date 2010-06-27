@@ -56,6 +56,7 @@ def switch(hash):
         sudo("cp prod/emails/settings.py emails/config/settings.py")
         sudo("ln -s /var/lookout/run emails/run")
         sudo("ln -s /var/lookout/logs emails/logs")
+        sudo("rm -rf tests/")
 
 
 def reboot():
