@@ -30,9 +30,10 @@
   {% endfor %}
   {% endif %}
 
-  
-
 </ul>
+{% if not olderind %}
+<a id="olderlink" href="{%url webapp.feed.views.older client.id %}">Older alerts</a>
+{% endif %}
 {% endblock %}
 
 {% block scripts %}
