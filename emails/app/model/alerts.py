@@ -176,7 +176,7 @@ def get_raw_alert(stub):
     """
 
     #the first font tag contains the text nodes we want.
-    blurb = ''.join(stub.find('font', recursive=False).findAll(text=True, recursive=False)).replace("\n", "")
+    blurb = ''.join(stub.find('font', recursive=False).findAll(text=True)).replace("\n", "")
     title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
     source = ""
 
@@ -185,6 +185,20 @@ def get_raw_alert(stub):
     font = stub.find('font', recursive=False).font
     if font:
         source = font.find(text=True)
+
+
+    # remove the source from the beginning of the blurb if it is there.
+    try:
+        index = blurb.index(source)
+        if index == 0:
+            hasSource = True
+        else:
+            hasSource = False
+    except ValueError:
+        hasSource = False
+
+    if hasSource:
+        blurb = blurb[len(source):]
 
     #Google wraps up the direct link in a query string, which goes
     #to them first then redirects. This gets the big link then pulls
