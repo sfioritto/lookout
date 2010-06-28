@@ -2,7 +2,9 @@ from django.shortcuts import get_object_or_404
 from webapp.blurb.models import Blurb, IrrelevantBlurb
 from webapp.clients.models import Client
 from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def visit(request, clientid, blurbid):
     """
     Redirects someone who clicks on this link to the
@@ -14,7 +16,7 @@ def visit(request, clientid, blurbid):
         blurb.save()
     return HttpResponseRedirect(blurb.url)
 
-
+@login_required
 def relevance(request, clientid, blurbid):
     """
     Marks a blurb as irrelevant on a POST.

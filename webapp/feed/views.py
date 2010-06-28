@@ -4,8 +4,9 @@ from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def older(request, clientid):
     """
     Shows all of the older blurbs for the given client,
@@ -28,6 +29,7 @@ def older(request, clientid):
                                                  'olderind' : True,
                                                  }, context_instance = RequestContext(request))
 
+@login_required
 def show(request, clientid):
     """
     Shows all the blurbs for the client.
