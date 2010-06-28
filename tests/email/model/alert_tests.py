@@ -129,7 +129,7 @@ def test_get_raw_alert():
     stub = alerts.get_html_stubs(alertsmsg.body())[1]
     alert = alerts.get_raw_alert(stub)
     assert alert.has_key('blurb')
-    assert alert['title'].startswith("Q&amp;A with outgoing Irving council member")
+    assert alert['title'].startswith("Q&A with outgoing Irving council member")
     assert alert['source'] == "Dallas Morning News"
     assert alert['byline'] == "BRANDON FORMBY"
 
@@ -147,7 +147,7 @@ def test_create_blurbs():
      blurbs = alerts.create_blurbs(alertsmsg, alert)
      assert len(blurbs) == 15
      blurb = blurbs[1]
-     assert blurb.title.startswith("Q&amp;A with outgoing Irving council member")
+     assert blurb.title.startswith("Q&A with outgoing Irving council member")
      assert blurb.source == "Dallas Morning News"
      assert blurb.byline == "BRANDON FORMBY"
      assert len(Blurb.objects.all()) == 15
@@ -209,7 +209,6 @@ def test_create_params():
     frequency = "instant"
     length = 50
     params = alerts.create_params(term, email, type, frequency, length)
-    print params
     assert params[alerts.TERM_NAME] == term
     assert params[alerts.EMAIL_NAME] == email
     assert params[alerts.TYPES_NAME] == alerts.TYPES[type]

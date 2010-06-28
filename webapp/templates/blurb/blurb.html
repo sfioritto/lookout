@@ -2,12 +2,15 @@
 <div class="blurb">
   <h3><a class="blurb" href="{{ blurb.url }}">{{ blurb.title }}</a></h3>
   {% if blurb.source %}
-  <p class="source">{{ blurb.source }}</p>
+  <p class="source">
+  {{ blurb.source }}
+  </p>
   {% endif %}
   <p class="blurb">
   {{ blurb.blurb }}
   </p>
-  <a class="visit" href="{{blurb.visit}}">visit</a>
+  <a
+   class="visit" href="{{blurb.visit}}">visit</a>
 </div>
 <div class="links">
   <a class="textbtn" href="{{ blurb.url }}">Text</a>
