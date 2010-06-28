@@ -15,6 +15,13 @@ urlpatterns = patterns(
     (r'^clients/', include('clients.urls')),
     )
 
+#generic/marketing
+urlpatterns += patterns(
+    'django.views.generic.simple',
+    (r'^$', 'direct_to_template', {'template' : '404.html'}, 'home'),
+    )
+
+
 #django contrib
 urlpatterns += patterns(
     'django.contrib.auth.views',
