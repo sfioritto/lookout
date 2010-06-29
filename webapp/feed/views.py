@@ -2,9 +2,27 @@ from datetime import datetime as dt, timedelta as td
 from django.shortcuts import render_to_response, get_object_or_404
 from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+
+
+def login_redirect(request, clientid):
+    """
+    Temporary, just for beta testers.
+    """
+    id = request.GET['id']
+    if id == '3918862675d4db70b01d7e0c087c2a79d6fd855f':
+        user = get_object_or_404(User, username='sean')
+        authenticate(username='christy', password='password')
+        return HttpResponseRedirect(reverse(show, kwargs={'clientid':clientid}))
+
+    else:
+        raise Http404
+        
 
 @login_required
 def older(request, clientid):
