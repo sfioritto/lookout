@@ -6,7 +6,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
@@ -16,8 +16,8 @@ def login_redirect(request, clientid):
     """
     id = request.GET['id']
     if id == '3918862675d4db70b01d7e0c087c2a79d6fd855f':
-        user = get_object_or_404(User, username='sean')
-        authenticate(username='christy', password='password')
+        user = authenticate(username='christy', password='password')
+        login(request, user)
         return HttpResponseRedirect(reverse(show, kwargs={'clientid':clientid}))
 
     else:
