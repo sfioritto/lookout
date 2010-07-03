@@ -30,7 +30,7 @@ FREQUENCY = {
 
 LOG = logging.getLogger("Parse Alerts")
 
-remove = re.compile('(?:(/alerts/remove.*)">)|(/alerts/remove.*\w)')
+remove = re.compile('(?:(/alerts/remove[^">]*)">)|(/alerts/remove.*\w)')
 verify = re.compile("/alerts/verify.*\w")
 byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
 
@@ -140,12 +140,16 @@ def get_html_stubs(html):
     and returns a list.
     """
     soup = BeautifulSoup(html)
-    tables = soup.p.findNextSiblings('table')
-    trs = []
-    for table in tables:
-        trs.extend(table.findAll('tr', recursive=False))
-        
-    return [tr.find('td', recursive=False) for tr in trs]
+    # the first two rows are just general information about the alerts
+    trs = soup.body.find('div', recursive=False).findAll('table', recursive=False)[0].findAll('tr', recursive=False)[2:]
+    
+    stubs = []
+    for tr in trs:
+        if tr.td.find('table', recursive=False):
+            stubs.append(tr.td.table.td)
+        else:
+            stubs.append(tr.td)
+    return stubs
 
 
 def get_remove_url(html):

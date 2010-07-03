@@ -16,10 +16,10 @@ import re
 sender = "test@localhost"
 receiver = "google@localhost"
 
-msg = MailRequest('fakepeer', sender, receiver, open(home("tests/data/emails/alert-confirmation.msg")).read())
+msg = MailRequest('fakepeer', sender, receiver, open(home("tests/data/emails/confirmation.msg")).read())
 
 addr = "alerts-11@lookoutthere.com"
-compmsg = MailRequest('fakepeer', "me@localhost", addr, open(home("tests/data/emails/computer-alerts.msg")).read())
+compmsg = MailRequest('fakepeer', "me@localhost", addr, open(home("tests/data/emails/alerts.msg")).read())
 
 
 
@@ -67,7 +67,7 @@ def test_get_confirmation_url():
     
     body = msg.base.body
     url = alerts.get_conf_url(body)
-    assert url == "/alerts/verify?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o"
+    assert url == "/alerts/verify?gl=us&hl=en&s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY"
 
 
 def test_confirmed():
@@ -90,9 +90,9 @@ def test_get_html_stubs():
     of html stubs that represent
     alerts.
     """
-    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alerts.msg")).read())
     stubs = alerts.get_html_stubs(alertsmsg.body())
-    assert len(stubs) == 15
+    assert len(stubs) == 26
 
 @raises(AssertionError)
 def test_disable_alert_bad_url():
@@ -110,13 +110,13 @@ def test_disable_alert_google_down():
     alerts.disable_alert("/alerts/disable/bad")
 
 def test_get_remove_url():
-    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alerts.msg")).read())
     url = alerts.get_remove_url(alertsmsg.body())
-    assert url == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&amp;hl=en&amp;gl=us&amp;source=alertsmail&amp;cd=TdfUlYqIXl4&amp;cad=:s7:f2:v0:"
+    assert url == "/alerts/remove?s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY&hl=en&gl=us&source=alertsmail&cd=4Ya67t6E3e4&cad=:s7:f1:v1:"
 
-    msg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alert-confirmation.msg")).read())
+    msg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/confirmation.msg")).read())
     url = alerts.get_remove_url(msg.body())
-    assert url == "/alerts/remove?gl=us&hl=en&s=AB2Xq4jYrbhsp8BlA12NFLDxGgFlmQQ2kF2WF5o"
+    assert url == "/alerts/remove?gl=us&hl=en&s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY"
 
 
 def test_get_raw_alert():
@@ -125,32 +125,32 @@ def test_get_raw_alert():
     a python dictionary we can use to 
     populate a database record.
     """
-    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+    alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alerts.msg")).read())
     stub = alerts.get_html_stubs(alertsmsg.body())[1]
     alert = alerts.get_raw_alert(stub)
     assert alert.has_key('blurb')
-    assert alert['title'].startswith("Q&A with outgoing Irving council member")
-    assert alert['source'] == "Dallas Morning News"
-    assert alert['byline'] == "BRANDON FORMBY"
+    assert alert['title'].startswith("Audio reveals swipes at Obama, other Illinois Democrats")
+    assert alert['source'] == "Chicago Tribune"
+    assert alert['byline'] == ""
 
-    alert['url'] == "http://www.dallasnews.com/sharedcontent/dws/news/city/coppell_vr/stories/DN-vanduyneqa_06met.ART.Central.Edition1.f47fa.html"
+    alert['url'] == "http://www.chicagotribune.com/news/local/blagojevich/ct-met-blagojevich-trial-0704-20100704,0,3385819.story"
 
     stub = alerts.get_html_stubs(alertsmsg.body())[0]
     alert = alerts.get_raw_alert(stub)
     assert alert['byline'] == ""
-    assert alert['url'] == "http://bleacherreport.com/articles/388807-beth-phoenix-is-injured-but-thank-god-its-not-serious"    
+    assert alert['url'] == "http://www.foxnews.com/politics/2010/07/03/obama-announces-b-grants-clean-energy-jobs/"    
 
 
 def test_create_blurbs():
-     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/beth-alerts.msg")).read())
+     alertsmsg = MailRequest('fakepeer', sender, "alerts-1@lookoutthere.com", open(home("tests/data/emails/alerts.msg")).read())
      alert = Alert.objects.all()[0]
      blurbs = alerts.create_blurbs(alertsmsg, alert)
-     assert len(blurbs) == 15
+     assert len(blurbs) == 26
      blurb = blurbs[1]
-     assert blurb.title.startswith("Q&A with outgoing Irving council member")
-     assert blurb.source == "Dallas Morning News"
-     assert blurb.byline == "BRANDON FORMBY"
-     assert len(Blurb.objects.all()) == 15
+     assert blurb.title.startswith("Audio reveals swipes at Obama, other Illinois Democrats")
+     assert blurb.source == "Chicago Tribune"
+     assert blurb.byline == ""
+     assert len(Blurb.objects.all()) == 26
 
     
 
@@ -171,7 +171,7 @@ def test_computer_monitor_stubs():
     """
     alert = create_alert()
     stubs = alerts.get_html_stubs(compmsg.body())
-    assert len(stubs) == 11
+    assert len(stubs) == 26
 
 
 
@@ -184,7 +184,7 @@ def test_computer_monitor_raw():
     alert = create_alert()
     stubs = alerts.get_html_stubs(compmsg.body())
     rawAlerts = [alerts.get_raw_alert(stub) for stub in stubs]
-    assert len(rawAlerts) == 11
+    assert len(rawAlerts) == 26
 
 
 @with_setup(setup_func, teardown_func)
