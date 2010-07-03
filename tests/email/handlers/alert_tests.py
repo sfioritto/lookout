@@ -19,7 +19,7 @@ client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
 
 
-badmsg = MailRequest('fakepeer', sender, "alerts-2@lookoutthere.com", open(home("tests/data/emails/bad-confirmation.msg")).read())
+badmsg = MailRequest('fakepeer', sender, "alerts-2@lookoutthere.com", open(home("tests/data/emails/confirmation.msg")).read())
 badmsg['to'] = "alerts-2@lookoutthere.com"
 
 #send the alerts urls to localhost
