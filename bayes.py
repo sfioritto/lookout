@@ -23,11 +23,11 @@ class Bayes:
 
     @property
     def ngood(self):
-        return float(sum([self.good[key] for key in self.good.keys()]))
+        return float(sum([self.good[key] for key in self.good.keys()])) or 1.0
 
     @property
     def nrejected(self):
-        return float(sum([self.rejected[key] for key in self.rejected.keys()]))
+        return float(sum([self.rejected[key] for key in self.rejected.keys()])) or 1.0
 
 
     def good_count(self, word):
@@ -60,15 +60,14 @@ class Bayes:
         if self.rhash.has_key(word):
             return self.rhash[word]
         else:
-            # get a lot more rejected messages than good, so .6 is weighted to favor that.
-            p = min((self.bad_count(word) / self.nrejected), .01) * self.prejected
+            p = (self.bad_count(word) / self.nrejected) * self.prejected
             pw = p + (self.good_count(word) / self.ngood)
             if p == 0 and pw == 0:
                 #most data is from rejected emails, so a new word is slightly more
                 #likely to be relevant.
                 prob = .4 
             else:
-                prob = min(p/pw, .99)
+                prob = max(min(p/pw, .99), .01)
             self.rhash[word] = prob
             return prob
 
@@ -78,17 +77,35 @@ class Bayes:
         Given some text figure out what the odds
         are that it should be rejected.
         """
+        tokens = self.valid_tokens(text)
+        probs = self.most_interesting(tokens)
+        rejected = reduce(lambda x, y: x * y, probs)
+        notrejected = reduce(lambda x, y: x * (1 - y), probs)
+        return rejected / (rejected + notrejected)
+
+
+    def valid_tokens(self, text):
+        """
+        Given a list of tokens, only return
+        those that occurr more than 5 times.
+        """
         tokens = []
         for t in tokenize(text):
             ngood = self.good_count(t)
             nbad = self.bad_count(t)
             if ngood + nbad > 5:
                 tokens.append(t)
+        return tokens
 
-        probs = sorted([self.rejected_given_word(t) for t in tokens])[-15:]
-        rejected = reduce(lambda x, y: x * y, probs)
-        notrejected = reduce(lambda x, y: x * (1 - y), probs)
-        return rejected / (rejected + notrejected)
+
+    def most_interesting(self, tokens):
+        """
+        Returns the 15 most interesting tokens as rated
+        by their absolute difference from .5.
+        """
+        interesting = lambda x: abs(.5 - self.rejected_given_word(x))
+        probs = sorted([(self.rejected_given_word(t), interesting(t)) for t in tokens], key=itemgetter(1))[-15:]
+        return [p for (p, i) in probs]
 
 
 def valid_token(token):
