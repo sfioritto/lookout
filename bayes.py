@@ -12,18 +12,45 @@ html_tags = ["p", "html", "div", "id", "a", "title", "tr", "span", "li", "class"
 
 class Bayes:
 
-    def __init__(self, gtext, rtext):
-        self.good = create_count_hash(gtext)
-        self.rejected = create_count_hash(rtext)
-        self.rhash = {}
+    def __init__(self, gtext="", rtext="", probs=None):
+        
+        """
+        Initializes a bayes filter. You can either pass in pre-populated lookups
+        which will be used as a cache, or pass in a corpus of text which will then
+        calculate probabilities as needed.
+
+        To create a prepopulated cache create an instance with good and bad text then
+        call warm_cache. The resulting dictionary can be passed in as the probs
+        argument when creating a new bayes fiter instance.
+        """
+        if not gtext and not rtext:
+            assert probs, "If you don't provide a corpus of text, you must provide a dictionary of probabilities."
+
+        if gtext:
+            self.good = create_count_hash(gtext)
+        else:
+            self.good = probs['good']
+
+        if rtext:
+            self.rejected = create_count_hash(rtext)
+        else:
+            self.rejected = probs['rejected']
+
+        if not probs:
+            self.rprobs = {}
+        else:
+            self.rprobs = probs['rprobs']
+
         
     @property
     def prejected(self):
         return self.nrejected / (self.nrejected + self.ngood)
 
+
     @property
     def ngood(self):
         return float(sum([self.good[key] for key in self.good.keys()])) or 1.0
+
 
     @property
     def nrejected(self):
@@ -48,18 +75,34 @@ class Bayes:
         return get_count(word, self.rejected)
 
 
+    def warm_cache(self):
+        """
+        Populates the rprobs cache with calculated
+        probabilites of rejection for every word
+        the filter knows about. Useful for creating a
+        dictionary all at once, otherwise words are cached
+        as they are encountered.
+        """
+        words = self.good.keys() + self.rejected.keys()
+        for word in words:
+            self.rprobs[word] = self.rejected_given_word(word)
+        
+        return {'rprobs' : self.rprobs,
+                'good' : self.good,
+                'rejected' : self.rejected}
+
+
     def rejected_given_word(self, word):
         """
         Calculate the odds a message is rejected
         given one word.
         P(Rejected|word) = ( P(word|Rejected)P(Rejected) ) / P(Good)
         """
-        ngood = self.good_count(word)
-        nbad = self.bad_count(word)
 
-        if self.rhash.has_key(word):
-            return self.rhash[word]
+        if self.rprobs.has_key(word):
+            return self.rprobs[word]
         else:
+
             p = (self.bad_count(word) / self.nrejected) * self.prejected
             pw = p + (self.good_count(word) / self.ngood)
             if p == 0 and pw == 0:
@@ -68,7 +111,7 @@ class Bayes:
                 prob = .4 
             else:
                 prob = max(min(p/pw, .99), .01)
-            self.rhash[word] = prob
+            self.rprobs[word] = prob
             return prob
 
 
