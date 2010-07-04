@@ -59,7 +59,7 @@ def test_good_confirmation(msg=None):
     
     addr = "alerts-%s@lookoutthere.com" % alert.id
     if not msg:
-        msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alert-confirmation.msg")).read())
+        msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/confirmation.msg")).read())
     msg['to'] = addr
     Router.deliver(msg)
     q = queue.Queue(email('run/alerts'))
@@ -85,19 +85,19 @@ def test_confirm_then_alert():
 
     addr = "alerts-%s@lookoutthere.com" % alert.id
 
-    confirm = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/tim-confirmation.msg")).read())
+    confirm = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/confirmation.msg")).read())
     confirm['to'] = addr
     test_good_confirmation(msg=confirm)
 
 
-    alertsmsg = MailRequest('fakepeer', "different@sender", addr, open(home("tests/data/emails/tim-alerts.msg")).read())
+    alertsmsg = MailRequest('fakepeer', "different@sender", addr, open(home("tests/data/emails/alerts.msg")).read())
     alertsmsg['to'] = addr
     Router.deliver(alertsmsg)
 
     # there are 10 alerts in this alert email. since this is the test environment it will be dumped
     # into the alerts queue automatically, which will create the 10 alerts. Then it should be processed
     # by the alerts handler module, dumped into the queue again, thereby upping the alerts queue by one.
-    assert len(Blurb.objects.all()) == 10, "There are %s blurbs." % len(Blurb.objects.all())
+    assert len(Blurb.objects.all()) == 26, "There are %s blurbs." % len(Blurb.objects.all())
     q = queue.Queue(email('run/alerts'))
     assert q.count() == 1
 
@@ -114,7 +114,7 @@ def test_incoming_alert():
     alert = create_alert()
 
     
-    msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/beth-alerts.msg")).read())
+    msg = MailRequest('fakepeer', sender, "alerts-%s@lookoutthere.com" % alert.id, open(home("tests/data/emails/alerts.msg")).read())
     msg['to'] = "alerts-%s@lookoutthere.com" % alert.id
     Router.deliver(msg)
 
@@ -124,7 +124,7 @@ def test_incoming_alert():
     q = queue.Queue(email('run/error'))
     assert q.count() == 1
     
-    assert len(Blurb.objects.all()) == 15, "There are %s blurbs." % len(Blurb.objects.all())
+    assert len(Blurb.objects.all()) == 26, "There are %s blurbs." % len(Blurb.objects.all())
 
     
     

@@ -83,6 +83,7 @@ def deploy(hash):
     upload(archive)
     untar(archive, hash)
     switch(hash)
+    reboot()
 
 
     

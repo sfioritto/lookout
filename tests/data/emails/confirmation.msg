@@ -34,7 +34,7 @@ Google received a request to start sending Alerts for the search
 [ barack obama ] to sean.fioritto@gmail.com.
 
 Verify this Google Alert request:
-http://www.google.com/alerts/verify/bad?gl=us&hl=en&s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY
+http://www.google.com/alerts/verify?gl=us&hl=en&s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY
 
 Cancel this Google Alert request:
 http://www.google.com/alerts/remove?gl=us&hl=en&s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY

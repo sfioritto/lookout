@@ -19,9 +19,6 @@ client = RouterConversation("somedude@localhost", "alerts_tests")
 sender = "test@localhost"
 
 
-badmsg = MailRequest('fakepeer', sender, "alerts-2@lookoutthere.com", open(home("tests/data/emails/bad-confirmation.msg")).read())
-badmsg['to'] = "alerts-2@lookoutthere.com"
-
 #send the alerts urls to localhost
 alerts.GOOGLE_URL = "localhost:8000"
 
@@ -57,18 +54,18 @@ def test_remove_url():
     alert = create_alert()
     addr = "alerts-%s@lookoutthere.com" % alert.id
     #get into an 'ALERTING' state
-    msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alert-confirmation.msg")).read())
+    msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/confirmation.msg")).read())
     msg['to'] = addr
     Router.deliver(msg)
     q = queue.Queue(email('run/alerts'))
     assert q.count() == 0
 
     #send a regular alerts email
-    msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/beth-alerts.msg")).read())
+    msg = MailRequest('fakepeer', sender, addr, open(home("tests/data/emails/alerts.msg")).read())
     msg['to'] = addr
     Router.deliver(msg)
-    assert len(Blurb.objects.all()) == 15, "There are %s blurbs, expected 15." % len(Blurb.objects.all())
+    assert len(Blurb.objects.all()) == 26, "There are %s blurbs, expected 15." % len(Blurb.objects.all())
     alert = Alert.objects.all()[0]
-    assert alert.removeurl == u"/alerts/remove?s=AB2Xq4j1Vtl2RCGNmsxd2ZfkTDErPbpuZmPzYLE&amp;hl=en&amp;gl=us&amp;source=alertsmail&amp;cd=TdfUlYqIXl4&amp;cad=:s7:f2:v0:"
+    assert alert.removeurl == u"/alerts/remove?s=AB2Xq4jsDy4ienBZYuYgWbzBWQ5i6LiD5L4y8JY&hl=en&gl=us&source=alertsmail&cd=4Ya67t6E3e4&cad=:s7:f1:v1:"
 
 
