@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from webapp.blurb.models import Blurb, IrrelevantBlurb
+from webapp.blurb.models import Blurb
 from webapp.clients.models import Client
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
@@ -32,16 +32,6 @@ def relevance(request, clientid, blurbid):
 
         blurb.relevant = rel
         blurb.save()
-
-        #add this blurb to the queue to be processed by the bayesian filter
-        #process later.
-        if not blurb.relevant:
-            ib = IrrelevantBlurb(blurb=blurb,
-                                 client=client)
-            ib.save()
-        # oops, didn't mean to mark that as irrelevant, remove from the queue
-        else:
-            IrrelevantBlurb.objects.filter(blurb=blurb).delete()
 
         return HttpResponse()
     else:

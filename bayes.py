@@ -25,15 +25,18 @@ class Bayes:
         """
         if not gtext and not rtext:
             assert probs, "If you don't provide a corpus of text, you must provide a dictionary of probabilities."
+            
+        self.good = {}
+        self.rejected = {}
 
         if gtext:
             self.good = create_count_hash(gtext)
-        else:
+        elif probs:
             self.good = probs['good']
 
         if rtext:
             self.rejected = create_count_hash(rtext)
-        else:
+        elif probs:
             self.rejected = probs['rejected']
 
         if not probs:
@@ -102,17 +105,21 @@ class Bayes:
         if self.rprobs.has_key(word):
             return self.rprobs[word]
         else:
-
-            p = (self.bad_count(word) / self.nrejected) * self.prejected
-            pw = p + (self.good_count(word) / self.ngood)
-            if p == 0 and pw == 0:
-                #most data is from rejected emails, so a new word is slightly more
-                #likely to be relevant.
-                prob = .4 
+            # only calculate odds if we have samples of both good and rejected
+            # text in the corpus.
+            if self.good and self.rejected:
+                p = (self.bad_count(word) / self.nrejected) * self.prejected
+                pw = p + (self.good_count(word) / self.ngood)
+                if p == 0 and pw == 0:
+                    #most data is from rejected emails, so a new word is slightly more
+                    #likely to be relevant.
+                    prob = .4 
+                else:
+                    prob = max(min(p/pw, .99), .01)
+                    self.rprobs[word] = prob
+                return prob
             else:
-                prob = max(min(p/pw, .99), .01)
-            self.rprobs[word] = prob
-            return prob
+                return 0
 
 
     def rejected_given_text(self, text):
@@ -187,21 +194,21 @@ def get_count(word, words):
         return 0
 
 
-def get_text(blurb, fetch=True):
-    text = ""
-    for key in blurb.keys():
-        if key != "rejected" and key != "url":
-            text = text + blurb[key].encode("utf-8")
-    if fetch:
-        try:
-            f = urllib2.urlopen(blurb['url'].encode("utf-8"))
-            html = f.read()
-            nodes = bs(html).findAll(text=True)
-            text = text + "".join(nodes).encode("utf-8")
-            f.close()
-        except:
-            text = text
-    return text
+# def get_text(blurb, fetch=True):
+#     text = ""
+#     for key in blurb.keys():
+#         if key != "rejected" and key != "url":
+#             text = text + blurb[key].encode("utf-8")
+#     if fetch:
+#         try:
+#             f = urllib2.urlopen(blurb['url'].encode("utf-8"))
+#             html = f.read()
+#             nodes = bs(html).findAll(text=True)
+#             text = text + "".join(nodes).encode("utf-8")
+#             f.close()
+#         except:
+#             text = text
+#     return text
     
     
     

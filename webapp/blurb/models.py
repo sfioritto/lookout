@@ -17,6 +17,12 @@ class Blurb(models.Model):
     visited = models.BooleanField(default=False)
     relevant = models.BooleanField(default=True)
 
+
+    @property
+    def text(self):
+        text = self.blurb + self.title + self.source + self.byline + self.url
+        return text
+
     @property
     def visit(self):
         return reverse("webapp.blurb.views.visit", kwargs={'clientid':self.client.id,
@@ -32,14 +38,4 @@ class Blurb(models.Model):
         return "%s" % self.id
 
 
-class IrrelevantBlurb(models.Model):
-    """
-    Basically a quick and dirty queue of blurbs which
-    some async process will use to train the bayesian
-    network.
-    """
 
-    created_on = models.DateTimeField(auto_now_add=True)
-    blurb = models.ForeignKey(Blurb)
-    client = models.ForeignKey(Client)
-    processed = models.BooleanField(default=False)
