@@ -89,13 +89,13 @@ class Bayes:
         Given a list of tokens, only return
         those that occurr more than 5 times.
         """
-        tokens = []
+        tokens = {}
         for t in tokenize(text):
             ngood = self.good_count(t)
             nbad = self.bad_count(t)
             if ngood + nbad > 5:
-                tokens.append(t)
-        return tokens
+                tokens[t] = 1
+        return tokens.keys()
 
 
     def most_interesting(self, tokens):
