@@ -1,10 +1,16 @@
 $(document).ready(function(){
+
+
 		      /* go to the visit url on the hidden anchor tag instead of the href on the event target*/
 		      $("a.blurb, a.textbtn").click(function(event){
-							var container = event.currentTarget.parentNode.parentNode;
+							var container = $(event.currentTarget).parents("li.blurb");
 							var url = $("a.visit", container)[0].href;
-							window.location = url;
-							event.preventDefault();
+							var oldurl = event.currentTarget.href;
+							event.currentTarget.href = url;
+							$(container).addClass("visited");
+							setTimeout(function(){
+								       event.currentTarget.href = oldurl;
+								   }, 0);
 					 });
 
 		      /*mark the div as irrelevant and post to the relevance view*/

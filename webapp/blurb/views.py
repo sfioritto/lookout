@@ -16,6 +16,7 @@ def visit(request, clientid, blurbid):
         blurb.save()
     return HttpResponseRedirect(blurb.url)
 
+
 @login_required
 def relevance(request, clientid, blurbid):
     """
