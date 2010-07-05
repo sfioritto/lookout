@@ -16,6 +16,7 @@ class Blurb(models.Model):
     url = models.CharField(max_length=1024)
     visited = models.BooleanField(default=False)
     relevant = models.BooleanField(default=True)
+    rejected = models.BooleanField(default=False)
 
 
     @property
