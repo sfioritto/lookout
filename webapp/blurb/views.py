@@ -31,6 +31,7 @@ def relevance(request, clientid, blurbid):
             rel = True
 
         blurb.relevant = rel
+        blurb.rejected = not rel
         blurb.save()
 
         return HttpResponse()
