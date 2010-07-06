@@ -207,7 +207,7 @@ def test_create_params():
     email = "test@localhost"
     type = "comprehensive"
     frequency = "instant"
-    length = 50
+    length = '50'
     params = alerts.create_params(term, email, type, frequency, length)
     assert params[alerts.TERM_NAME] == term
     assert params[alerts.EMAIL_NAME] == email
