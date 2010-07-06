@@ -44,8 +44,8 @@ def START(message, alert_id=None, host=None):
                 b = bayes.Bayes(gtext, rtext)
                 for blurb in blurbs:
                     if b.rejected_given_text(blurb.text) > .99:
-                        b.relevant = False
-                        b.save()
+                        blurb.relevant = False
+                        blurb.save()
             transaction.commit()
         else:
             LOG.debug("Received alerts for a disabled alert with id %s and remove url %s" % (alert.id, alert.removeurl))
