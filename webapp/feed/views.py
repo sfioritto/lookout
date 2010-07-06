@@ -19,11 +19,12 @@ def login_redirect(request, clientid):
         user = authenticate(username='christy', password='password')
     elif id == '98ba9c25be8d9ff043e4fdfd82c3f06af6f32f1c':
         user = authenticate(username='jackie', password='password')
+    else:
+        raise Http404
+
     login(request, user)
     return HttpResponseRedirect(reverse(show, kwargs={'clientid':clientid}))
 
-    else:
-        raise Http404
         
 
 @login_required
