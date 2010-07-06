@@ -28,13 +28,18 @@ FREQUENCY = {
     'week' : '6'
 }
 
+LENGTHS = {
+    '50' : 1,
+    '20' : 0
+}
+
 LOG = logging.getLogger("Parse Alerts")
 
 remove = re.compile('(?:(/alerts/remove[^">]*)">)|(/alerts/remove.*\w)')
 verify = re.compile("/alerts/verify.*\w")
 byline = re.compile("By ([a-zA-Z]+ [a-zA-Z]+) ")
 
-def create_alert(term, email, type='comprehensive', frequency='instant', length=50):
+def create_alert(term, email, type='comprehensive', frequency='instant', length='50'):
 
     """
     Creates a google alert for the given term and
@@ -60,7 +65,7 @@ def create_params(term, email, typekey, freqkey, length):
 
     assert freqkey in FREQUENCY.keys(), "Must be one of %s" % FREQUENCY.keys()
     assert typekey in TYPES.keys(), "Must be one of %s" % TYPES.keys()
-    assert length == 50 or length == 20, "Length must be 50 or 20."
+    assert length == '50' or length == '20', "Length must be 50 or 20."
 
     type = TYPES[typekey]
     frequency = FREQUENCY[freqkey]
