@@ -17,7 +17,7 @@ def login_redirect(request, clientid):
     id = request.GET['id']
     if id == '3918862675d4db70b01d7e0c087c2a79d6fd855f':
         user = authenticate(username='christy', password='password')
-    elif id = '98ba9c25be8d9ff043e4fdfd82c3f06af6f32f1c':
+    elif id == '98ba9c25be8d9ff043e4fdfd82c3f06af6f32f1c':
         user = authenticate(username='jackie', password='password')
     login(request, user)
     return HttpResponseRedirect(reverse(show, kwargs={'clientid':clientid}))
