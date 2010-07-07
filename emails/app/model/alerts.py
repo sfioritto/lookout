@@ -2,6 +2,7 @@ import logging
 import httplib, urllib, urllib2
 import re
 import htmlentitydefs
+from lxml import html as lhtml
 from BeautifulSoup import BeautifulSoup
 from webapp.blurb.models import Blurb
 
@@ -144,16 +145,18 @@ def get_html_stubs(html):
     Takes in the html from an alerts email
     and returns a list.
     """
-    soup = BeautifulSoup(html)
+
+    root = lhtml.fromstring(html)
     # the first two rows are just general information about the alerts
-    trs = soup.body.find('div', recursive=False).findAll('table', recursive=False)[0].findAll('tr', recursive=False)[2:]
-    
+    trs = root.find(".//table").findall("tr")[2:]
+
     stubs = []
     for tr in trs:
-        if tr.td.find('table', recursive=False):
-            stubs.append(tr.td.table.td)
+        table = tr.find("td").find("table")
+        if table:
+            stubs.append(table.find("tr").find("td"))
         else:
-            stubs.append(tr.td)
+            stubs.append(tr.find("td"))
     return stubs
 
 
@@ -181,20 +184,21 @@ def disable_alert(url):
 
 def get_raw_alert(stub):
     """
-    Given a stub of html beautiful soup, return
+    Given a stub of html (lxml node), return
     a dictionary representing the alert.
     """
 
     #the first font tag contains the text nodes we want.
-    blurb = ''.join(stub.find('font', recursive=False).findAll(text=True)).replace("\n", "")
-    title = ''.join(stub.find('a', recursive=False).findAll(text=True)).replace("\n", "")
+    # the last node in the text iteration is an anchor tag we don't want
+    blurb = ' '.join([n for n in stub.find('font').itertext()][:-1]).replace("\n", "")
+    title = ''.join(stub.find('a').text_content()).replace("\n", "")
     source = ""
 
 
     #sometimes there is not a source
-    font = stub.find('font', recursive=False).font
+    font = stub.find('font').find('font')
     if font:
-        source = font.find(text=True)
+        source = font.text_content()
 
 
     # remove the source from the beginning of the blurb if it is there.
@@ -213,7 +217,7 @@ def get_raw_alert(stub):
     #Google wraps up the direct link in a query string, which goes
     #to them first then redirects. This gets the big link then pulls
     # the actual link out of the query string.
-    bigUrl = stub.find('a', recursive=False)['href']
+    bigUrl = dict(stub.find('a').items())['href']
     url = urllib2.unquote(urllib2.urlparse.parse_qs(bigUrl)['q'][0])
 
     #get the byline
