@@ -197,9 +197,8 @@ def get_raw_alert(stub):
     #sometimes there is not a source
     source = ""
     font = stub.find('font').find('font')
-    if font:
+    if font is not None:
         source = font.text_content()
-
 
     # remove the source from the beginning of the blurb if it is there.
     try:
