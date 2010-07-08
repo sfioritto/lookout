@@ -18,6 +18,14 @@ pip install beautifulsoup
 pip install ipython
 pip install readline
 pip install fabric
+mkdir source
+cd source
+wget http://pypi.python.org/packages/source/l/lxml/lxml-2.2.6.tar.gz#md5=b1f700fb22d7ee9b977ee3eceb65b20c
+tar -xzf lxml-2.2.6.tar.gz
+cd lxml-2.2.6/lib
+wget ftp://xmlsoft.org/libxml2/libxml2-2.7.3.tar.gz
+cd ..
+sudo python setup.py build --static-deps --libxml2-version=2.7.3
 
 
 cd *your lookout dir*

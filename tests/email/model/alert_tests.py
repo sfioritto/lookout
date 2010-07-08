@@ -130,7 +130,7 @@ def test_get_raw_alert():
     alert = alerts.get_raw_alert(stub)
     assert alert.has_key('blurb')
     assert alert['title'].startswith("Audio reveals swipes at Obama, other Illinois Democrats")
-    assert alert['source'] == "Chicago Tribune"
+    assert alert['source'] == "Chicago Tribune", "Expected Chicago Tribune, source is actually %s" % alert['source']
     assert alert['byline'] == ""
 
     alert['url'] == "http://www.chicagotribune.com/news/local/blagojevich/ct-met-blagojevich-trial-0704-20100704,0,3385819.story"

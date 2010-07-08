@@ -153,7 +153,7 @@ def get_html_stubs(html):
     stubs = []
     for tr in trs:
         table = tr.find("td").find("table")
-        if table:
+        if table is not None:
             stubs.append(table.find("tr").find("td"))
         else:
             stubs.append(tr.find("td"))
@@ -192,10 +192,10 @@ def get_raw_alert(stub):
     # the last node in the text iteration is an anchor tag we don't want
     blurb = ' '.join([n for n in stub.find('font').itertext()][:-1]).replace("\n", "")
     title = ''.join(stub.find('a').text_content()).replace("\n", "")
-    source = ""
 
 
     #sometimes there is not a source
+    source = ""
     font = stub.find('font').find('font')
     if font:
         source = font.text_content()
@@ -204,15 +204,10 @@ def get_raw_alert(stub):
     # remove the source from the beginning of the blurb if it is there.
     try:
         index = blurb.index(source)
-        if index == 0:
-            hasSource = True
-        else:
-            hasSource = False
+        blurb = blurb[len(source):].strip()
     except ValueError:
-        hasSource = False
+        blurb = blurb
 
-    if hasSource:
-        blurb = blurb[len(source):]
 
     #Google wraps up the direct link in a query string, which goes
     #to them first then redirects. This gets the big link then pulls
@@ -235,6 +230,7 @@ def get_raw_alert(stub):
     for key in raw.keys():
         raw[key] = __unescape(raw[key])
     return raw
+
 
 def create_blurbs(msg, alert):
     """
