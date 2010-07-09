@@ -8,7 +8,12 @@
 {% block content %}
 <img id="tabimage" src="{{ MEDIA_URL }}images/main-tabs.png" />
 <p id="filters">
-Showing <a class="relfilter">only relevant</a> alerts.
+Showing <select name="relfilter" class="relfilter">
+  <option value="only relevant">only relevant</option>
+  <option value="only irrelevant">only irrelevant</option>
+  <option value="all">all</option>
+</select>
+  <a href="/" class="relfilter">only relevant</a> alerts.
 </p>
   
 <ul id="blurbs">

@@ -118,12 +118,17 @@ li.blurb div.links a{
     text-align: center;
 }
 
+
+/*css for the filter rules*/
 p#filters{
     font-family: verdana;
     font-size: 12;
     color: #636363;
     float: right;
-    margin-bottom: 10px;
+}
+
+select.relfilter{
+    display: none;
 }
 
 /*rounded corners*/
