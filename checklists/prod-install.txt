@@ -67,6 +67,7 @@ sudo usermod -p '!' root
 > sudo pip install http://pypi.python.org/packages/source/p/python-daemon/python-daemon-1.5.5.tar.gz#md5=1f6cd41473c2e201021a0aeef395b2b1
 > sudo pip uninstall lockfile
 > sudo pip install http://pylockfile.googlecode.com/files/lockfile-0.8.tar.gz
+> sudo apt-get install lxml
 > sudo -u postgres createdb lookout
 
 -- install and configure postfix
