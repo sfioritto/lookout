@@ -7,6 +7,10 @@
 
 {% block content %}
 <img id="tabimage" src="{{ MEDIA_URL }}images/main-tabs.png" />
+<p id="filters">
+Showing <a class="relfilter">only relevant</a> alerts.
+</p>
+  
 <ul id="blurbs">
   {% if todays %}
   <h2>Today</h2>

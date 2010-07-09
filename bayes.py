@@ -194,21 +194,6 @@ def get_count(word, words):
         return 0
 
 
-# def get_text(blurb, fetch=True):
-#     text = ""
-#     for key in blurb.keys():
-#         if key != "rejected" and key != "url":
-#             text = text + blurb[key].encode("utf-8")
-#     if fetch:
-#         try:
-#             f = urllib2.urlopen(blurb['url'].encode("utf-8"))
-#             html = f.read()
-#             nodes = bs(html).findAll(text=True)
-#             text = text + "".join(nodes).encode("utf-8")
-#             f.close()
-#         except:
-#             text = text
-#     return text
     
     
     

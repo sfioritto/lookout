@@ -42,7 +42,7 @@ li#manage a{
 }
 
 div#content{
-    padding: 30px;
+    padding: 15px 30px 30px 30px;
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
@@ -116,6 +116,14 @@ li.blurb div.links a{
     display: block;
     float: left;
     text-align: center;
+}
+
+p#filters{
+    font-family: verdana;
+    font-size: 12;
+    color: #636363;
+    float: right;
+    margin-bottom: 10px;
 }
 
 /*rounded corners*/
