@@ -32,7 +32,7 @@ class Blurb(models.Model):
     @property
     def relevance(self):
         return reverse("webapp.blurb.views.relevance", kwargs={'clientid':self.client.id,
-                                                           'blurbid':self.id})
+                                                           'blurbid':self.id})        
 
     
     def __unicode__(self):

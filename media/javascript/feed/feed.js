@@ -2,6 +2,7 @@ $(document).ready(
 function(){
 
 
+    /* Update the filter*/
     $("select.relfilter").change(
     function(event){
 	var select = $(event.target).hide();
@@ -9,6 +10,7 @@ function(){
 	$("a.relfilter").html(text).show();
     });
 
+    /* Show filter options */
     $("a.relfilter").click(
     function(event){
 	$(event.target).hide();

@@ -1,4 +1,3 @@
-from datetime import datetime as dt, timedelta as td
 from django.shortcuts import render_to_response, get_object_or_404
 from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
@@ -37,15 +36,7 @@ def older(request, clientid):
 
     client = get_object_or_404(Client, pk=clientid)
 
-    yesterday = dt.today() - td(1)
-
-    older = Blurb.objects.filter(client=client).filter(created_on__lt=dt(yesterday.year,
-                                                                         yesterday.month,
-                                                                         yesterday.day))\
-                                                                         .filter(relevant=True)\
-                                                                         .order_by('-created_on')\
-                                                                         .all()[10:]
-    return render_to_response('feed/show.html', {'older' : older,
+    return render_to_response('feed/show.html', {'older' : client.older_blurbs()[10:],
                                                  'client' : client,
                                                  'olderind' : True,
                                                  }, context_instance = RequestContext(request))
@@ -57,33 +48,20 @@ def show(request, clientid):
     """
     client = get_object_or_404(Client, pk=clientid)
 
-    today = dt.today()
-    yesterday = dt.today() - td(1)
-
-    todays = Blurb.objects.filter(client=client).filter(created_on__year=today.year,
-                                                        created_on__month=today.month,
-                                                        created_on__day=today.day)\
-                                                        .filter(relevant=True)\
-                                                        .order_by('-created_on')\
-                                                        .all()
-
-    yesterdays = Blurb.objects.filter(client=client).filter(created_on__year=yesterday.year,
-                                                       created_on__month=yesterday.month,
-                                                       created_on__day=yesterday.day)\
-                                                       .filter(relevant=True)\
-                                                       .order_by('-created_on')\
-                                                       .all()
-
-    older = Blurb.objects.filter(client=client).filter(created_on__lt=dt(yesterday.year,
-                                                                         yesterday.month,
-                                                                         yesterday.day))\
-                                                                         .filter(relevant=True)\
-                                                                         .order_by('-created_on')\
-                                                                         .all()[:10]
-
-    return render_to_response('feed/show.html', {'todays' : todays,
-                                                 'yesterdays' : yesterdays,
-                                                 'older' : older,
+    return render_to_response('feed/show.html', {'todays' : client.todays_blurbs(),
+                                                 'yesterdays' : client.yesterdays_blurbs(),
+                                                 'older' : client.older_blurbs()[:10], #only the first 10
                                                  'client' : client, 
                                                  }, context_instance = RequestContext(request))
+
+@login_required
+def show_ajax(request, clientid):
+    
+    client = get_object_or_404(Client, pk=clientid)
+
+    return render_to_response('feed/show-inner.html', {'todays' : client.todays_blurbs(),
+                                                       'yesterdays' : client.yesterdays_blurbs(),
+                                                       'older' : client.older_blurbs(),
+                                                       'client' : client,
+                                                       }, context_instance = RequestContext(request))
 

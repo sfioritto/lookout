@@ -15,31 +15,11 @@ Showing <select name="relfilter" class="relfilter">
 </select>
   <a href="/" class="relfilter">only relevant</a> alerts.
 </p>
-  
+
 <ul id="blurbs">
-  {% if todays %}
-  <h2>Today</h2>
-  {% for blurb in todays %}
-  {% include 'feed/blurb.html' %}
-  {% endfor %}
-  {% endif %}
-
-  {% if yesterdays %}
-  <h2>Yesterday</h2>
-  {% for blurb in yesterdays %}
-  {% include 'feed/blurb.html' %}
-  {% endfor %}
-  {% endif %}
-
-  
-  {% if older %}
-  <h2>Older</h2>
-  {% for blurb in older %}
-  {% include 'feed/blurb.html' %}
-  {% endfor %}
-  {% endif %}
-
+{% include "feed/show-inner.html" %}
 </ul>
+
 {% if not olderind %}
 <a id="olderlink" href="{%url webapp.feed.views.older client.id %}">Older alerts</a>
 {% endif %}
