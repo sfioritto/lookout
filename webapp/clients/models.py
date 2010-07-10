@@ -3,6 +3,7 @@ from django.db import models
 from webapp.account.models import Account
 from datetime import datetime as dt, timedelta as td
 
+
 class Client(models.Model):
 
     created_on = models.DateTimeField(auto_now_add=True)
@@ -51,12 +52,15 @@ class Client(models.Model):
                                        .all()
         return todays
 
-    def yesterdays_blurbs(self, filters={'relevant' : True}):
+    def yesterdays_blurbs(self, filters=None):
         """
         Return all of the blurbs created yesterday. Accepts an optional
         dictionary of filters based on blurb properties, default
         is {'relevant' : True}
         """
+        
+        # filters are passed in, stored in preferences, or default to relevant=true.
+        filters = filters or self.get_filters() or {'relevant' : True}
         yesterday = dt.today() - td(1)
         yesterdays = self.blurb_set.filter(created_on__year=yesterday.year,
                                            created_on__month=yesterday.month,
@@ -67,6 +71,33 @@ class Client(models.Model):
         return yesterdays
 
 
+    def get_filters(self):
+        """
+        Returns a dictionary of filters to be applied
+        to any of the feed queries.
+        """
+        filters = dict([(p.key, p.value) for p in self.preferences_set.all()])
+        return filters
+
 
     def __unicode__(self):
         return "%s" % self.id
+
+
+class Preferences(models.Model):
+
+    """
+    Stores rows of key/value pairs which are used
+    to store preferences for each client. TODO: get rid
+    of this table and put this data as json in tokyo
+    tyrant or memcached or something.
+    """
+    created_on = models.DateTimeField(auto_now_add=True)
+    client = models.ForeignKey(Client)
+    key = models.CharField(max_length=256, unique=True)
+    value = models.CharField(max_length=256)
+
+
+    def __unicode__(self):
+        return "{ '%s' : '%s' }" % (self.key, self.value)
+
