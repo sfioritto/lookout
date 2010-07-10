@@ -76,7 +76,17 @@ class Client(models.Model):
         to any of the feed queries. The default is relevant
         set to True, if no preferences have been created.
         """
-        filters = dict([(p.key, p.value) for p in self.preferences_set.all()])
+
+        # convert the key to a string, since filters are used as keywords in a call to the
+        # django queryset filters method, it doesn't accept unicode.
+        filters = dict([(str(p.key), p.value) for p in self.preferences_set.all()])
+        for key in filters.keys():
+            # change strings into actual booleans
+            if filters[key] == 'False':
+                filters[key] = False
+            elif filters[key] == 'True':
+                filters[key] = True
+
         return filters or {'relevant' : True}
 
 
@@ -89,9 +99,9 @@ class Client(models.Model):
         params = []
         for key in filters:
             params.append({'client' : self,
-                           'key' : key,
+                           'key' : str(key),
                            'value' : filters[key]})
-
+            
         for param in params:
             Preferences.objects.get_or_create(**param)
 

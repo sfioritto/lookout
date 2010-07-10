@@ -58,7 +58,11 @@ def show(request, clientid):
 def show_ajax(request, clientid):
     
     client = get_object_or_404(Client, pk=clientid)
-    client.update_filters(request.GET)
+
+    # This view can optionally accept a query string which defines
+    # key value pairs which are used to define what blurbs show up
+    # by default for the client.
+    client.update_preferences(dict(request.GET.items()))
 
     return render_to_response('feed/show-inner.html', {'todays' : client.todays_blurbs(),
                                                        'yesterdays' : client.yesterdays_blurbs(),
