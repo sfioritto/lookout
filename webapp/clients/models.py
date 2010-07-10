@@ -22,7 +22,7 @@ class Client(models.Model):
         return self.alert_set.filter(disabled=False).order_by('created_on').all()
 
 
-    def older_blurbs(self, filters={'relevant' : True}):
+    def older_blurbs(self):
         """
         Return all of the blurbs older than yesterday. Accepts an optional
         dictionary of filters based on blurb properties, default
@@ -32,12 +32,12 @@ class Client(models.Model):
         older = self.blurb_set.filter(created_on__lt=dt(yesterday.year,
                                                         yesterday.month,
                                                         yesterday.day))\
-                                                        .filter(**filters)\
+                                                        .filter(**self.get_filters())\
                                                         .order_by('-created_on')\
                                                         .all()
         return older
 
-    def todays_blurbs(self, filters={'relevant' : True}):
+    def todays_blurbs(self):
         """
         Return all of the blurbs created today. Accepts an optional
         dictionary of filters based on blurb properties, default
@@ -47,12 +47,12 @@ class Client(models.Model):
         todays = self.blurb_set.filter(created_on__year=today.year,
                                        created_on__month=today.month,
                                        created_on__day=today.day)\
-                                       .filter(**filters)\
+                                       .filter(**self.get_filters())\
                                        .order_by('-created_on')\
                                        .all()
         return todays
 
-    def yesterdays_blurbs(self, filters=None):
+    def yesterdays_blurbs(self):
         """
         Return all of the blurbs created yesterday. Accepts an optional
         dictionary of filters based on blurb properties, default
@@ -60,12 +60,11 @@ class Client(models.Model):
         """
         
         # filters are passed in, stored in preferences, or default to relevant=true.
-        filters = filters or self.get_filters() or {'relevant' : True}
         yesterday = dt.today() - td(1)
         yesterdays = self.blurb_set.filter(created_on__year=yesterday.year,
                                            created_on__month=yesterday.month,
                                            created_on__day=yesterday.day)\
-                                           .filter(**filters)\
+                                           .filter(**self.get_filters())\
                                            .order_by('-created_on')\
                                            .all()
         return yesterdays
@@ -74,10 +73,27 @@ class Client(models.Model):
     def get_filters(self):
         """
         Returns a dictionary of filters to be applied
-        to any of the feed queries.
+        to any of the feed queries. The default is relevant
+        set to True, if no preferences have been created.
         """
         filters = dict([(p.key, p.value) for p in self.preferences_set.all()])
-        return filters
+        return filters or {'relevant' : True}
+
+
+    def update_preferences(self, filters):
+        """
+        Go through the given dictionary and update
+        the preferences for each key, value pair.
+        """
+        
+        params = []
+        for key in filters:
+            params.append({'client' : self,
+                           'key' : key,
+                           'value' : filters[key]})
+
+        for param in params:
+            Preferences.objects.get_or_create(**param)
 
 
     def __unicode__(self):
@@ -94,7 +110,7 @@ class Preferences(models.Model):
     """
     created_on = models.DateTimeField(auto_now_add=True)
     client = models.ForeignKey(Client)
-    key = models.CharField(max_length=256, unique=True)
+    key = models.CharField(max_length=256)
     value = models.CharField(max_length=256)
 
 

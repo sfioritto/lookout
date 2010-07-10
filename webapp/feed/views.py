@@ -58,6 +58,7 @@ def show(request, clientid):
 def show_ajax(request, clientid):
     
     client = get_object_or_404(Client, pk=clientid)
+    client.update_filters(request.GET)
 
     return render_to_response('feed/show-inner.html', {'todays' : client.todays_blurbs(),
                                                        'yesterdays' : client.yesterdays_blurbs(),
