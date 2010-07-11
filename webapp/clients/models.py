@@ -77,17 +77,29 @@ class Client(models.Model):
         set to True, if no preferences have been created.
         """
 
+        #TODO: This needs some thought, clearly. It's horrible code.
+
         # convert the key to a string, since filters are used as keywords in a call to the
         # django queryset filters method, it doesn't accept unicode.
-        filters = dict([(str(p.key), p.value) for p in self.preferences_set.all()])
-        for key in filters.keys():
+        prefs = dict([(str(p.key), p.value) for p in self.preferences_set.all()])
+        for key in prefs.keys():
             # change strings into actual booleans
-            if filters[key] == 'False':
-                filters[key] = False
-            elif filters[key] == 'True':
-                filters[key] = True
+            if prefs[key] == 'False':
+                prefs[key] = False
+            elif prefs[key] == 'True':
+                prefs[key] = True
 
-        return filters or {'relevant' : True}
+        relevant = prefs.has_key('relevant') and prefs['relevant']
+        irrelevant = prefs.has_key('irrelevant') and prefs['irrelevant']
+        
+        if relevant and irrelevant:
+            filters = {}
+        elif not relevant and irrelevant:
+            filters = {'relevant' : False}
+        else:
+            filters = {'relevant' : True}
+
+        return filters
 
 
     def update_preferences(self, filters):
@@ -103,7 +115,12 @@ class Client(models.Model):
                            'value' : filters[key]})
             
         for param in params:
-            Preferences.objects.get_or_create(**param)
+            try:
+                p = Preferences.objects.get(key=param['key'], client=self)
+                p.value = param['value']
+            except Preferences.DoesNotExist:
+                p = Preferences(**param)
+            p.save()
 
 
     def __unicode__(self):
