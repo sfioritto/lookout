@@ -1,0 +1,23 @@
+
+{% if todays %}
+<h2>Today</h2>
+{% for blurb in todays %}
+{% include 'feed/blurb.html' %}
+{% endfor %}
+{% endif %}
+
+{% if yesterdays %}
+<h2>Yesterday</h2>
+{% for blurb in yesterdays %}
+{% include 'feed/blurb.html' %}
+{% endfor %}
+{% endif %}
+
+
+{% if older %}
+<h2>Older</h2>
+{% for blurb in older %}
+{% include 'feed/blurb.html' %}
+{% endfor %}
+{% endif %}
+
