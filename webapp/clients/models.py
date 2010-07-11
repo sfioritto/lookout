@@ -101,7 +101,6 @@ class Client(models.Model):
 
         return filters
 
-
     def update_preferences(self, filters):
         """
         Go through the given dictionary and update

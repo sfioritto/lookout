@@ -9,11 +9,11 @@
 <img id="tabimage" src="{{ MEDIA_URL }}images/main-tabs.png" />
 <p id="filters">
 Showing <select name="relfilter" class="relfilter">
-  <option value="only relevant">only relevant</option>
-  <option value="only irrelevant">only irrelevant</option>
-  <option value="all">all</option>
+  {% for option in options %}
+  <option {% if option.selected %}selected="{{ option.selected }}" {% endif %} value="{{ option.value }}">{{ option.text }}</option>
+    {% endfor %}
 </select>
-  <a href="/" class="relfilter">only relevant</a> alerts.
+  <a href="{%url webapp.feed.views.show_ajax client.id %}" class="relfilter">{{ selectedtext }}</a> alerts.
 </p>
 
 <ul id="blurbs">
