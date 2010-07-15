@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/clients.css" />
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/clients/clients.css" />
 {% endblock %}
 
 {% block tabs %}
@@ -9,10 +9,14 @@
 
 {% block content %}
 <h2>Clients</h2>
-<h3>Add or remove clients from this screen.</h3>
-<ul>
-  {%for client in clients %}
-  <li>{{ client.name }}</li>
-  {% endfor %}
+<h3>Add, edit or remove clients.</h3>
+<ul id="clients">
+  {% include "clients/show-inner.html" %}
+  <li id="clearli"></li>
 </ul>
+<a id="addclient" href="{% url webapp.clients.views.create %}">Add a new client.</a>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{MEDIA_URL}}javascript/clients/clients.js"></script>
 {% endblock %}

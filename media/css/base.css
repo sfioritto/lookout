@@ -76,7 +76,7 @@ div#content h2{
     color: #F4A3A6;
     font-family: verdana;
     font-size: 48px;
-    padding-left: 10px; /*should match li.blurb padding left*/
+    padding: 0px 10px; /*should match li.blurb padding left*/
 }
 
 li#clientname{

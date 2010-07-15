@@ -30,11 +30,13 @@ def create(request):
     form = CreateClientForm()
     if request.method == "POST":
         form = CreateClientForm(request.POST)
-        name = form.data['name']
-        client = Client(user=account,
-                        name=name)
-        client.save()
-        return HttpResponseRedirect(reverse('webapp.clients.views.show'))
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            print len(name)
+            client = Client(user=account,
+                            name=name)
+            client.save()
+            return HttpResponseRedirect(reverse('webapp.clients.views.show'))
 
     return render_to_response('clients/create.html', {
             'form' : form,
