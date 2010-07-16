@@ -1,0 +1,29 @@
+a, a:visited{
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+a.button{
+    border: 1px solid #FAC9B5;
+    padding: 5px 10px;
+    width: 50px;
+    display: block;
+    text-align: center;
+    float: left;
+    font-family: georgia;
+    font-size: 14px;
+    color: #A09C9C;
+    background-color: white;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+a.button:hover{
+    background-color: #F8FFC2;
+    text-decoration: none;    
+}
+

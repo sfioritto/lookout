@@ -1,0 +1,12 @@
+{%for client in clients %}
+<li class="client">
+<div class="client">
+<p>{{ client.name }}</p>
+</div>
+<div class="links">
+<a class="edit button" href="/">Edit</a>
+<a class="delete button" href="/">Delete</a>
+</div>
+</li>
+{% endfor %}
+

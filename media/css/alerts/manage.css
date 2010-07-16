@@ -1,4 +1,3 @@
-
 img#tabimage{
     position: absolute;
     top: 0px;
@@ -35,24 +34,6 @@ div.links{
 
 div.term{
     width: 60%;
-}
-
-div.links a, a#addterm{
-    border: 1px solid #FAC9B5;
-    padding: 5px 10px;
-    width: 50px;
-    display: block;
-    text-align: center;
-    float: left;
-    font-family: georgia;
-    font-size: 14px;
-    color: #A09C9C;
-    background-color: white;
-}
-
-div.links a:hover{
-    background-color: #F8FFC2;
-    text-decoration: none;
 }
 
 a.edit{
@@ -147,13 +128,12 @@ li.editing div.term, li.editing div.links{
     display: none;
 }
 
-
 div#content h3, a#addlink{
     padding-left: 10px;
 }
 
 /*rounded corners*/
-ul#alerts li, div.links a, div#formlinks a{
+ul#alerts li, div#formlinks a{
     -moz-border-radius: 5px;
     border-radius: 5px;
 }

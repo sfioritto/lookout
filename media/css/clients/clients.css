@@ -60,7 +60,7 @@ div.links{
     margin-right: 10px;
 }
 
-div.links a:hover{
+/*div.links a:hover{
     background-color: #F8FFC2;
     text-decoration: none;
 }
@@ -78,7 +78,7 @@ div.links a{
     background-color: white;
     -moz-border-radius: 5px;
     border-radius: 5px;
-}
+}*/
 
 #clearli{
     clear: both;
