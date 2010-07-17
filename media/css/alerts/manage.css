@@ -87,6 +87,8 @@ a#addterm{
     color: #474646;
     border-color: #9A9A9A;
     width: 100px;
+    float: left;
+    padding: 5px 10px;
 }
 
 div#canceladd{
