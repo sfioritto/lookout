@@ -15,10 +15,14 @@
   <table>
     <tr>
       <td>{{ form.name.label_tag }}</td>
+    </tr>
+    <tr>
       <td>{{ form.name }}</td>
     </tr>
  </table>
-  <input type="submit" value="create" />
+  <p>
+ <input type="submit" value="Create client" /> or <a class="cancel" href="{% url webapp.clients.views.show %}">cancel</a>
+ </p>
 </form>
 
  {% endblock %}
