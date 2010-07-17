@@ -1,7 +1,7 @@
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from webapp.clients.forms import CreateClientForm, DisableClientForm
 from webapp.clients.models import Client
@@ -13,9 +13,8 @@ def show(request):
     Show all of the clients for a user.
     """
     account = request.user.get_profile()
-    clients = account.client_set.all()
     return render_to_response('clients/show.html', {
-            'clients' : clients
+            'clients' : account.active_clients()
             }, context_instance = RequestContext(request))
 
 
@@ -44,7 +43,7 @@ def create(request):
 
 
 @login_required
-def disable(request):
+def delete(request):
     """
     Disables a given client.
     """

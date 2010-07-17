@@ -8,6 +8,9 @@ class Account(models.Model):
     email = models.CharField(max_length=512, primary_key=True)
     user = models.ForeignKey(User, null=True)
 
+    def active_clients(self):
+        return self.client_set.filter(disabled=False).all()
+
     def __unicode__(self):
         return "%s" % self.email
 
