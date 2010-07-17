@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from webapp.clients.forms import CreateClientForm
+from webapp.clients.forms import CreateClientForm, DisableClientForm
 from webapp.clients.models import Client
 
 
@@ -41,5 +41,18 @@ def create(request):
     return render_to_response('clients/create.html', {
             'form' : form,
             }, context_instance=RequestContext(request))
-    
+
+
+@login_required
+def disable(request):
+    """
+    Disables a given client.
+    """
+    if request.method == "POST":
+        form = DisableClientForm(request.POST)
+        client = get_object_or_404(Client, pk=form.data['id'])
+        client.disable()
+        return HttpResponse()
+    else:
+        raise Http404
 

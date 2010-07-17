@@ -9,14 +9,17 @@ class Client(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(Account)
     name = models.CharField(max_length=256, null=False)
+    disabled = models.BooleanField(default=False)
 
     @property
     def feed(self):
         return reverse('webapp.feed.views.show', kwargs={'clientid':self.id})
 
+
     @property
     def manage(self):
         return reverse('webapp.alerts.views.manage', kwargs={'clientid':self.id})
+
 
     def all_alerts(self):
         return self.alert_set.filter(disabled=False).order_by('created_on').all()
@@ -120,6 +123,26 @@ class Client(models.Model):
             except Preferences.DoesNotExist:
                 p = Preferences(**param)
             p.save()
+
+
+    def disable(self):
+        """
+        Disables the client and all of its alerts. No longer shows up
+        in the list of clients and no longer receives alerts. Actual
+        rows in the database are not deleted.
+        """
+
+        for alert in self.all_alerts():
+            alert.disable()
+            alert.save()
+
+        self.disabled = True
+        self.save()
+
+
+    def enable(self):
+        self.disabled - False
+        self.save()
 
 
     def __unicode__(self):
