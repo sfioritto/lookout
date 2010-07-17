@@ -1,11 +1,11 @@
 {%for client in clients %}
 <li class="client">
 <div class="client">
-<p>{{ client.name }}</p>
+<a href="{% url webapp.feed.views.show client.id %}" class="name">{{ client.name }}</a>
 </div>
 <div class="links">
+<a class="delete" id="{{ client.id }}" href="{% url webapp.clients.views.delete %}">Delete</a>
 <a class="edit button" href="/">Edit</a>
-<a class="delete button" id="{{ client.id }}" href="{% url webapp.clients.views.delete %}">Delete</a>
 </div>
 </li>
 {% endfor %}

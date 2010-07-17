@@ -2,7 +2,7 @@ div#content{
     overflow: hidden;
 }
 
-div#content h3, div.client, a#addclient{
+div#content h3, a.name, a#addclient{
     padding-left: 10px;
 }
 
@@ -40,28 +40,29 @@ li.client:hover{
     background-color: #F0F0F1;
 }
 
-li.client p{
+li.client a.name{
     font-family: georgia;
-    color: #474646;
     font-size: 21px;
+    clear: left;
+    float: left;
 }
 
 ul#clients{
     margin: 20px 0px;
 }
 
-li.client p{
-    clear: left;
-    float: left;
-}
-
-li.client a{
+div.links a{
     float: right;
     margin-left: 10px;
 }
 
 div.links{
     margin-right: 10px;
+}
+
+a.delete{
+    padding-top: 5px;
+    color: #AB1F27;
 }
 
 #clearli{
