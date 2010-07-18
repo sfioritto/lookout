@@ -17,6 +17,8 @@ DATABASE_PASSWORD = 'Bethers8064'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
+#Just for local development
+EMAIL_PORT = 1025
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -88,7 +90,7 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = ('webapp.backends.EmailBackend',
                            'django.contrib.auth.backends.ModelBackend',)
-LOGIN_URL = '/login/'
+LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/clients'
 AUTH_PROFILE_MODULE = 'account.Account'
 

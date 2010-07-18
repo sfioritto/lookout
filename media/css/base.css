@@ -64,6 +64,13 @@ ul#tabs li a, div#content h3{
     font-size: 18px;
 }
 
+div#content h3{
+    color: #A09C9C;
+    font-family: verdana;
+    font-size: 14px;
+}
+
+
 div#content h2{
     color: #F4A3A6;
     font-family: verdana;

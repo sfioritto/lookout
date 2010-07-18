@@ -25,12 +25,6 @@ div.links, div.editlinks{
     float: right;
 }
 
-div#content h3{
-    color: #A09C9C;
-    font-family: verdana;
-    font-size: 14px;
-}
-
 li.client{
     -moz-border-radius: 5px;
     border-radius: 5px;

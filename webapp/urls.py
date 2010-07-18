@@ -21,16 +21,6 @@ urlpatterns += patterns(
     (r'^$', 'direct_to_template', {'template' : '404.html'}, 'home'),
     )
 
-
-#django contrib
-urlpatterns += patterns(
-    'django.contrib.auth.views',
-    (r'^login/$', 'login', {
-        'template_name': 'account/login.html'}
-     ),
-    (r'logout/$', 'logout_then_login'),
-    )
-
 #load static files when in dev.
 if settings.TEMPLATE_DEBUG:
     urlpatterns += patterns('',
