@@ -89,7 +89,7 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = ('webapp.backends.EmailBackend',
                            'django.contrib.auth.backends.ModelBackend',)
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/clients'
 AUTH_PROFILE_MODULE = 'account.Account'
 
 

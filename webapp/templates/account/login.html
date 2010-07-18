@@ -1,29 +1,51 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/login.css" />
+{% endblock %}
+
+
+{% block nav %}
+{% endblock %}
+
+{% block tabs %}
+{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p class="error">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
-<form method="post" action="{% url django.contrib.auth.views.login %}">
+<form id="login" method="post" action="{% url django.contrib.auth.views.login %}">
   <table>
     <tr>
-      <td>
+      <td class="left">
 	<label>
 	  Username or email address
 	</label>
+      </td>
+      <td class="right">
 	{{ form.username }}
       </td>
     </tr>
     <tr>
-      <td>
-	<label>
+      <td class="left">
 	  {{ form.password.label_tag }}
-	</label>
+     </td>
+      <td class="right">
 	{{ form.password }}
       </td>
     </tr>
+    <tr class="submit">
+      <td>
+      </td>
+      <td>
+	<input type="submit" value="Sign in" />
+      </td>
+    </tr>
   </table>
-  
-  <input type="submit" value="Sign in" />
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
-
+{% endblock %}

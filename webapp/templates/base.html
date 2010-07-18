@@ -15,6 +15,7 @@ Lookout
 <body>
 
 <div id="body">
+{% block nav %}
 <div id="nav">
   <ul>
     <li><a href="{%url webapp.clients.views.show %}">My Clients</a></li>
@@ -24,6 +25,7 @@ Lookout
     <li><a href="/">Logout</a></li>
   </ul>
 </div>
+{% endblock %}
 
 <div id="content">
   {% block tabs %}
