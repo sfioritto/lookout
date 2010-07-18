@@ -2,22 +2,26 @@ div#content{
     overflow: hidden;
 }
 
-div#content h3, a.name, a#addclient{
-    padding-left: 10px;
+div#content h3, a.name, a#addclient, input.name{
+    margin-left: 10px;
 }
 
-div.client, div.links{
+div.editlinks a.cancel{
+    padding-top: 5px;
+}
+
+div.client, div.links, div.editlinks{
     height: 40px;
     padding-top: 15px;
 }
 
 div.client{
     overflow: hidden;
-    max-width: 70%;
+    width: 70%;
     float: left;
 }
 
-div.links{
+div.links, div.editlinks{
     float: right;
 }
 
@@ -40,23 +44,35 @@ li.client:hover{
     background-color: #F0F0F1;
 }
 
-li.client a.name{
+a.name, input.name{
     font-family: georgia;
     font-size: 21px;
     clear: left;
     float: left;
 }
 
+input.name{
+    color: #474646;
+    width: 95%;
+    padding-left: 5px;
+    border: 2px solid #FAC9B5;
+    display: none;
+}
+
+div.editlinks{
+    display: none;
+}
+
 ul#clients{
     margin: 20px 0px;
 }
 
-div.links a{
+div.links a, div.editlinks a{
     float: right;
     margin-left: 10px;
 }
 
-div.links{
+div.links, div.editlinks{
     margin-right: 10px;
 }
 
@@ -67,4 +83,25 @@ a.delete{
 
 #clearli{
     clear: both;
+}
+
+/* Edit styles */
+li.edit input.name{
+    display: block;
+}
+
+li.edit a.name{
+    display: none;
+}
+
+li.edit div.client{
+    padding-top: 10px;
+}
+
+li.edit div.links{
+    display: none;
+}
+
+li.edit div.editlinks{
+    display: block;
 }

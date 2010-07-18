@@ -1,12 +1,21 @@
 {%for client in clients %}
 <li class="client">
+
 <div class="client">
-<a href="{% url webapp.feed.views.show client.id %}" class="name">{{ client.name }}</a>
+  <a href="{% url webapp.feed.views.show client.id %}" class="name">{{ client.name }}</a>
+  <input class="name" value="{{ client.name }}" />
 </div>
+
+<div class="editlinks">
+  <a class="cancel" href="/">Cancel</a>
+  <a id="{{ client.id }}" class="save button" href="{% url webapp.clients.views.update %}">Save</a>
+</div>
+
 <div class="links">
-<a class="delete" id="{{ client.id }}" href="{% url webapp.clients.views.delete %}">Delete</a>
-<a class="edit button" href="/">Edit</a>
+  <a class="delete" id="{{ client.id }}" href="{% url webapp.clients.views.delete %}">Delete</a>
+  <a class="edit button" href="/">Edit</a>
 </div>
+
 </li>
 {% endfor %}
 

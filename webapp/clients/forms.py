@@ -8,4 +8,9 @@ class DisableClientForm(forms.Form):
     
     id = forms.CharField()
 
+class UpdateClientForm(forms.Form):
+    
+    id = forms.CharField()
+    name = forms.CharField(max_length=256)
+
 

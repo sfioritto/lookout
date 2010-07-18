@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from webapp.clients.forms import CreateClientForm, DisableClientForm
+from webapp.clients.forms import CreateClientForm, DisableClientForm, UpdateClientForm
 from webapp.clients.models import Client
 
 
@@ -52,6 +52,20 @@ def delete(request):
         client = get_object_or_404(Client, pk=form.data['id'])
         client.disable()
         return HttpResponse()
+    else:
+        raise Http404
+
+
+def update(request):
+    """
+    Updates a given client.
+    """
+    if request.method == "POST":
+        form = UpdateClientForm(request.POST)
+        client = get_object_or_404(Client, pk=form.data['id'])
+        client.name = form.data['name']
+        client.save()
+        HttpResponse()
     else:
         raise Http404
 
