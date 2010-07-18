@@ -3,7 +3,7 @@
 
 <div class="client">
   <a href="{% url webapp.feed.views.show client.id %}" class="name">{{ client.name }}</a>
-  <input class="name" value="{{ client.name }}" />
+  <form class="client"><input class="name" value="{{ client.name }}" /></form>
 </div>
 
 <div class="editlinks">

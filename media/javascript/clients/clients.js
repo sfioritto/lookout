@@ -1,5 +1,18 @@
 $(document).ready(
 function(){
+
+    var update_client = function(container){
+	var link = $("a.save", container),
+	href = link[0].href,
+	id = link[0].id,
+	input = $("input.name", container),
+	val = input.val();
+	$.post(href, {'name' : val,
+		      'id' : id});
+	$("a.name", container).text(val);
+	container.removeClass("edit");
+    };
+
     $("a.delete").click(
     function(event){
 	var answer = confirm("Are you sure? You can't undo this.");
@@ -27,16 +40,15 @@ function(){
 
     $("a.save").click(
     function(event){
-	var link = $(event.target),
-	href = link[0].href,
-	id = link[0].id,
-	container = link.parent().parent(),
-	input = $("input.name", container),
-	val = input.val();
-	$.post(href, {'name' : val,
-		      'id' : id});
-	$("a.name", container).text(val);
-	container.removeClass("edit");
+	var container = $(event.target).parent().parent();
+	update_client(container);
+	event.preventDefault();
+    });
+
+    $("form.client").submit(
+    function(event){
+	var container = $(event.target).parent().parent();
+	update_client(container);
 	event.preventDefault();
     });
 
