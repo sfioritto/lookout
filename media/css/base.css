@@ -23,6 +23,7 @@ div#nav li{
 
 
 div#content{
+    padding: 30px 30px 30px 40px;
     width: 825px;
     margin: 0px 10px 10px 10px;
     background-color: white;
@@ -70,12 +71,10 @@ div#content h3{
     font-size: 14px;
 }
 
-
 div#content h2{
     color: #F4A3A6;
     font-family: verdana;
     font-size: 48px;
-    padding: 0px 10px; /*should match li.blurb padding left*/
 }
 
 li#clientname{
@@ -84,10 +83,6 @@ li#clientname{
 
 li#manage{
     margin-left: 30px;
-}
-
-div#content{
-    padding: 30px;
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/

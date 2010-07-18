@@ -16,6 +16,10 @@ li.irrelevant a.relevance{
     padding-top: 5px;
 }
 
+div#content li h3{
+    padding: 0;
+}
+
 div#content li.visited h3 a{
     color: #879BCD;
 }

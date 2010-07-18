@@ -130,9 +130,7 @@ li.editing div.term, li.editing div.links{
     display: none;
 }
 
-div#content h3, a#addlink{
-    padding-left: 10px;
-}
+
 
 /*rounded corners*/
 ul#alerts li, div#formlinks a{
