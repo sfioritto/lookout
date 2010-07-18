@@ -8,16 +8,9 @@ div#content form table{
 }
 
 div#content table input{
-    border: 2px solid #FAC9B5;
     width: 70%;
-    padding: 5px 0px 5px 5px;
 }
 
-div#content table, div#content table input{
-    font-family: georgia;
-    font-size: 21px;
-    color: #474646;
-}
 
 
 

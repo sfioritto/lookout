@@ -72,10 +72,7 @@ div#add form, div#formlinks{
 }
 
 div#add form input{
-    border: 2px solid #FAC9B5;
     width: 100%;
-    /*left, right padding should be same as alerts li*/
-    padding: 5px 0px 5px 10px;
 }
 
 div#formlinks{
