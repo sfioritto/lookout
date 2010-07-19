@@ -27,8 +27,7 @@ alerts.GOOGLE_URL = "localhost:8000"
 
 def setup_func():
     user = User.objects.all()[0]
-    account = Account(email="test@test.com",
-                   user=user)
+    account = Account(user=user)
     account.save()
     client = Client(name="Beth",
                     user=account)
