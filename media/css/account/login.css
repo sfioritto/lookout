@@ -22,8 +22,10 @@ form#login label{
     margin-right: 10px;
 }
 
-tr.submit input{
-    float: left;
+tr.submit a{
+    font-family: georgia;
+    font-size: 12px;
+    margin-left: 10px;
 }
 
 form#login table tr{
