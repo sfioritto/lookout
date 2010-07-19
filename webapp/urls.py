@@ -15,10 +15,11 @@ urlpatterns = patterns(
     (r'^clients/', include('clients.urls')),
     )
 
-#generic/marketing
+#generic
 urlpatterns += patterns(
     'django.views.generic.simple',
     (r'^$', 'direct_to_template', {'template' : '404.html'}, 'home'),
+    (r'^help/faq/$', 'direct_to_template', {'template' : 'help/faq.html'}, 'faq'),
     )
 
 #load static files when in dev.

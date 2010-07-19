@@ -23,7 +23,7 @@ Lookout
     <li><a href="{%url webapp.clients.views.show %}">My Clients</a></li>
     <li><a href="{% url webapp.account.views.profile %}">Profile</a></li>
     {% endif %}
-    <li><a href="/">Help</a></li>
+    <li><a href="{% url faq %}">Help</a></li>
     {% if user.is_authenticated %}
     <li><a href="{% url django.contrib.auth.views.logout_then_login %}">Logout</a></li>
     {% else %}
