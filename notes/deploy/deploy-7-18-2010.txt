@@ -1,0 +1,46 @@
+
+before deploying new software, on production do:
+python manage.py shell
+from webapp.account.models import *
+from webapp.clients.models import *
+from webapp.alerts.models import *
+clients = [(c.id, c.user.email) for c in Client.objects.all()]
+alerts = [(a.id, a.user.email) for a in Alert.objects.all()]
+import json
+open('/tmp/data.txt', 'w').write(json.dumps({'clients' : clients, 'alerts' : alerts}))
+
+deploy new code
+
+#add disabled column to clients
+alter table clients_client add column "disabled" boolean;
+# in ipython shell, go through each client and set disabled to false
+alter table clients_client alter column disabled SET NOT NULL;
+
+alter table account_account drop constraint account_account_pkey cascade;
+alter table clients_client drop column user_id cascade;
+alter table alerts_alert drop column user_id cascade;
+alter table account_account add column "id" serial NOT NULL PRIMARY KEY;
+alter table alerts_alert add column "user_id" integer REFERENCES "account_account" ("id") DEFERRABLE INITIALLY DEFERRED;
+alter table clients_client add column "user_id" integer REFERENCES "account_account" ("id") DEFERRABLE INITIALLY DEFERRED;
+
+#conversion
+in python shell
+import json
+lookup = json.loads(open("/tmp/data.txt").read())
+
+# for each client in clients, look up by id, lookup account by email,
+  set client user to this account and save it
+# do this for alerts as well
+# go through each account and update user email
+
+# after converstion
+alter table alerts_alert alter column user_id SET NOT NULL;
+alter table clients_client alter column user_id SET NOT NULL;
+alter table account_account drop column email;
+
+-- update model to not include email
+-- deploy that code
+
+
+
+
