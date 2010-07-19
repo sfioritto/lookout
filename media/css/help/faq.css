@@ -1,0 +1,28 @@
+span.underline{
+    text-decoration: underline;
+}
+
+div#innercontent{
+    width: 66%;
+}
+
+p#intro{
+    margin-top: 30px;
+    font-family: verdana;
+    font-size: 14px;
+    color: rgb(40, 40, 40);
+}
+
+ul#questions h4{
+    font-family: georgia;
+    font-size: 21px;
+    color: rgb(40, 40, 40);
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+
+ul#questions li p{
+    font-family: verdana;
+    font-size: 14px;
+    color: rgb(40, 40, 40);
+}

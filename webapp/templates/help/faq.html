@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/help/faq.css" />
+{% endblock %}
+
+{% block tabs %}
+{% endblock %}
+
+{% block content %}
+<h2>FAQ</h2>
+<h3>If you can't find what you're looking for here send an email to sean@twosix.es</h3>
+
+<div id="innercontent">
+<p id="intro">
+Hello. My name is Sean and I'm the owner of Lookout. I hope this FAQ answers
+whatever questions you have. If you feel something is missing or have
+any other questions please send me an email directly. <span class="underline">My email is sean@twosix.es.</span>
+</p>
+<ul id="questions">
+  <li>
+  <h4>Can I just email you my question?</h4>
+  <p>Of course. <span class="underline">My email is sean@twosix.es.</span></p>
+  </li>
+  <li>
+  <h4>I forgot my password.</h4>
+  <p>
+  No problem. You want to go <a href="{% url django.contrib.auth.views.password_reset %}">here.</a>
+  </p>
+  </li>
+  <li>
+  <h4>Lookout flagged a very important alert as irrelevant.</h4>
+  <p>Well, this is not good news at all. Please send me an email
+  (sean@twosix.es) and I'll look into it right away. I promise
+  to do 10 pushups any time an alert is falsely flagged as
+  irrelevant. It's very important to us that Lookout's filter works
+  perfectly, so please tell us when it doesn't work.
+  </li>
+  <li>
+  <h4>I'm getting rubbish alerts in my feed. It's not working!</h4>
+  <p>Yarg. That's not good. Please send me an email from your
+  account's email address and tell me which client is getting all the
+  irrelevant alerts and I'll see about fixing it.</p>
+  </li>
+  <li>
+  <h4>How do I edit a search term once I've created one?</h4>
+  <p>The easiest thing to do is create a new search term with the text
+  you want and delete the old one.</p>
+  </li>
+  <li>
+  <h4>What is the thumbs down button next to my links for?</h4>
+  <p>Whenever you get an alert that is rubbish, click on the thumbs
+  down button next to it. This tells the filter to mark future alerts
+  that look like this one as irrelevant. The more you click thumbs
+  down, the more relevant your alerts will be.
+  </li>
+</ul>
+</div>
+{% endblock %}
