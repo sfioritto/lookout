@@ -3,6 +3,8 @@
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+EMAIL_PORT = 25
+
 ADMINS = (
     # ('Sean Fioritto', 'sean@twosix.es'),
 )
@@ -89,6 +91,6 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = ('webapp.backends.EmailBackend',
                            'django.contrib.auth.backends.ModelBackend',)
 LOGIN_URL = '/account/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/clients'
 AUTH_PROFILE_MODULE = 'account.Account'
 
