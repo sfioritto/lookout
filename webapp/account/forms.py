@@ -5,8 +5,8 @@ from webapp.account.models import Account
 class UpdateUserForm(forms.Form):
 
     email = forms.EmailField(max_length=75)
-    firstname = forms.CharField(max_length=30)
-    lastname = forms.CharField(max_length=30)
+    firstname = forms.CharField(max_length=30, required=False)
+    lastname = forms.CharField(max_length=30, required=False)
 
 class CreateAccountForm(forms.Form):
 
