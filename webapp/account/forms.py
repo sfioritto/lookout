@@ -2,6 +2,11 @@ from django import forms
 from django.contrib.auth.models import User
 from webapp.account.models import Account
 
+class UpdateUserForm(forms.Form):
+
+    email = forms.EmailField(max_length=75)
+    firstname = forms.CharField(max_length=30)
+    lastname = forms.CharField(max_length=30)
 
 class CreateAccountForm(forms.Form):
 

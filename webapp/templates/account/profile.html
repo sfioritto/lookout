@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/account/profile.css" />
+{% endblock %}
+
+{% block tabs %}
+{% endblock %}
+
+{% block content %}
+<h2>Your Profile</h2>
+<h3>View and update your profile information.</h3>
+
+{% block subcontent %}
+<h4>Basic Information <a href="{% url webapp.account.views.edit_profile %}">(edit)</a></h4>
+<table>
+  <tbody>
+    <tr>
+      <td class="left">
+	<p>Username:</p>
+      </td>
+      <td class="right">
+	<p>{{ user.username }}</p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td class="left">
+	<p>Email:</p>
+      </td>
+      <td class="right">
+	<p>{{ user.email }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+	<p>Name:</p>
+      </td>
+      <td class="right">
+	<p>{{ user.first_name }} {{user.last_name }}</p>
+      </td>
+    </tr>
+ </tbody>
+</table>
+<h4>Password</h4>
+<p>Change your password <a href="{% url django.contrib.auth.views.password_change %}">here.</a>
+{% endblock %}
+
+{% endblock %}

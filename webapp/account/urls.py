@@ -3,6 +3,8 @@ from webapp import settings
 
 urlpatterns = patterns('webapp.account.views',
                        (r'create/$', 'create'),
+                       (r'profile/$', 'profile'),
+                       (r'profile/edit/$', 'edit_profile'),
                        )
 
 #registration and authentication

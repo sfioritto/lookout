@@ -1,0 +1,55 @@
+{% extends "account/profile.html" %}
+
+{% block css %}
+<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/account/edit-profile.css" />
+{% endblock %}
+
+{% block subcontent %}
+<form action="" method="post">
+<table>
+  <tbody>
+    
+    <tr>
+      <td>
+	<label for="id_username">Username:</label>
+      </td>
+      <td>
+	<p>{{ user.username }}</p>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+	<label for="id_email">Email:</label>
+      </td>
+      <td class="textinput">
+	{{ form.email }}
+	{{ form.email.errors }}
+      </td>
+    </tr>
+   
+    <tr>
+      <td>
+	<label for="id_firstname">First name:</label>
+      </td>
+      <td class="textinput">
+	{{ form.firstname }}
+	{{ form.firstname.errors }}
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <label for="id_lastname">Last name:</label>
+    </td>
+    <td class="textinput">
+      {{ form.lastname }}
+      {{ form.lastname.errors }}
+    </td>
+  </tr>
+ </tbody>
+</table>
+<p id="submitbutton">
+<input class="submit" type="submit" value="Update my profile" /> or <a href="{% url webapp.account.views.profile %}">cancel</a></p>
+</form>
+{% endblock %}

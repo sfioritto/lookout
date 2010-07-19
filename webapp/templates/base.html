@@ -21,8 +21,7 @@ Lookout
   <ul>
     {% if user.is_authenticated %}
     <li><a href="{%url webapp.clients.views.show %}">My Clients</a></li>
-    <li><a href="/">Preferences</a></li>
-    <li><a href="/">Profile</a></li>
+    <li><a href="{% url webapp.account.views.profile %}">Profile</a></li>
     {% endif %}
     <li><a href="/">Help</a></li>
     {% if user.is_authenticated %}
