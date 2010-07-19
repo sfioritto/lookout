@@ -1,6 +1,4 @@
 from django.contrib.auth.models import User
-from webapp.account.models import Account
-
 
 class EmailBackend:
 
@@ -11,13 +9,12 @@ class EmailBackend:
 
     def authenticate(self, username=None, password=None):
         try:
-            account = Account.objects.get(pk=username)
-            user = account.user
+            user = User.objects.get(email=username)
             if user and user.check_password(password):
                 return user
             else:
                 return None
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return None
 
 
