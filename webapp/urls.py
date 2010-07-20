@@ -20,6 +20,7 @@ urlpatterns += patterns(
     'django.views.generic.simple',
     (r'^$', 'direct_to_template', {'template' : '404.html'}, 'home'),
     (r'^help/faq/$', 'direct_to_template', {'template' : 'help/faq.html'}, 'faq'),
+    (r'^help/contact/$', 'direct_to_template', {'template' : 'help/contact.html'}, 'contact'),
     )
 
 #load static files when in dev.
