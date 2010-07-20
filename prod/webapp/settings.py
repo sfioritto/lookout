@@ -3,7 +3,7 @@
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-EMAIL_PORT = 25
+EMAIL_PORT = 1025
 
 ADMINS = (
     # ('Sean Fioritto', 'sean@twosix.es'),

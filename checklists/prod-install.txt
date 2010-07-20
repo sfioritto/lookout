@@ -73,6 +73,19 @@ sudo usermod -p '!' root
 -- install and configure postfix
 > sudo apt-get install mutt
 # accept defaults
+# follow directions here https://help.ubuntu.com/community/Postfix#Configuration
+
+# Edit the master.cf file to change the port
+sudo emacs /etc/postfix/master.cf
+# change the line that looks like this
+inetd      inet  n       -       -       -       -       smtpd
+# to this...
+1025      inet  n       -       -       -       -       smtpd
+
+sudo /etc/init.d/postfix restart
+sudo apt-get install telnet
+sudo telnet localhost 1025
+#should connect, type 'quit' to exit
 
 -- copy production python path file
 #from local machine
