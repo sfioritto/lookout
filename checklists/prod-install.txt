@@ -74,6 +74,7 @@ sudo usermod -p '!' root
 > sudo apt-get install mutt
 # accept defaults
 # follow directions here https://help.ubuntu.com/community/Postfix#Configuration
+# choose the "pam" mechanism when updating the saslauthd file
 
 # Edit the master.cf file to change the port
 sudo emacs /etc/postfix/master.cf
@@ -82,9 +83,30 @@ inetd      inet  n       -       -       -       -       smtpd
 # to this...
 1025      inet  n       -       -       -       -       smtpd
 
+# follow the direction here  https://help.ubuntu.com/community/Postfix#Authentication
+# Add an alias for devnull
+sudo emacs /etc/aliases
+# add this line
+devnull: /dev/null
+#Edit /etc/postfix/virtual and add following entry
+sudo emacs /etc/postfix/virtual
+# Add a line: no-reply@lookoutthere.com devnull
+sudo emacs /etc/postfix/main.cf
+#Add this line somewhere: virtual_alias_maps =
+# hash:/etc/postfix/virtual
+sudo postmap /etc/postfix/virtual
+sudo newaliases
+postfix reload
 sudo /etc/init.d/postfix restart
+
+#set domain name
+#go to: http://lookoutthere.com/admin/sites/site/1/
+#change domain name to lookoutthere.com
+
+# run a quick test
 sudo apt-get install telnet
-sudo telnet localhost 1025
+telnet localhost 1025
+# type 'ehlo localhost' should display 250-auth and 250-STARTTLS
 #should connect, type 'quit' to exit
 
 -- copy production python path file

@@ -4,6 +4,11 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 EMAIL_PORT = 1025
+EMAIL_USE_TLS = False
+EMAIL_HOST_PASSWORD = "C3rb3russ"
+EMAIL_HOST_USER = "sean"
+DEFAULT_FROM_EMAIL = "no-reply@lookoutthere.com"
+SERVER_EMAIL = "no-reply@lookoutthere.com"
 
 ADMINS = (
     # ('Sean Fioritto', 'sean@twosix.es'),
