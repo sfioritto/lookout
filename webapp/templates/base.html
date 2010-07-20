@@ -24,6 +24,7 @@ Lookout
     <li><a href="{% url webapp.account.views.profile %}">Profile</a></li>
     {% endif %}
     <li><a href="{% url faq %}">Help</a></li>
+    <li><a href="{% url contact %}">Contact Us</a></li>
     {% if user.is_authenticated %}
     <li><a href="{% url django.contrib.auth.views.logout_then_login %}">Logout</a></li>
     {% else %}
@@ -46,7 +47,7 @@ Lookout
 {% endblock %}
   {% block content %}
   {% endblock %}
-  <a href="/"><img id="feedback" src="{{ MEDIA_URL }}images/feedback.png" /></a>
+  <a href="{% url contact %}"><img id="feedback" src="{{ MEDIA_URL }}images/feedback.png" /></a>
 </div>
 </div>
 
