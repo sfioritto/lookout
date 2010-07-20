@@ -18,7 +18,7 @@ urlpatterns = patterns(
 #generic
 urlpatterns += patterns(
     'django.views.generic.simple',
-    (r'^$', 'direct_to_template', {'template' : '404.html'}, 'home'),
+    (r'^$', 'redirect_to', {'url' : settings.LOGIN_REDIRECT_URL}, 'home'),
     (r'^help/faq/$', 'direct_to_template', {'template' : 'help/faq.html'}, 'faq'),
     (r'^help/contact/$', 'direct_to_template', {'template' : 'help/contact.html'}, 'contact'),
     )
