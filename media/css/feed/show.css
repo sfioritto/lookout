@@ -60,7 +60,7 @@ a#olderlink{
 }
 
 li.blurb, a#olderlink{
-    width: 100%;
+    width: 80%;
     margin-top: 5px;
     margin-bottom: 0px;
     padding: 5px 0px 5px 10px;
@@ -72,12 +72,12 @@ li.blurb:hover{
 }
 
 div.blurb{
-    width: 80%;
+    width: 90%;
 }
 
 div.links{
-    width: 20%;
-    margin-top: 15px; 
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 p.source, p.blurb{
@@ -85,10 +85,6 @@ p.source, p.blurb{
     font-size: 12px;
     color: #636363;
     margin-top: 3px;
-}
-
-a.textbtn{
-    margin-right: 5px;
 }
 
 a.relevance{
@@ -102,12 +98,10 @@ a.relevance:hover{
     background-image: url("/static/images/thumb-hover.png");
 }
 
-li.blurb div.links a{ 
-    display: block;
+a.relevance{ 
     float: left;
-    text-align: center;
+    display: block;
 }
-
 
 /*css for the filter rules*/
 p#filters{

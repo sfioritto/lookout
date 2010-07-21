@@ -42,3 +42,7 @@ ul.errorlist li{
     font-size: 12px;
     color: #AB1F27;
 }
+
+div.cleardiv{
+    clear: both;
+}
