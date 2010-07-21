@@ -38,7 +38,7 @@ input.textinput, .textinput input {
     padding: 5px 0px 5px 5px;
 }
 
-ul.errorlist li{
+ul.errorlist li, .error{
     font-size: 12px;
     color: #AB1F27;
 }

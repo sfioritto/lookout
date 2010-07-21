@@ -1,5 +1,13 @@
-form#login{
-    margin-top: 50px;
+div#content h2{
+    margin-bottom: 50px;
+}
+
+p.error{
+    font-family: verdana;
+}
+
+form#login table tr.error{
+    height: 20px;
 }
 
 form#login input, form#login label{
