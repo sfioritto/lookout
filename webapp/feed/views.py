@@ -1,15 +1,15 @@
 from django.shortcuts import render_to_response, get_object_or_404
+from webapp.auth import is_owner
 from webapp.clients.models import Client
 from webapp.blurb.models import Blurb
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 
-@login_required
+@is_owner
 def older(request, clientid):
     """
     Shows all of the older blurbs for the given client,
@@ -28,7 +28,7 @@ def older(request, clientid):
                                                  'selectedtext' : selected.text
                                                  }, context_instance = RequestContext(request))
 
-@login_required
+@is_owner
 def show(request, clientid):
     """
     Shows all the blurbs for the client.
@@ -45,7 +45,7 @@ def show(request, clientid):
                                                  'selectedtext' : selected.text
                                                  }, context_instance = RequestContext(request))
 
-@login_required
+@is_owner
 def show_ajax(request, clientid):
     
     client = get_object_or_404(Client, pk=clientid)

@@ -1,15 +1,15 @@
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from webapp.clients.models import Client
 from webapp.alerts.models import Alert
+from webapp.auth import is_owner
 from webapp.alerts.forms import CreateAlertForm, DisableAlertForm
 from app.model import alerts
 
 
-@login_required
+@is_owner
 def alert_list(request, clientid):
     """
     Return html for the list of alerts for ajax requests.
@@ -20,12 +20,12 @@ def alert_list(request, clientid):
             'client' : client,
             })
 
-
-@login_required
+@is_owner
 def manage(request, clientid):
     """
     Show all of the alerts for a client.
     """
+    print 'here'
     client = get_object_or_404(Client, pk=clientid)
     return render_to_response('alerts/manage.html', {
             'alerts' : client.all_alerts(),
@@ -34,7 +34,7 @@ def manage(request, clientid):
 
 
 
-@login_required
+@is_owner
 def disable(request, clientid):
     """
     Disable the given alert. A disabled alert can never be
@@ -51,7 +51,7 @@ def disable(request, clientid):
         raise Http404
 
 
-@login_required
+@is_owner
 def create(request, clientid):
     """
     Create a new alert for the given client.

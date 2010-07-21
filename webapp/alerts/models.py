@@ -23,6 +23,9 @@ class Alert(models.Model):
     def update(self):
         return "/"
 
+    def __unicode__(self):
+        return self.term
+
 class LamsonState(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     key = models.CharField(max_length=512)

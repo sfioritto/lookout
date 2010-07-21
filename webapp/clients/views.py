@@ -56,6 +56,7 @@ def delete(request):
         raise Http404
 
 
+@login_required
 def update(request):
     """
     Updates a given client.

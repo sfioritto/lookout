@@ -11,6 +11,6 @@ class Account(models.Model):
         return self.client_set.filter(disabled=False).all()
 
     def __unicode__(self):
-        return "%s" % self.email
+        return "%s" % self.user.email
 
 

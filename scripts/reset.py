@@ -1,13 +1,20 @@
 #!/Users/seanfioritto/lookout/env/LOOKOUT/bin/python
 
 from conf import home
+from webapp import settings
 import os
 
 def main():
 
     # create the dropall script
     os.chdir(home("webapp"))
-    os.system('python manage.py sqlreset blurb testing account feed alerts clients | grep "DROP TABLE" > /tmp/dropall.sql')
+
+    # grabs all the app names from installed_apps, skip the auth app so you don't have to
+    # create the superuser account over and over.
+    apps = ' '.join([a.split('.')[-1] for a in settings.INSTALLED_APPS]).strip('auth ')
+
+#     os.system('python manage.py sqlreset auth blurb testing account feed alerts clients | grep "DROP TABLE" > /tmp/dropall.sql')
+    os.system('python manage.py sqlreset %s | grep "DROP TABLE" > /tmp/dropall.sql' % apps)
     
     #add cascade to each line
     dropall = open("/tmp/dropall.sql").read()
