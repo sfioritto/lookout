@@ -18,26 +18,36 @@ def visit(request, clientid, blurbid):
 
 
 @is_owner
-def relevance(request, clientid, blurbid):
+def reject(request, clientid, blurbid):
     """
-    Marks a blurb as irrelevant on a POST.
+    Marks a blurb as rejected on a POST.
     """
     if request.method == "POST":
 
         blurb = get_object_or_404(Blurb, pk=blurbid)
-        client = get_object_or_404(Client, pk=clientid)
-
-        rel = False
-        if request.POST['relevance'] == 'true':
-            rel = True
-
-        blurb.relevant = rel
-        blurb.rejected = not rel
-        blurb.save()
+        blurb.reject()
+        print blurb.rejected
+        print blurb.approved
 
         return HttpResponse()
     else:
         raise Http404()
+
+
+@is_owner
+def approve(request, clientid, blurbid):
+    """
+    Marks a blurb as approved on a POST.
+    """
+    if request.method == "POST":
+
+        blurb = get_object_or_404(Blurb, pk=blurbid)
+        blurb.approve()
+
+        return HttpResponse()
+    else:
+        raise Http404()
+
 
 
 

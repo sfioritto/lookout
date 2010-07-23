@@ -17,6 +17,7 @@ class Blurb(models.Model):
     visited = models.BooleanField(default=False)
     relevant = models.BooleanField(default=True)
     rejected = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
 
 
     @property
@@ -29,10 +30,26 @@ class Blurb(models.Model):
         return reverse("webapp.blurb.views.visit", kwargs={'clientid':self.client.id,
                                                            'blurbid':self.id})
 
-    @property
-    def relevance(self):
-        return reverse("webapp.blurb.views.relevance", kwargs={'clientid':self.client.id,
-                                                           'blurbid':self.id})        
+    def reject_url(self):
+        return reverse("webapp.blurb.views.reject", kwargs={'clientid':self.client.id,
+                                                           'blurbid':self.id})   
+
+    def approve_url(self):
+        return reverse("webapp.blurb.views.reject", kwargs={'clientid':self.client.id,
+                                                           'blurbid':self.id})   
+
+    def approve(self):
+        self.rejected = False
+        self.approved = True
+        self.relevant = True
+        self.save()
+
+
+    def reject(self):
+        self.rejected = True
+        self.approved = False
+        self.relevant = False
+        self.save()
 
     
     def __unicode__(self):

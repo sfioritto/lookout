@@ -23,7 +23,7 @@ def START(message, alert_id=None, host=None):
 
         if not alert.disabled:
 
-            gtext = "".join([b.text for b in alert.client.blurb_set.filter(rejected=False).filter(visited=True).all()])
+            gtext = "".join([b.text for b in alert.client.blurb_set.filter(approved=True).all()])
             rtext = "".join([b.text for b in alert.client.blurb_set.filter(rejected=True).all()])
 
             url = alerts.get_remove_url(message.body())

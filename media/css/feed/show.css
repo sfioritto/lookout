@@ -20,7 +20,7 @@ li.irrelevant p, li.irrelevant a, div#content li.irrelevant h3 a.blurb{
     border-color: #DDDDDD;
 }
 
-li.irrelevant a.relevance{
+li.irrelevant a.reject{
     background-image: none;
     color: #AB1F27;
     text-indent: 0;
@@ -91,18 +91,18 @@ p.source, p.blurb{
     margin-top: 3px;
 }
 
-a.relevance{
+a.reject{
     background-image: url("/static/images/thumb.png");
     height: 25px;
     width: 24px;
     text-indent: -9999;
 }
 
-a.relevance:hover{
+a.reject:hover{
     background-image: url("/static/images/thumb-hover.png");
 }
 
-a.relevance{ 
+a.reject{ 
     float: left;
     display: block;
 }

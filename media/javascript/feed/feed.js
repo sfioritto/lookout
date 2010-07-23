@@ -78,7 +78,7 @@ function(){
 
     var bind_thumb_button = function(){
 	/*mark the div as irrelevant and post to the relevance view*/
-	$("a.relevance").click(
+	$("a.reject").click(
 	function(event){
 
 	    var relevance = "false",
@@ -91,9 +91,7 @@ function(){
 		blurb.addClass("irrelevant");
 	    }
 
-	    $.post(event.target.href, {
-		       'relevance' : relevance
-		   });
+	    $.post(event.target.href);
 	    event.preventDefault();
 	});
     };

@@ -95,8 +95,11 @@ class Client(models.Model):
         relevant = prefs.has_key('relevant') and prefs['relevant']
         irrelevant = prefs.has_key('irrelevant') and prefs['irrelevant']
         
+        # don't filter anything
         if relevant and irrelevant:
             filters = {}
+            
+        # show only irrelevant
         elif not relevant and irrelevant:
             filters = {'relevant' : False}
         else:
