@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "client-nav.html" %}
 
 {% block css %}
+{{ block.super }}
 <link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/feed/show.css" />
 {% endblock %}
 
 
 {% block content %}
-<img id="tabimage" src="{{ MEDIA_URL }}images/main-tabs.png" />
 <p id="filters">
 Showing <select name="relfilter" class="relfilter">
   {% for option in options %}

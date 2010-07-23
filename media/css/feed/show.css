@@ -2,12 +2,6 @@ div#content h2{
     clear: both;
 }
 
-img#tabimage{
-    position: absolute;
-    top: 9px;
-    left: 40px;
-}
-
 li.irrelevant p, li.irrelevant a, div#content li.irrelevant h3 a.blurb{
     color: #DDDDDD;
     border-color: #DDDDDD;
@@ -37,16 +31,6 @@ div#content h2{
     font-family: verdana;
     font-size: 48px;
     padding-left: 10px; /*should match li.blurb padding left*/
-}
-
-li#clientname a{
-    color: #AB1F27;
-    white-space: nowrap;
-}
-
-
-li#manage a{
-    color: #979495;
 }
 
 div#content{

@@ -25,11 +25,12 @@ def manage(request, clientid):
     """
     Show all of the alerts for a client.
     """
-    print 'here'
+
     client = get_object_or_404(Client, pk=clientid)
     return render_to_response('alerts/manage.html', {
             'alerts' : client.all_alerts(),
             'client' : client,
+            'feed' : False,
             }, context_instance = RequestContext(request))
 
 

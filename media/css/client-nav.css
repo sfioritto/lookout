@@ -1,0 +1,27 @@
+div#clientnav{
+    float: right;
+    z-index: 1;
+    margin-top: 15px;
+}
+
+div#clientnav h1{
+    display: inline;
+}
+
+div#clientnav h1.terms a{
+    font-family: verdana;
+    font-size: 10px;
+    color: red;
+}
+
+h1.terms{
+    margin-left: 3px;
+    margin-right: 30px;
+    text-decoration: underline;
+}
+
+h1.client{
+    font-family: georgia;
+    font-size: 22px;
+}
+

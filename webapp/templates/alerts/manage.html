@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "client-nav.html" %}
 
 {% block css %}
+{{ block.super }}
 <link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}css/alerts/manage.css" />
 {% endblock %}
 
 {% block content %}
-<img id="tabimage" src="{{ MEDIA_URL }}images/manage-tabs.png" />
 <h2>Search Terms</h2>
 <h3>What should we be looking for?</h3>
 

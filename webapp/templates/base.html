@@ -35,16 +35,6 @@ Lookout
 {% endblock %}
 
 <div id="content">
-  {% block tabs %}
-  <ul id="tabs">
-  <li id="clientname">
-  <h1><a href="{{ client.feed }}">{{ client.name }}</a></h1>
-  </li>
-  <li id="manage">
-  <h1><a href="{{ client.manage }}">Manage</a></h1>
-  </li>
-</ul>
-{% endblock %}
   {% block content %}
   {% endblock %}
   <a href="{% url contact %}"><img id="feedback" src="{{ MEDIA_URL }}images/feedback.png" /></a>

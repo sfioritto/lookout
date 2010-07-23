@@ -25,7 +25,8 @@ def older(request, clientid):
                                                  'client' : client,
                                                  'olderind' : True,
                                                  'options' : options,
-                                                 'selectedtext' : selected.text
+                                                 'selectedtext' : selected.text,
+                                                 'feed' : True,
                                                  }, context_instance = RequestContext(request))
 
 @is_owner
@@ -42,7 +43,8 @@ def show(request, clientid):
                                                  'older' : client.older_blurbs()[:10], #only the first 10
                                                  'client' : client,
                                                  'options' : options,
-                                                 'selectedtext' : selected.text
+                                                 'selectedtext' : selected.text,
+                                                 'feed' : True,
                                                  }, context_instance = RequestContext(request))
 
 @is_owner
