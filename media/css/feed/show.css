@@ -1,3 +1,5 @@
+
+
 ul#blurbs h3.time, a#olderlink, div#content h3.subtitle, div#content h2{
     padding-left: 40px;
 }
@@ -13,18 +15,6 @@ ul#blurbs h3.time{
     font-size: 22px;
     padding-top: 35px;
     color: rgb(40, 40, 40);
-}
-
-li.irrelevant p, li.irrelevant a, div#content li.irrelevant h3 a.blurb{
-    color: #DDDDDD;
-    border-color: #DDDDDD;
-}
-
-li.irrelevant a.reject{
-    background-image: none;
-    color: #AB1F27;
-    text-indent: 0;
-    padding-top: 5px;
 }
 
 div#content li h3{

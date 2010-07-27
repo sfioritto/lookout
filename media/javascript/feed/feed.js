@@ -81,11 +81,9 @@ function(){
 	$("a.reject").click(
 	function(event){
 
-	    var relevance = "false",
-	    blurb = $(event.target).parent().parent();
+	    var blurb = $(event.target).parent().parent();
 
 	    if (blurb.hasClass("irrelevant")){
-		relevance = "true";
 		blurb.removeClass("irrelevant");
 	    } else {
 		blurb.addClass("irrelevant");
