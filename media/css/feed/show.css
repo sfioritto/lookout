@@ -45,8 +45,8 @@ div.blurb, li.blurb, ul#blurbs, div.links{
     float: left;
 }
 
-li.blurb{
-    clear: left;
+div.blurb{
+    width: 90%;
 }
 
 a#olderlink{
@@ -55,23 +55,24 @@ a#olderlink{
 }
 
 li.blurb{
+    background-color: rgb(250, 250, 250);
+    clear: left;
     width: 80%;
     margin-top: 5px;
     margin-bottom: 0px;
-    padding: 5px 0px 5px 10px;
+    padding-left: 10px;
 }
 
 li.blurb:hover{
     background-color: #F0F0F1;
 }
 
-div.blurb{
-    width: 90%;
+div.blurb, div.links{
+    margin: 5px 0px;
 }
 
 div.links{
     width: 30px;
-    height: 30px;
 }
 
 p.source, p.blurb{
@@ -110,6 +111,7 @@ select.relfilter{
 }
 
 /*rounded corners*/
+
 li.blurb{
     -moz-border-radius: 5px;
     border-radius: 5px;
