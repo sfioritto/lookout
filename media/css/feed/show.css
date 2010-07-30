@@ -15,6 +15,11 @@ ul#blurbs h3.time{
     font-size: 22px;
     padding-top: 35px;
     color: rgb(40, 40, 40);
+    margin-bottom: 5px;
+}
+
+ul#blurbs h3.time span.detail{
+    font-size: 12px;
 }
 
 div#content li h3{
@@ -25,7 +30,7 @@ div#content li.visited h3 a{
     color: #879BCD;
 }
 
-div#content li.visited p{
+div#content li.visited p, div#content li.visited span{
     color: #BCBCBC;
 }
 
@@ -54,17 +59,25 @@ a#olderlink{
     float: left;
 }
 
+ul#blurbs li.relevant h3{
+    color: #35B53D;
+}
+
+li.relevant{
+    background-color: C9FFBF;
+}
+
+li.irrelevant{
+    background-color: #FFCED5;
+}
+
 li.blurb{
-    background-color: rgb(250, 250, 250);
     clear: left;
     width: 80%;
     margin-top: 5px;
     margin-bottom: 0px;
     padding-left: 10px;
-}
-
-li.blurb:hover{
-    background-color: #F0F0F1;
+    padding-bottom: 5px;
 }
 
 div.blurb, div.links{
@@ -75,11 +88,15 @@ div.links{
     width: 30px;
 }
 
-p.source, p.blurb{
+span.source, p.blurb{
     font-family: georgia;
     font-size: 12px;
-    color: #636363;
+    color: rgb(40, 40, 40);
     margin-top: 3px;
+}
+
+span.source{
+    font-weight: bold;
 }
 
 a.reject{

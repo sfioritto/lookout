@@ -15,7 +15,7 @@
 
 
 {% if older %}
-<h3 class="time">Ancient History</h3>
+<h3 class="time">Ancient History <span class="detail">(older than yesterday)</span></h3>
 {% for blurb in older %}
 {% include 'feed/blurb.html' %}
 {% endfor %}
