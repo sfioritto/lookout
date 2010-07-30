@@ -27,9 +27,7 @@ class Client(models.Model):
 
     def older_blurbs(self):
         """
-        Return all of the blurbs older than yesterday. Accepts an optional
-        dictionary of filters based on blurb properties, default
-        is {'relevant' : True}
+        Return all of the blurbs older than yesterday.
         """
         yesterday = dt.today() - td(1)
         older = self.blurb_set.filter(created_on__lt=dt(yesterday.year,
@@ -42,9 +40,7 @@ class Client(models.Model):
 
     def todays_blurbs(self):
         """
-        Return all of the blurbs created today. Accepts an optional
-        dictionary of filters based on blurb properties, default
-        is {'relevant' : True}
+        Return all of the blurbs created today.
         """
         today = dt.today()
         todays = self.blurb_set.filter(created_on__year=today.year,
@@ -57,9 +53,7 @@ class Client(models.Model):
 
     def yesterdays_blurbs(self):
         """
-        Return all of the blurbs created yesterday. Accepts an optional
-        dictionary of filters based on blurb properties, default
-        is {'relevant' : True}
+        Return all of the blurbs created yesterday. 
         """
         
         # filters are passed in, stored in preferences, or default to relevant=true.
@@ -102,8 +96,14 @@ class Client(models.Model):
         # show only irrelevant
         elif not relevant and irrelevant:
             filters = {'relevant' : False}
-        else:
+
+        # show only relevant
+        elif relevant and not irrelevant:
             filters = {'relevant' : True}
+
+        # default to showing all blurbs.
+        else:
+            filters = {}
 
         return filters
 
