@@ -88,7 +88,6 @@ INSTALLED_APPS = (
     'webapp.account',
     'webapp.clients',
     'webapp.feed',
-    'webapp.testing',
     'webapp.blurb',
 )
 

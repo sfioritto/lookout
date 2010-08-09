@@ -1,0 +1,8 @@
+Starting up servers for local development:
+
+start up two django servers, one on the default 8000 and the other on 8001
+from webapp directory:
+python manage.py runserver 8001
+
+start up an email server:
+python -m smtpd -n -c DebuggingServer localhost:1025
