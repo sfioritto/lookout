@@ -1,4 +1,6 @@
-
+ul#blurbs{
+    width: 100%;
+}
 
 ul#blurbs h3.time, a#olderlink, div#content h3.subtitle, div#content h2{
     padding-left: 40px;
