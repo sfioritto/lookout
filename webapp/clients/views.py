@@ -31,7 +31,6 @@ def create(request):
         form = CreateClientForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            print len(name)
             client = Client(user=account,
                             name=name)
             client.save()

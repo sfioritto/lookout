@@ -15,10 +15,17 @@ class Blurb(models.Model):
     blurb = models.CharField(max_length=2048)
     url = models.CharField(max_length=1024)
     visited = models.BooleanField(default=False)
-    relevant = models.BooleanField(default=True)
+    junk_score = models.FloatField(default=.4)
     rejected = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
+
+    @property
+    def relevant(self):
+        if self.junk_score > .99:
+            return False
+        else:
+            return True
 
     @property
     def text(self):

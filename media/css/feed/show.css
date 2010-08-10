@@ -63,8 +63,12 @@ ul#blurbs li.relevant h3{
     color: #35B53D;
 }
 
-li.relevant{
-    background-color: C9FFBF;
+li.blurb{
+    background-color: rgb(240, 240, 240);
+}
+
+li.approved {
+    background-color: #C9FFBF;
 }
 
 li.irrelevant{
