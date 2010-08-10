@@ -80,12 +80,13 @@ li.blurb{
     padding-bottom: 5px;
 }
 
-div.blurb, div.links{
+div.blurb{
     margin: 5px 0px;
 }
 
 div.links{
     width: 30px;
+    margin-top: 5px;
 }
 
 span.source, p.blurb{
@@ -101,6 +102,16 @@ span.source{
 
 a.reject{
     background-image: url("/static/images/thumb.png");
+    margin-top: 2px;
+}
+
+a.approve{
+    background-image: url("/static/images/thumb-up.png");
+}
+
+a.reject, a.approve{
+    float: left;
+    display: block;
     height: 25px;
     width: 24px;
     text-indent: -9999;
@@ -110,9 +121,8 @@ a.reject:hover{
     background-image: url("/static/images/thumb-hover.png");
 }
 
-a.reject{ 
-    float: left;
-    display: block;
+a.approve:hover{
+    background-image: url("/static/images/thumb-up-hover.png");
 }
 
 /*css for the filter rules*/
