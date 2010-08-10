@@ -74,11 +74,11 @@ def get_options(filters):
     irrelevant = Option("only irrelevant", "2")
     relevant = Option("only relevant", "1")
 
-    if filters.has_key('relevant') and filters['relevant']:
+    if filters.has_key('junk_score__lt'):
         # only relevant blurbs
         relevant.selected = True
         selected = relevant
-    elif filters.has_key('relevant') and not filters['relevant']:
+    elif filters.has_key('junk_score__gte'):
         # only irrelevant
         irrelevant.selected = True
         selected = irrelevant
