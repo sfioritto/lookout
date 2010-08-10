@@ -59,7 +59,7 @@ def switch(hash):
         sudo("rm -rf tests/")
 
 
-def reboot():
+def stop():
     #TODO: this will break when there are multiple hosts, need to dynamically lookup uid and gid
     #This assert makes sure I know when it breaks
     assert len(env.hosts) == 1
@@ -69,11 +69,27 @@ def reboot():
             sudo("apache2ctl restart")
             sudo("lamson stop -ALL run/")
             sudo("rm run/*")
+
+
+def start():
+    #TODO: this will break when there are multiple hosts, need to dynamically lookup uid and gid
+    #This assert makes sure I know when it breaks
+    assert len(env.hosts) == 1
+
+    with settings(warn_only=True):
+        with cd(env.emailroot):
+            sudo("apache2ctl start")
             sudo("lamson start -gid 1000 -uid 1000")
             #TODO: why can't I start it up and switch to a different user?
 #            sudo("lamson start -gid 1000 -uid 1000 -boot config.queue -pid run/queue.pid")
             sudo("lamson start -boot config.queue -pid run/queue.pid")
             sudo("chown -R sean:sean %s" % env.prodhome)
+
+
+
+def reboot():
+    stop()
+    start()
 
     
 def deploy(hash):
