@@ -109,6 +109,14 @@ a.approve{
     background-image: url("/static/images/thumb-up.png");
 }
 
+li.rejected a.reject{
+    visibility: hidden;
+}
+
+li.approved a.approve{
+    visibility: hidden;
+}
+
 a.reject, a.approve{
     float: left;
     display: block;

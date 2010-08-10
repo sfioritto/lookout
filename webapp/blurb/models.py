@@ -51,6 +51,29 @@ class Blurb(models.Model):
         self.relevant = False
         self.save()
 
+    def class_names(self):
+        """
+        Returns class names that should be used for the blurb's li. This
+        was getting a bit complex to store in the template.
+        """
+
+        classes = []
+        if self.visited:
+            classes.append("visited")
+
+        if self.relevant:
+            classes.append("relevant")
+        else:
+            classes.append("irrelevant")
+
+        if self.approved:
+            classes.append("approved")
+
+        if self.rejected:
+            classes.append("rejected")
+
+        return ' '.join(classes)
+
     
     def __unicode__(self):
         return "%s" % self.id

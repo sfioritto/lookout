@@ -1,3 +1,3 @@
-<li class="blurb{% if blurb.visited %} visited{% endif %}{% if blurb.relevant %} relevant{% else %} irrelevant{% endif %}">
+<li class="blurb {{ blurb.class_names }}">
 {% include 'blurb/blurb.html' %}
 </li>
