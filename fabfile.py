@@ -66,7 +66,7 @@ def stop():
 
     with settings(warn_only=True):
         with cd(env.emailroot):
-            sudo("apache2ctl restart")
+            sudo("apache2ctl stop")
             sudo("lamson stop -ALL run/")
             sudo("rm run/*")
 
