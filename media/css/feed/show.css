@@ -101,23 +101,33 @@ span.source{
 }
 
 a.reject{
-    background-image: url("/static/images/thumb.png");
+    background-image: url("/static/images/thumbs/thumb.png");
     margin-top: 2px;
 }
 
 a.approve{
-    background-image: url("/static/images/thumb-up.png");
+    background-image: url("/static/images/thumbs/thumb-up.png");
 }
 
-li.rejected a.reject{
-    visibility: hidden;
+li.rejected a.approve{
+    background-image: url("/static/images/thumbs/thumbs-up-small.png")
 }
 
-li.approved a.approve{
-    visibility: hidden;
+li.rejected a.approve:hover{
+    background-image: url("/static/images/thumbs/thumbs-up-small-hover.png")
+}
+
+li.approved a.reject{
+    background-image: url("/static/images/thumbs/thumbs-down-small.png")
+}
+
+li.approved a.reject:hover{
+    background-image: url("/static/images/thumbs/thumbs-down-small-hover.png")
 }
 
 a.reject, a.approve{
+    background-repeat: no-repeat;
+    background-position: center;
     float: left;
     display: block;
     height: 25px;
@@ -126,11 +136,11 @@ a.reject, a.approve{
 }
 
 a.reject:hover{
-    background-image: url("/static/images/thumb-hover.png");
+    background-image: url("/static/images/thumbs/thumb-hover.png");
 }
 
 a.approve:hover{
-    background-image: url("/static/images/thumb-up-hover.png");
+    background-image: url("/static/images/thumbs/thumb-up-hover.png");
 }
 
 /*css for the filter rules*/

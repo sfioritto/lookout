@@ -35,7 +35,7 @@ class Blurb(models.Model):
                                                            'blurbid':self.id})   
 
     def approve_url(self):
-        return reverse("webapp.blurb.views.reject", kwargs={'clientid':self.client.id,
+        return reverse("webapp.blurb.views.approve", kwargs={'clientid':self.client.id,
                                                            'blurbid':self.id})   
 
     def approve(self):

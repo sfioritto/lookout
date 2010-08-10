@@ -26,8 +26,6 @@ def reject(request, clientid, blurbid):
 
         blurb = get_object_or_404(Blurb, pk=blurbid)
         blurb.reject()
-        print blurb.rejected
-        print blurb.approved
 
         return HttpResponse()
     else:

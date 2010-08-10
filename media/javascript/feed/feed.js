@@ -5,7 +5,7 @@ function(){
 	bind_select();
 	bind_filter_link();
 	bind_visit_link();
-	bind_thumb_button();
+	bind_thumb_buttons();
     };
 
     /* Update the filter*/
@@ -76,16 +76,23 @@ function(){
 	});
     };
 
-    var bind_thumb_button = function(){
+    var bind_thumb_buttons = function(){
 	/*mark the div as irrelevant and post to the relevance view*/
-	$("a.reject").click(
+	$("a.reject, a.approve").click(
 	function(event){
 
-	    var blurb = $(event.target).parent().parent();
+	    var target = $(event.target),
+	    blurb = target.parent().parent();
 
-	    if (blurb.hasClass("irrelevant")){
+	    if ( target.hasClass("approve") ){
+		blurb.removeClass("rejected");
 		blurb.removeClass("irrelevant");
-	    } else {
+		blurb.addClass("approved");
+		blurb.addClass("relevant");
+	    } else if (target.hasClass("reject")){
+		blurb.removeClass("relevant");
+		blurb.removeClass("approved");
+		blurb.addClass("rejected");
 		blurb.addClass("irrelevant");
 	    }
 
