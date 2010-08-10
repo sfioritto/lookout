@@ -95,11 +95,11 @@ class Client(models.Model):
             
         # show only irrelevant
         elif not relevant and irrelevant:
-            filters = {'relevant' : False}
+            filters = {'junk_score__gte' : .99}
 
         # show only relevant
         elif relevant and not irrelevant:
-            filters = {'relevant' : True}
+            filters = {'junk_score__lt' : .99}
 
         # default to showing all blurbs.
         else:
