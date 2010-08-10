@@ -22,7 +22,7 @@ class Blurb(models.Model):
 
     @property
     def relevant(self):
-        if self.junk_score > .99:
+        if self.junk_score >= .99:
             return False
         else:
             return True
@@ -48,14 +48,14 @@ class Blurb(models.Model):
     def approve(self):
         self.rejected = False
         self.approved = True
-        self.relevant = True
+        self.junk_score = 0
         self.save()
 
 
     def reject(self):
         self.rejected = True
         self.approved = False
-        self.relevant = False
+        self.junk_score = 1
         self.save()
 
     def class_names(self):
