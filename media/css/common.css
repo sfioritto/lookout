@@ -46,3 +46,9 @@ ul.errorlist li, .error{
 div.cleardiv{
     clear: both;
 }
+
+/* added because IE doesn't support 'inherit' in css, so the reset.css
+   file doesn't work for font-weight. */
+h1, h2, h3{
+    font-weight: normal;
+}

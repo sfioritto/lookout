@@ -156,6 +156,10 @@ p#filters{
     font-size: 12;
     color: #636363;
     float: right;
+    /*Added for IE7 problem with floating this thing to the right.
+    it makes it too short (for some reason) so the letters are partially
+    hidden.*/
+    padding-bottom: 5px;
 }
 
 select.relfilter{
