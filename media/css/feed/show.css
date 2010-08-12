@@ -139,7 +139,7 @@ a.reject, a.approve{
     display: block;
     height: 25px;
     width: 24px;
-    text-indent: -9999;
+    text-indent: -9999px;
 }
 
 a.reject:hover{
