@@ -24,7 +24,6 @@ div#nav li{
 
 div#content{
     padding: 30px 70px;
-    width: 825px;
     margin: 0px 10px 10px 10px;
     background-color: white;
     border: 1px solid;
@@ -64,7 +63,9 @@ div#content h2{
     margin-bottom: 5px;
 }
 
-/*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
-div#body, div#content{
-    float: left;
+div#body{
+    width: 985px;
 }
+
+/*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
+
