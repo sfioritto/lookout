@@ -18,11 +18,10 @@ Showing <select name="relfilter" class="relfilter">
 <div id="inner"> 
   <h2>News Feed</h2>
   <h3 class="subtitle">A news feed about your client.</h3>
-  <ul id="blurbs">
-    {% include "feed/show-inner.html" %}
-  </ul>
-  
-  {% if not olderind %}
+  <div id="blurbs">
+   {% include "feed/show-inner.html" %}
+  </div>
+ {% if not olderind %}
   <a id="olderlink" href="{%url webapp.feed.views.older client.id %}">Older alerts</a>
   {% endif %}
 </div>

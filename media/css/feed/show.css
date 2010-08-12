@@ -1,8 +1,8 @@
-ul#blurbs{
+ul.blurbs{
     width: 100%;
 }
 
-ul#blurbs h3.time, a#olderlink, div#content h3.subtitle, div#content h2{
+#blurbs h3.time, a#olderlink, div#content h3.subtitle, div#content h2{
     padding-left: 40px;
 }
 
@@ -11,7 +11,7 @@ div#inner{
 }
 
 
-ul#blurbs h3.time{
+#blurbs h3.time{
     clear: both;
     font-family: georgia;
     font-size: 22px;
@@ -20,7 +20,7 @@ ul#blurbs h3.time{
     margin-bottom: 5px;
 }
 
-ul#blurbs h3.time span.detail{
+#blurbs h3.time span.detail{
     font-size: 12px;
 }
 
@@ -48,7 +48,7 @@ div#content{
 }
 
 /*float all of these so they stay containing blocks so the heights don't shrink to nothing.*/
-div.blurb, li.blurb, ul#blurbs, div.links{
+div.blurb, div.links{
     float: left;
 }
 
@@ -61,7 +61,7 @@ a#olderlink{
     float: left;
 }
 
-ul#blurbs li.relevant h3{
+ul.blurbs li.relevant h3{
     color: #35B53D;
 }
 
@@ -79,7 +79,6 @@ li.irrelevant{
 }
 
 li.blurb{
-    clear: left;
     width: 80%;
     margin-top: 5px;
     margin-bottom: 0px;

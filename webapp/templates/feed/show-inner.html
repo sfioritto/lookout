@@ -1,23 +1,30 @@
 
 {% if todays %}
 <h3 class="time">Today's News</h3>
-{% for blurb in todays %}
-{% include 'feed/blurb.html' %}
-{% endfor %}
+<ul class="blurbs">
+  {% for blurb in todays %}
+  {% include 'feed/blurb.html' %}
+  {% endfor %}
+</ul>
 {% endif %}
+
 
 {% if yesterdays %}
 <h3 class="time">Yesterday's News</h3>
-{% for blurb in yesterdays %}
-{% include 'feed/blurb.html' %}
-{% endfor %}
+<ul class="blurbs">
+  {% for blurb in yesterdays %}
+  {% include 'feed/blurb.html' %}
+  {% endfor %}
+</ul>
 {% endif %}
 
 
 {% if older %}
 <h3 class="time">Ancient History <span class="detail">(older than yesterday)</span></h3>
-{% for blurb in older %}
-{% include 'feed/blurb.html' %}
-{% endfor %}
+<ul class="blurbs">
+  {% for blurb in older %}
+  {% include 'feed/blurb.html' %}
+  {% endfor %}
+</ul>
 {% endif %}
 
