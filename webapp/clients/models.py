@@ -136,7 +136,8 @@ class Client(models.Model):
         """
 
         for alert in self.all_alerts():
-            alerts.disable_alert(alert.removeurl)
+            if alert.removeurl:
+                alerts.disable_alert(alert.removeurl)
             alert.disabled = True
             alert.save()
 

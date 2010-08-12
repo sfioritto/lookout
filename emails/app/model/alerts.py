@@ -172,7 +172,7 @@ def get_remove_url(html):
 def disable_alert(url):
     """
     Takes a url to call in order to disable an
-    alert.
+    alert. 
     """
     assert url.startswith("/alerts"), "Url of the alert to disable is not valid: %s." % url
     conn = httplib.HTTPConnection(GOOGLE_URL)
