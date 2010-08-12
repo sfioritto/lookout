@@ -24,7 +24,7 @@ ul#alerts{
     width: 60%;
 }
 
-ul#alerts, ul#alerts li, div.term, div#add, div#canceladd{
+div.term{
     float: left;
 }
 
