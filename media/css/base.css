@@ -38,8 +38,8 @@ div#content, div#nav{
     border-radius: 5px
 }
 
-img#feedback{
-    position: fixed;
+a#feedback{
+    position: absolute;
     z-index: 9999;
     bottom: 0;
     right: 0;
